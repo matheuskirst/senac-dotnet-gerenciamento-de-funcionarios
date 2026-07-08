@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GerenciamentoDeFuncionarios.views
 {
-    public partial class FormTelaAdmin : Form
+    public partial class FormLoginFuncionario : Form
     {
-        public FormTelaAdmin()
+        public FormLoginFuncionario()
         {
             InitializeComponent();
         }

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace GerenciamentoDeFuncionarios.views
 {
-    public partial class FormTelaFuncionario : Form
+    public partial class FormTelaPrincipal : Form
     {
-        public FormTelaFuncionario()
+        public FormTelaPrincipal()
         {
             InitializeComponent();
+        }
+
+        private void btnNewEmployee_Click(object sender, EventArgs e)
+        {
+            new FormCadastroFuncionario().ShowDialog();
         }
     }
 }

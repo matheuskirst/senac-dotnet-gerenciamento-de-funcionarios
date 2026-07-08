@@ -37,9 +37,10 @@
             // btnAdmin
             // 
             btnAdmin.Dock = DockStyle.Fill;
-            btnAdmin.Location = new Point(129, 216);
+            btnAdmin.Font = new Font("Segoe UI", 10.8F);
+            btnAdmin.Location = new Point(104, 216);
             btnAdmin.Name = "btnAdmin";
-            btnAdmin.Size = new Size(148, 47);
+            btnAdmin.Size = new Size(197, 47);
             btnAdmin.TabIndex = 0;
             btnAdmin.Text = "Sou Administrador";
             btnAdmin.UseVisualStyleBackColor = true;
@@ -48,19 +49,21 @@
             // btnFunc
             // 
             btnFunc.Dock = DockStyle.Fill;
-            btnFunc.Location = new Point(129, 269);
+            btnFunc.Font = new Font("Segoe UI", 10.8F);
+            btnFunc.Location = new Point(104, 269);
             btnFunc.Name = "btnFunc";
-            btnFunc.Size = new Size(148, 47);
+            btnFunc.Size = new Size(197, 47);
             btnFunc.TabIndex = 1;
             btnFunc.Text = "Sou Funcionário";
             btnFunc.UseVisualStyleBackColor = true;
+            btnFunc.MouseClick += btnFunc_MouseClick;
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.0555534F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 37.8857956F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.0586529F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.Controls.Add(btnAdmin, 1, 1);
             tableLayoutPanel1.Controls.Add(btnFunc, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
@@ -82,6 +85,7 @@
             Controls.Add(tableLayoutPanel1);
             MinimumSize = new Size(425, 580);
             Name = "FormTelaInicial";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Inicial";
             Load += Form1_Load;
             tableLayoutPanel1.ResumeLayout(false);

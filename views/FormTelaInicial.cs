@@ -17,7 +17,14 @@ namespace GerenciamentoDeFuncionarios
         private void btnAdmin_MouseClick(object sender, MouseEventArgs e)
         {
             this.Hide();
-            new FormTelaAdmin().ShowDialog();
+            new FormLoginAdmin().ShowDialog();
+            this.Show();
+        }
+
+        private void btnFunc_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.Hide();
+            new FormLoginFuncionario().ShowDialog();
             this.Show();
         }
     }
