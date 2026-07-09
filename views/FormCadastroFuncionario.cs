@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GerenciamentoDeFuncionarios.banco.repositories;
+using GerenciamentoDeFuncionarios.modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,27 +25,14 @@ namespace GerenciamentoDeFuncionarios.views
             string? email = txtBoxFuncEmail.Text;
             string? salario = txtBoxFuncSalario.Text;
             char sexo = radioBtnMasculino.Checked ? 'M' : 'F';
-            string? contrato;
+            string? tipoContrato = radioBtnContratoClt.Checked ? "CLT" : radioBtnContratoPj.Checked ? "JP" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
-            if (radioBtnContratoClt.Checked)
-            {
-                contrato = "CLT";
-            }
-            else if (radioBtnContratoPj.Checked)
-            {
-                contrato = "PJ";
-            }
-            else
-            {
-                contrato = "Autônomo";
-            }
-            
             if (nome == "" && email == "" && salario == "")
             {
                 MessageBox.Show(
                     "Os campos de cadastro estão vazio!.",
-                    "Erro ao criar usuário",
+                    "Erro ao cadastrar funcionário",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
@@ -52,7 +41,7 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 MessageBox.Show(
                     "Campo 'Nome' está vazio!.",
-                    "Erro ao criar usuário",
+                    "Erro ao cadastrar funcionário",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
@@ -61,7 +50,7 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 MessageBox.Show(
                     "Campo 'E-mail' está vazio!.",
-                    "Erro ao criar usuário",
+                    "Erro ao cadastrar funcionário",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
@@ -70,7 +59,7 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 MessageBox.Show(
                     "Campo 'Salário' está vazio!.",
-                    "Erro ao criar usuário",
+                    "Erro ao cadastrar funcionário",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                     );
@@ -79,13 +68,16 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 if (decimal.TryParse(salario, out decimal salarioValor))
                 {
-                    new Funcionario(
+                    var funcionario = new Funcionario(
                         nome: nome,
                         email: email,
                         salario: salarioValor,
                         sexo: sexo,
-                        contrato: contrato
+                        contrato: tipoContrato,
+                        dataDeCadastro: dataCadastro
                         );
+
+                    FuncionarioRepository.Adicionar(funcionario);
                 }
             }
         }
