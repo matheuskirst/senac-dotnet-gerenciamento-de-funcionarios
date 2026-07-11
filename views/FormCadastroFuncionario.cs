@@ -19,12 +19,12 @@ namespace GerenciamentoDeFuncionarios.views
             InitializeComponent();
         }
 
-        private void btnSalvarFuncionario_Click(object sender, EventArgs e)
+        private async void btnSalvarFuncionario_Click(object sender, EventArgs e)
         {
             string? nome = txtBoxFuncNome.Text;
             string? email = txtBoxFuncEmail.Text;
-            string? salario = txtBoxFuncSalario.Text;
             char sexo = radioBtnMasculino.Checked ? 'M' : 'F';
+            string? salario = txtBoxFuncSalario.Text;
             string? tipoContrato = radioBtnContratoClt.Checked ? "CLT" : radioBtnContratoPj.Checked ? "JP" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
@@ -70,14 +70,34 @@ namespace GerenciamentoDeFuncionarios.views
                 {
                     var funcionario = new Funcionario(
                         nome: nome,
+                        cpf: cpf,
+                        sexo: sexo,
                         email: email,
                         salario: salarioValor,
-                        sexo: sexo,
-                        contrato: tipoContrato,
+                        tipoDeContrato: tipoContrato,
                         dataDeCadastro: dataCadastro
                         );
 
-                    FuncionarioRepository.Adicionar(funcionario);
+                    try
+                    {
+                        await FuncionarioRepository.Adicionar(funcionario);
+                        MessageBox.Show(
+                            "Funcionário cadastrado com sucesso",
+                            "Operação concluida",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                            );
+                        this.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(
+                            "Erro ao salvar para o banco de dados.",
+                            "Erro ao cadastrar funcionário",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                    }
                 }
             }
         }

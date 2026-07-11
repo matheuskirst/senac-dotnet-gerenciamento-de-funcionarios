@@ -12,14 +12,88 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
     public class FuncionarioRepository
     {
         private static ConexaoBanco ConexaoBanco = new ConexaoBanco();
-        public static void Adicionar(Funcionario funcionario)
+        public static async Task Adicionar(Funcionario funcionario)
         {
-            ConexaoBanco.CriarConexao().QueryAsync(
+            await ConexaoBanco.CriarConexao().QueryAsync(
                 @"  
-                    INSERT INTO Funcionario (Nome, Email, Salario, Sexo, TipoDeContrato, DataDeCadastro, DataDeAtualizacao)    
-                    VALUES (@Nome, @Email, @Salario, @Sexo, @TipoDeContrato, @DataDeCadastro, @DataDeAtualizacao);
+                    INSERT INTO Funcionario (
+                        Nome,
+                        Email,
+                        Sexo,
+                        Salario,
+                        TipoDeContrato,
+                        DataDeCadastro,
+                        DataDeAtualizacao
+                        )    
+                    VALUES (
+                        @Nome,
+                        @Email,
+                        @Sexo,
+                        @Salario,
+                        @TipoDeContrato,
+                        @DataDeCadastro,
+                        @DataDeAtualizacao
+                        );
+                ",
+                funcionario
+                );
+        }
+
+        public static async Task Editar(Funcionario funcionario)
+        {
+            await ConexaoBanco.CriarConexao().QueryAsync(
+                @"  
+                    INSERT INTO Funcionario (
+                        Nome,
+                        Email,
+                        Sexo,
+                        Salario,
+                        TipoDeContrato,
+                        DataDeCadastro,
+                        DataDeAtualizacao
+                        )    
+                    VALUES (
+                        @Nome,
+                        @Email,
+                        @Sexo,
+                        @Salario,
+                        @TipoDeContrato,
+                        @DataDeCadastro,
+                        @DataDeAtualizacao
+                        );
+                ",
+                funcionario
+                );
+        }
+        
+        public static async Task Remover()
+        {
+            await ConexaoBanco.CriarConexao().QueryAsync(
+                @"
+                    DELETE FROM Funcionario
+                    
                 "
                 );
+        }
+
+        public static async Task<IEnumerable<Funcionario>> ObterTodos()
+        {
+            var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
+                @"
+                    SELECT
+                        Id,
+                        Nome,
+                        Email,
+                        Sexo,
+                        Salario,
+                        TipoDeContrato,
+                        DataDeCadastro,
+                        DataDeAtualizacao
+                    FROM
+                        Funcionario
+                "
+                );
+            return funcionarios;
         }
     }
 }

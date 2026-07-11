@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GerenciamentoDeFuncionarios.banco.repositories;
+using GerenciamentoDeFuncionarios.modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,11 +17,36 @@ namespace GerenciamentoDeFuncionarios.views
         public FormTelaPrincipal()
         {
             InitializeComponent();
+
+            Load += FormTelaPrincipal_Load;
+        }
+
+        private void FormTelaPrincipal_Load(object? sender, EventArgs e)
+        {
+            AtualizarGrid();
+        }
+
+        public async void AtualizarGrid()
+        {
+            var funcionarios = await FuncionarioRepository.ObterTodos();
+
+            dgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
         }
 
         private void btnNewEmployee_Click(object sender, EventArgs e)
         {
             new FormCadastroFuncionario().ShowDialog();
+            AtualizarGrid();
+        }
+
+        private void btnEditEmployee_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -33,6 +33,9 @@
             panelNomeFunc = new Panel();
             txtBoxFuncNome = new TextBox();
             label2 = new Label();
+            panelCpfFunc = new Panel();
+            mTxtBoxCpf = new MaskedTextBox();
+            label1 = new Label();
             panelEmailFunc = new Panel();
             txtBoxFuncEmail = new TextBox();
             label3 = new Label();
@@ -40,22 +43,23 @@
             txtBoxFuncSalario = new TextBox();
             label4 = new Label();
             tableLayoutRight = new TableLayoutPanel();
-            groupBox1 = new GroupBox();
-            radioBtnFeminino = new RadioButton();
+            groupBoxSexo = new GroupBox();
             radioBtnMasculino = new RadioButton();
-            groupBox2 = new GroupBox();
+            radioBtnFeminino = new RadioButton();
+            groupBoxContrato = new GroupBox();
+            radioBtnContratoClt = new RadioButton();
             radioBtnContratoPj = new RadioButton();
             radioBtnContratoAutonomo = new RadioButton();
-            radioBtnContratoClt = new RadioButton();
             btnSalvarFuncionario = new Button();
             tableLayoutMain.SuspendLayout();
             tableLayoutLeft.SuspendLayout();
             panelNomeFunc.SuspendLayout();
+            panelCpfFunc.SuspendLayout();
             panelEmailFunc.SuspendLayout();
             panelSalarioFunc.SuspendLayout();
             tableLayoutRight.SuspendLayout();
-            groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            groupBoxSexo.SuspendLayout();
+            groupBoxContrato.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutMain
@@ -82,8 +86,9 @@
             tableLayoutLeft.ColumnCount = 1;
             tableLayoutLeft.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutLeft.Controls.Add(panelNomeFunc, 0, 0);
-            tableLayoutLeft.Controls.Add(panelEmailFunc, 0, 1);
-            tableLayoutLeft.Controls.Add(panelSalarioFunc, 0, 2);
+            tableLayoutLeft.Controls.Add(panelCpfFunc, 0, 1);
+            tableLayoutLeft.Controls.Add(panelEmailFunc, 0, 2);
+            tableLayoutLeft.Controls.Add(panelSalarioFunc, 0, 3);
             tableLayoutLeft.Dock = DockStyle.Fill;
             tableLayoutLeft.Location = new Point(23, 26);
             tableLayoutLeft.Name = "tableLayoutLeft";
@@ -92,6 +97,7 @@
             tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutLeft.Size = new Size(495, 410);
             tableLayoutLeft.TabIndex = 0;
             // 
@@ -124,15 +130,42 @@
             label2.TabIndex = 0;
             label2.Text = "Nome:";
             // 
+            // panelCpfFunc
+            // 
+            panelCpfFunc.Controls.Add(mTxtBoxCpf);
+            panelCpfFunc.Controls.Add(label1);
+            panelCpfFunc.Dock = DockStyle.Fill;
+            panelCpfFunc.Location = new Point(3, 103);
+            panelCpfFunc.Name = "panelCpfFunc";
+            panelCpfFunc.Size = new Size(489, 94);
+            panelCpfFunc.TabIndex = 1;
+            // 
+            // mTxtBoxCpf
+            // 
+            mTxtBoxCpf.Location = new Point(12, 55);
+            mTxtBoxCpf.Mask = "000\\.000\\.000\\-00";
+            mTxtBoxCpf.Name = "mTxtBoxCpf";
+            mTxtBoxCpf.Size = new Size(365, 27);
+            mTxtBoxCpf.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10.8F);
+            label1.Location = new Point(12, 17);
+            label1.Name = "label1";
+            label1.Size = new Size(46, 25);
+            label1.TabIndex = 0;
+            label1.Text = "CPF:";
+            // 
             // panelEmailFunc
             // 
             panelEmailFunc.Controls.Add(txtBoxFuncEmail);
             panelEmailFunc.Controls.Add(label3);
-            panelEmailFunc.Dock = DockStyle.Fill;
-            panelEmailFunc.Location = new Point(3, 103);
+            panelEmailFunc.Location = new Point(3, 203);
             panelEmailFunc.Name = "panelEmailFunc";
             panelEmailFunc.Size = new Size(489, 94);
-            panelEmailFunc.TabIndex = 3;
+            panelEmailFunc.TabIndex = 2;
             // 
             // txtBoxFuncEmail
             // 
@@ -141,7 +174,7 @@
             txtBoxFuncEmail.Name = "txtBoxFuncEmail";
             txtBoxFuncEmail.PlaceholderText = "Ex: joao.silva@email.com";
             txtBoxFuncEmail.Size = new Size(365, 31);
-            txtBoxFuncEmail.TabIndex = 1;
+            txtBoxFuncEmail.TabIndex = 0;
             // 
             // label3
             // 
@@ -158,10 +191,10 @@
             panelSalarioFunc.Controls.Add(txtBoxFuncSalario);
             panelSalarioFunc.Controls.Add(label4);
             panelSalarioFunc.Dock = DockStyle.Fill;
-            panelSalarioFunc.Location = new Point(3, 203);
+            panelSalarioFunc.Location = new Point(3, 303);
             panelSalarioFunc.Name = "panelSalarioFunc";
-            panelSalarioFunc.Size = new Size(489, 94);
-            panelSalarioFunc.TabIndex = 4;
+            panelSalarioFunc.Size = new Size(489, 104);
+            panelSalarioFunc.TabIndex = 3;
             // 
             // txtBoxFuncSalario
             // 
@@ -170,7 +203,7 @@
             txtBoxFuncSalario.Name = "txtBoxFuncSalario";
             txtBoxFuncSalario.PlaceholderText = "Somente valores numéricos (Ex: 2000)";
             txtBoxFuncSalario.Size = new Size(365, 31);
-            txtBoxFuncSalario.TabIndex = 1;
+            txtBoxFuncSalario.TabIndex = 0;
             // 
             // label4
             // 
@@ -186,8 +219,8 @@
             // 
             tableLayoutRight.ColumnCount = 1;
             tableLayoutRight.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutRight.Controls.Add(groupBox1, 0, 0);
-            tableLayoutRight.Controls.Add(groupBox2, 0, 1);
+            tableLayoutRight.Controls.Add(groupBoxSexo, 0, 0);
+            tableLayoutRight.Controls.Add(groupBoxContrato, 0, 1);
             tableLayoutRight.Controls.Add(btnSalvarFuncionario, 0, 3);
             tableLayoutRight.Dock = DockStyle.Fill;
             tableLayoutRight.Location = new Point(524, 26);
@@ -200,28 +233,17 @@
             tableLayoutRight.Size = new Size(254, 410);
             tableLayoutRight.TabIndex = 1;
             // 
-            // groupBox1
+            // groupBoxSexo
             // 
-            groupBox1.Controls.Add(radioBtnFeminino);
-            groupBox1.Controls.Add(radioBtnMasculino);
-            groupBox1.Dock = DockStyle.Fill;
-            groupBox1.Location = new Point(3, 3);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(248, 94);
-            groupBox1.TabIndex = 2;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Sexo:";
-            // 
-            // radioBtnFeminino
-            // 
-            radioBtnFeminino.AutoSize = true;
-            radioBtnFeminino.Location = new Point(115, 40);
-            radioBtnFeminino.Name = "radioBtnFeminino";
-            radioBtnFeminino.Size = new Size(91, 24);
-            radioBtnFeminino.TabIndex = 1;
-            radioBtnFeminino.TabStop = true;
-            radioBtnFeminino.Text = "Feminino";
-            radioBtnFeminino.UseVisualStyleBackColor = true;
+            groupBoxSexo.Controls.Add(radioBtnMasculino);
+            groupBoxSexo.Controls.Add(radioBtnFeminino);
+            groupBoxSexo.Dock = DockStyle.Fill;
+            groupBoxSexo.Location = new Point(3, 3);
+            groupBoxSexo.Name = "groupBoxSexo";
+            groupBoxSexo.Size = new Size(248, 94);
+            groupBoxSexo.TabIndex = 0;
+            groupBoxSexo.TabStop = false;
+            groupBoxSexo.Text = "Sexo:";
             // 
             // radioBtnMasculino
             // 
@@ -234,18 +256,41 @@
             radioBtnMasculino.Text = "Masculino";
             radioBtnMasculino.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // radioBtnFeminino
             // 
-            groupBox2.Controls.Add(radioBtnContratoPj);
-            groupBox2.Controls.Add(radioBtnContratoAutonomo);
-            groupBox2.Controls.Add(radioBtnContratoClt);
-            groupBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            groupBox2.Location = new Point(3, 103);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(248, 94);
-            groupBox2.TabIndex = 3;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Tipo de Contrato";
+            radioBtnFeminino.AutoSize = true;
+            radioBtnFeminino.Location = new Point(115, 40);
+            radioBtnFeminino.Name = "radioBtnFeminino";
+            radioBtnFeminino.Size = new Size(91, 24);
+            radioBtnFeminino.TabIndex = 1;
+            radioBtnFeminino.TabStop = true;
+            radioBtnFeminino.Text = "Feminino";
+            radioBtnFeminino.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxContrato
+            // 
+            groupBoxContrato.Controls.Add(radioBtnContratoClt);
+            groupBoxContrato.Controls.Add(radioBtnContratoPj);
+            groupBoxContrato.Controls.Add(radioBtnContratoAutonomo);
+            groupBoxContrato.Dock = DockStyle.Fill;
+            groupBoxContrato.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            groupBoxContrato.Location = new Point(3, 103);
+            groupBoxContrato.Name = "groupBoxContrato";
+            groupBoxContrato.Size = new Size(248, 94);
+            groupBoxContrato.TabIndex = 1;
+            groupBoxContrato.TabStop = false;
+            groupBoxContrato.Text = "Tipo de Contrato";
+            // 
+            // radioBtnContratoClt
+            // 
+            radioBtnContratoClt.AutoSize = true;
+            radioBtnContratoClt.Location = new Point(12, 42);
+            radioBtnContratoClt.Name = "radioBtnContratoClt";
+            radioBtnContratoClt.Size = new Size(53, 24);
+            radioBtnContratoClt.TabIndex = 0;
+            radioBtnContratoClt.TabStop = true;
+            radioBtnContratoClt.Text = "CLT";
+            radioBtnContratoClt.UseVisualStyleBackColor = true;
             // 
             // radioBtnContratoPj
             // 
@@ -253,7 +298,7 @@
             radioBtnContratoPj.Location = new Point(71, 42);
             radioBtnContratoPj.Name = "radioBtnContratoPj";
             radioBtnContratoPj.Size = new Size(42, 24);
-            radioBtnContratoPj.TabIndex = 4;
+            radioBtnContratoPj.TabIndex = 1;
             radioBtnContratoPj.TabStop = true;
             radioBtnContratoPj.Text = "PJ";
             radioBtnContratoPj.UseVisualStyleBackColor = true;
@@ -264,21 +309,10 @@
             radioBtnContratoAutonomo.Location = new Point(127, 42);
             radioBtnContratoAutonomo.Name = "radioBtnContratoAutonomo";
             radioBtnContratoAutonomo.Size = new Size(101, 24);
-            radioBtnContratoAutonomo.TabIndex = 3;
+            radioBtnContratoAutonomo.TabIndex = 2;
             radioBtnContratoAutonomo.TabStop = true;
             radioBtnContratoAutonomo.Text = "Autônomo";
             radioBtnContratoAutonomo.UseVisualStyleBackColor = true;
-            // 
-            // radioBtnContratoClt
-            // 
-            radioBtnContratoClt.AutoSize = true;
-            radioBtnContratoClt.Location = new Point(12, 42);
-            radioBtnContratoClt.Name = "radioBtnContratoClt";
-            radioBtnContratoClt.Size = new Size(53, 24);
-            radioBtnContratoClt.TabIndex = 2;
-            radioBtnContratoClt.TabStop = true;
-            radioBtnContratoClt.Text = "CLT";
-            radioBtnContratoClt.UseVisualStyleBackColor = true;
             // 
             // btnSalvarFuncionario
             // 
@@ -286,7 +320,7 @@
             btnSalvarFuncionario.Location = new Point(62, 349);
             btnSalvarFuncionario.Name = "btnSalvarFuncionario";
             btnSalvarFuncionario.Size = new Size(129, 50);
-            btnSalvarFuncionario.TabIndex = 4;
+            btnSalvarFuncionario.TabIndex = 3;
             btnSalvarFuncionario.Text = "Salvar";
             btnSalvarFuncionario.UseVisualStyleBackColor = true;
             btnSalvarFuncionario.Click += btnSalvarFuncionario_Click;
@@ -305,15 +339,17 @@
             tableLayoutLeft.ResumeLayout(false);
             panelNomeFunc.ResumeLayout(false);
             panelNomeFunc.PerformLayout();
+            panelCpfFunc.ResumeLayout(false);
+            panelCpfFunc.PerformLayout();
             panelEmailFunc.ResumeLayout(false);
             panelEmailFunc.PerformLayout();
             panelSalarioFunc.ResumeLayout(false);
             panelSalarioFunc.PerformLayout();
             tableLayoutRight.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            groupBoxSexo.ResumeLayout(false);
+            groupBoxSexo.PerformLayout();
+            groupBoxContrato.ResumeLayout(false);
+            groupBoxContrato.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -331,13 +367,16 @@
         private TextBox txtBoxFuncSalario;
         private Label label4;
         private TableLayoutPanel tableLayoutRight;
-        private GroupBox groupBox1;
+        private GroupBox groupBoxSexo;
         private RadioButton radioBtnFeminino;
         private RadioButton radioBtnMasculino;
-        private GroupBox groupBox2;
+        private GroupBox groupBoxContrato;
         private RadioButton radioBtnContratoAutonomo;
         private RadioButton radioBtnContratoClt;
         private RadioButton radioBtnContratoPj;
         private Button btnSalvarFuncionario;
+        private Panel panelCpfFunc;
+        private Label label1;
+        private MaskedTextBox mTxtBoxCpf;
     }
 }
