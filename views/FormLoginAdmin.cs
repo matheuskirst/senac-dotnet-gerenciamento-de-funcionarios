@@ -16,10 +16,9 @@ namespace GerenciamentoDeFuncionarios.views
         {
             InitializeComponent();
         }
-
-        private void btnLogin_Click(object sender, MouseEventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (txtBoxUser.Text == "admin" && txtBoxPassword.Text == "1234")
+            if (txtBoxUserAdmin.Text == "admin" && txtBoxPasswordAdmin.Text == "1234")
             {
                 this.Hide();
                 new FormTelaPrincipal().ShowDialog();

@@ -47,44 +47,49 @@
             mainTable.Controls.Add(panel1, 0, 1);
             mainTable.Dock = DockStyle.Fill;
             mainTable.Location = new Point(0, 0);
+            mainTable.Margin = new Padding(3, 2, 3, 2);
             mainTable.Name = "mainTable";
             mainTable.RowCount = 2;
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
-            mainTable.Size = new Size(794, 560);
+            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
+            mainTable.Size = new Size(695, 420);
             mainTable.TabIndex = 0;
             // 
             // dgvFuncionarios
             // 
             dgvFuncionarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvFuncionarios.Dock = DockStyle.Fill;
-            dgvFuncionarios.Location = new Point(3, 3);
+            dgvFuncionarios.Location = new Point(3, 2);
+            dgvFuncionarios.Margin = new Padding(3, 2, 3, 2);
             dgvFuncionarios.Name = "dgvFuncionarios";
             dgvFuncionarios.RowHeadersWidth = 51;
             dgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFuncionarios.Size = new Size(788, 484);
+            dgvFuncionarios.Size = new Size(689, 364);
             dgvFuncionarios.TabIndex = 0;
             // 
             // panel1
             // 
+            panel1.BackColor = SystemColors.ActiveCaption;
             panel1.Controls.Add(btnDeleteEmployee);
             panel1.Controls.Add(btnEditEmployee);
             panel1.Controls.Add(btnNewEmployee);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 493);
+            panel1.Location = new Point(3, 370);
+            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(788, 64);
+            panel1.Size = new Size(689, 48);
             panel1.TabIndex = 3;
             // 
             // btnDeleteEmployee
             // 
             btnDeleteEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnDeleteEmployee.BackColor = Color.Gainsboro;
-            btnDeleteEmployee.Location = new Point(600, 2);
-            btnDeleteEmployee.MaximumSize = new Size(200, 60);
-            btnDeleteEmployee.MinimumSize = new Size(185, 55);
+            btnDeleteEmployee.BackColor = Color.White;
+            btnDeleteEmployee.Location = new Point(526, 4);
+            btnDeleteEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnDeleteEmployee.MaximumSize = new Size(175, 45);
+            btnDeleteEmployee.MinimumSize = new Size(160, 40);
             btnDeleteEmployee.Name = "btnDeleteEmployee";
-            btnDeleteEmployee.Size = new Size(185, 60);
+            btnDeleteEmployee.Size = new Size(160, 40);
             btnDeleteEmployee.TabIndex = 2;
             btnDeleteEmployee.Text = "Excluir";
             btnDeleteEmployee.UseVisualStyleBackColor = false;
@@ -93,12 +98,13 @@
             // btnEditEmployee
             // 
             btnEditEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnEditEmployee.BackColor = Color.Gainsboro;
-            btnEditEmployee.Location = new Point(409, 5);
-            btnEditEmployee.MaximumSize = new Size(200, 60);
-            btnEditEmployee.MinimumSize = new Size(185, 55);
+            btnEditEmployee.BackColor = Color.White;
+            btnEditEmployee.Location = new Point(357, 4);
+            btnEditEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnEditEmployee.MaximumSize = new Size(175, 45);
+            btnEditEmployee.MinimumSize = new Size(160, 40);
             btnEditEmployee.Name = "btnEditEmployee";
-            btnEditEmployee.Size = new Size(185, 55);
+            btnEditEmployee.Size = new Size(160, 40);
             btnEditEmployee.TabIndex = 1;
             btnEditEmployee.Text = "Editar";
             btnEditEmployee.UseVisualStyleBackColor = false;
@@ -107,12 +113,13 @@
             // btnNewEmployee
             // 
             btnNewEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNewEmployee.BackColor = Color.Gainsboro;
-            btnNewEmployee.Location = new Point(3, 5);
-            btnNewEmployee.MaximumSize = new Size(200, 60);
-            btnNewEmployee.MinimumSize = new Size(185, 55);
+            btnNewEmployee.BackColor = Color.White;
+            btnNewEmployee.Location = new Point(3, 4);
+            btnNewEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnNewEmployee.MaximumSize = new Size(175, 45);
+            btnNewEmployee.MinimumSize = new Size(160, 40);
             btnNewEmployee.Name = "btnNewEmployee";
-            btnNewEmployee.Size = new Size(185, 55);
+            btnNewEmployee.Size = new Size(160, 40);
             btnNewEmployee.TabIndex = 0;
             btnNewEmployee.Text = "Novo";
             btnNewEmployee.UseVisualStyleBackColor = false;
@@ -120,11 +127,12 @@
             // 
             // FormTelaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(794, 560);
+            ClientSize = new Size(695, 420);
             Controls.Add(mainTable);
-            MinimumSize = new Size(630, 500);
+            Margin = new Padding(3, 2, 3, 2);
+            MinimumSize = new Size(553, 385);
             Name = "FormTelaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Principal";
