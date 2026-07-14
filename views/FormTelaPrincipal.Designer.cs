@@ -31,7 +31,7 @@
             mainTable = new TableLayoutPanel();
             dgvFuncionarios = new DataGridView();
             panel1 = new Panel();
-            btnDeleteEmployee = new Button();
+            btnRemoveEmployee = new Button();
             btnEditEmployee = new Button();
             btnNewEmployee = new Button();
             mainTable.SuspendLayout();
@@ -70,7 +70,7 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(btnDeleteEmployee);
+            panel1.Controls.Add(btnRemoveEmployee);
             panel1.Controls.Add(btnEditEmployee);
             panel1.Controls.Add(btnNewEmployee);
             panel1.Dock = DockStyle.Fill;
@@ -80,20 +80,20 @@
             panel1.Size = new Size(689, 48);
             panel1.TabIndex = 3;
             // 
-            // btnDeleteEmployee
+            // btnRemoveEmployee
             // 
-            btnDeleteEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnDeleteEmployee.BackColor = Color.White;
-            btnDeleteEmployee.Location = new Point(526, 4);
-            btnDeleteEmployee.Margin = new Padding(3, 2, 3, 2);
-            btnDeleteEmployee.MaximumSize = new Size(175, 45);
-            btnDeleteEmployee.MinimumSize = new Size(160, 40);
-            btnDeleteEmployee.Name = "btnDeleteEmployee";
-            btnDeleteEmployee.Size = new Size(160, 40);
-            btnDeleteEmployee.TabIndex = 2;
-            btnDeleteEmployee.Text = "Excluir";
-            btnDeleteEmployee.UseVisualStyleBackColor = false;
-            btnDeleteEmployee.Click += btnDeleteEmployee_Click;
+            btnRemoveEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            btnRemoveEmployee.BackColor = Color.White;
+            btnRemoveEmployee.Location = new Point(526, 4);
+            btnRemoveEmployee.Margin = new Padding(3, 2, 3, 2);
+            btnRemoveEmployee.MaximumSize = new Size(175, 45);
+            btnRemoveEmployee.MinimumSize = new Size(160, 40);
+            btnRemoveEmployee.Name = "btnRemoveEmployee";
+            btnRemoveEmployee.Size = new Size(160, 40);
+            btnRemoveEmployee.TabIndex = 2;
+            btnRemoveEmployee.Text = "Excluir";
+            btnRemoveEmployee.UseVisualStyleBackColor = false;
+            btnRemoveEmployee.Click += btnRemoveEmployee_Click;
             // 
             // btnEditEmployee
             // 
@@ -147,7 +147,7 @@
         private TableLayoutPanel mainTable;
         private DataGridView dgvFuncionarios;
         private Panel panel1;
-        private Button btnDeleteEmployee;
+        private Button btnRemoveEmployee;
         private Button btnEditEmployee;
         private Button btnNewEmployee;
     }

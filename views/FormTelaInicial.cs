@@ -23,9 +23,7 @@ namespace GerenciamentoDeFuncionarios
 
         private void btnFunc_MouseClick(object sender, MouseEventArgs e)
         {
-            this.Hide();
-            new FormLoginFuncionario().ShowDialog();
-            this.Show();
+
         }
     }
 }

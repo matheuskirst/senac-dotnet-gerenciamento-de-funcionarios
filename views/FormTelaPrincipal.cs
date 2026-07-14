@@ -45,7 +45,7 @@ namespace GerenciamentoDeFuncionarios.views
             AtualizarGrid();
         }
 
-        private async void btnDeleteEmployee_Click(object sender, EventArgs e)
+        private async void btnRemoveEmployee_Click(object sender, EventArgs e)
         {
             if (dgvFuncionarios.CurrentRow != null)
             {
@@ -53,7 +53,24 @@ namespace GerenciamentoDeFuncionarios.views
 
                 if (funcionario != null)
                 {
-                    await FuncionarioRepository.Remover(funcionario);
+                    DialogResult removerFuncionario = MessageBox.Show(
+                        $"Essa ação irá remover o funcionário \"{funcionario.Nome}\" (Id: {funcionario.Id})\nVocê tem certeza?",
+                        "Remover funcionário",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2
+                        );
+                    
+                    if (removerFuncionario == DialogResult.Yes)
+                    {
+                        await FuncionarioRepository.Remover(funcionario);
+                        MessageBox.Show(
+                            "Funcionário removido com sucesso!",
+                            "Sucesso",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                            );
+                    }
                 }
             }
             AtualizarGrid();
