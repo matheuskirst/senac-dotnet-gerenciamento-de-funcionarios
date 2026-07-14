@@ -51,7 +51,7 @@
             mainTable.RowCount = 2;
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
-            mainTable.Size = new Size(612, 453);
+            mainTable.Size = new Size(794, 560);
             mainTable.TabIndex = 0;
             // 
             // dgvFuncionarios
@@ -62,7 +62,7 @@
             dgvFuncionarios.Name = "dgvFuncionarios";
             dgvFuncionarios.RowHeadersWidth = 51;
             dgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFuncionarios.Size = new Size(606, 377);
+            dgvFuncionarios.Size = new Size(788, 484);
             dgvFuncionarios.TabIndex = 0;
             // 
             // panel1
@@ -71,16 +71,16 @@
             panel1.Controls.Add(btnEditEmployee);
             panel1.Controls.Add(btnNewEmployee);
             panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 386);
+            panel1.Location = new Point(3, 493);
             panel1.Name = "panel1";
-            panel1.Size = new Size(606, 64);
+            panel1.Size = new Size(788, 64);
             panel1.TabIndex = 3;
             // 
             // btnDeleteEmployee
             // 
             btnDeleteEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             btnDeleteEmployee.BackColor = Color.Gainsboro;
-            btnDeleteEmployee.Location = new Point(418, 2);
+            btnDeleteEmployee.Location = new Point(600, 2);
             btnDeleteEmployee.MaximumSize = new Size(200, 60);
             btnDeleteEmployee.MinimumSize = new Size(185, 55);
             btnDeleteEmployee.Name = "btnDeleteEmployee";
@@ -94,7 +94,7 @@
             // 
             btnEditEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             btnEditEmployee.BackColor = Color.Gainsboro;
-            btnEditEmployee.Location = new Point(227, 5);
+            btnEditEmployee.Location = new Point(409, 5);
             btnEditEmployee.MaximumSize = new Size(200, 60);
             btnEditEmployee.MinimumSize = new Size(185, 55);
             btnEditEmployee.Name = "btnEditEmployee";
@@ -122,7 +122,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(612, 453);
+            ClientSize = new Size(794, 560);
             Controls.Add(mainTable);
             MinimumSize = new Size(630, 500);
             Name = "FormTelaPrincipal";

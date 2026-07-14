@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,13 +48,23 @@ namespace GerenciamentoDeFuncionarios.modelos
         }
 
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "O campo 'Nome' é obrigatório.")]
+        [StringLength(255, MinimumLength = 2, ErrorMessage = "O campo 'Nome' deve ter entre 3 e 255 caracteres.")]
         public string Nome { get; private set; }
+
+        [Required(ErrorMessage = "O campo 'Email' é obrigatório.")]
+        [EmailAddress(ErrorMessage = "O 'Email' é inválido.")]
         public string Email { get; private set; }
+
         public char Sexo { get; private set; }
+
         public decimal Salario { get; private set; }
+
         public string TipoDeContrato { get; private set; }
 
         public DateTime DataDeCadastro { get; private set; }
+
         public DateTime? DataDeAtualizacao { get; set; }
     }
 }

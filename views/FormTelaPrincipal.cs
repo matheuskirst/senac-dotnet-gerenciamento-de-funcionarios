@@ -42,11 +42,21 @@ namespace GerenciamentoDeFuncionarios.views
         private void btnEditEmployee_Click(object sender, EventArgs e)
         {
 
+            AtualizarGrid();
         }
 
-        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        private async void btnDeleteEmployee_Click(object sender, EventArgs e)
         {
+            if (dgvFuncionarios.CurrentRow != null)
+            {
+                Funcionario? funcionario = dgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
 
+                if (funcionario != null)
+                {
+                    await FuncionarioRepository.Remover(funcionario);
+                }
+            }
+            AtualizarGrid();
         }
     }
 }
