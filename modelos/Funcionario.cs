@@ -59,6 +59,7 @@ namespace GerenciamentoDeFuncionarios.modelos
 
         public char Sexo { get; private set; }
 
+        [RegularExpression(@"^\d+(\.\d{1,2})?$", ErrorMessage = "O 'Salário' não pode ter mais de duas casas decimais")]
         public decimal Salario { get; private set; }
 
         public string TipoDeContrato { get; private set; }
