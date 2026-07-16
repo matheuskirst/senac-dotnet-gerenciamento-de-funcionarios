@@ -71,12 +71,12 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
                     DELETE FROM Funcionario
-                    WHERE Id = @Id  
+                    WHERE Id = @Id
                 ",
                 funcionario
                 );
         }
-
+        
         public static async Task<IEnumerable<Funcionario>> ObterTodos()
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(

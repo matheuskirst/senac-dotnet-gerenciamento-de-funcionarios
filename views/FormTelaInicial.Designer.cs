@@ -28,35 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnAdmin = new Button();
-            btnFunc = new Button();
+            BtnIdentificacaoAdmin = new Button();
+            BtnIdentificacaoFunc = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
-            // btnAdmin
+            // BtnIdentificacaoAdmin
             // 
-            btnAdmin.Dock = DockStyle.Fill;
-            btnAdmin.Font = new Font("Segoe UI", 10.8F);
-            btnAdmin.Location = new Point(104, 216);
-            btnAdmin.Name = "btnAdmin";
-            btnAdmin.Size = new Size(197, 47);
-            btnAdmin.TabIndex = 0;
-            btnAdmin.Text = "Sou Administrador";
-            btnAdmin.UseVisualStyleBackColor = true;
-            btnAdmin.MouseClick += btnAdmin_MouseClick;
+            BtnIdentificacaoAdmin.Dock = DockStyle.Fill;
+            BtnIdentificacaoAdmin.Font = new Font("Segoe UI", 10.8F);
+            BtnIdentificacaoAdmin.Location = new Point(104, 216);
+            BtnIdentificacaoAdmin.Name = "BtnIdentificacaoAdmin";
+            BtnIdentificacaoAdmin.Size = new Size(197, 47);
+            BtnIdentificacaoAdmin.TabIndex = 0;
+            BtnIdentificacaoAdmin.Text = "Sou Administrador";
+            BtnIdentificacaoAdmin.UseVisualStyleBackColor = true;
+            BtnIdentificacaoAdmin.MouseClick += BtnIdentificacaoAdmin_Click;
             // 
-            // btnFunc
+            // BtnIdentificacaoFunc
             // 
-            btnFunc.Dock = DockStyle.Fill;
-            btnFunc.Font = new Font("Segoe UI", 10.8F);
-            btnFunc.Location = new Point(104, 269);
-            btnFunc.Name = "btnFunc";
-            btnFunc.Size = new Size(197, 47);
-            btnFunc.TabIndex = 1;
-            btnFunc.Text = "Sou Funcionário";
-            btnFunc.UseVisualStyleBackColor = true;
-            btnFunc.MouseClick += btnFunc_MouseClick;
+            BtnIdentificacaoFunc.Dock = DockStyle.Fill;
+            BtnIdentificacaoFunc.Font = new Font("Segoe UI", 10.8F);
+            BtnIdentificacaoFunc.Location = new Point(104, 269);
+            BtnIdentificacaoFunc.Name = "BtnIdentificacaoFunc";
+            BtnIdentificacaoFunc.Size = new Size(197, 47);
+            BtnIdentificacaoFunc.TabIndex = 1;
+            BtnIdentificacaoFunc.Text = "Sou Funcionário";
+            BtnIdentificacaoFunc.UseVisualStyleBackColor = true;
+            BtnIdentificacaoFunc.Click += BtnIdentificacaoFunc_Click;
+            BtnIdentificacaoFunc.MouseClick += BtnIdentificacaoFunc_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -64,8 +65,8 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.Controls.Add(btnAdmin, 1, 1);
-            tableLayoutPanel1.Controls.Add(btnFunc, 1, 2);
+            tableLayoutPanel1.Controls.Add(BtnIdentificacaoAdmin, 1, 1);
+            tableLayoutPanel1.Controls.Add(BtnIdentificacaoFunc, 1, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -87,15 +88,14 @@
             Name = "FormTelaInicial";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Inicial";
-            Load += Form1_Load;
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Button btnAdmin;
-        private Button btnFunc;
+        private Button BtnIdentificacaoAdmin;
+        private Button BtnIdentificacaoFunc;
         private TableLayoutPanel tableLayoutPanel1;
     }
 }

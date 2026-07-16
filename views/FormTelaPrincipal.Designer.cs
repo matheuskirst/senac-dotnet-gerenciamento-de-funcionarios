@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             mainTable = new TableLayoutPanel();
-            dgvFuncionarios = new DataGridView();
-            panel1 = new Panel();
-            btnRemoveEmployee = new Button();
-            btnEditEmployee = new Button();
-            btnNewEmployee = new Button();
+            DgvFuncionarios = new DataGridView();
+            PanelControles = new Panel();
+            BtnRemoverFuncionario = new Button();
+            BtnEditarFuncionario = new Button();
+            BtnNovoFuncionario = new Button();
             mainTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvFuncionarios).BeginInit();
-            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvFuncionarios).BeginInit();
+            PanelControles.SuspendLayout();
             SuspendLayout();
             // 
             // mainTable
             // 
             mainTable.ColumnCount = 1;
             mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            mainTable.Controls.Add(dgvFuncionarios, 0, 0);
-            mainTable.Controls.Add(panel1, 0, 1);
+            mainTable.Controls.Add(DgvFuncionarios, 0, 0);
+            mainTable.Controls.Add(PanelControles, 0, 1);
             mainTable.Dock = DockStyle.Fill;
             mainTable.Location = new Point(0, 0);
             mainTable.Name = "mainTable";
@@ -54,70 +54,71 @@
             mainTable.Size = new Size(794, 560);
             mainTable.TabIndex = 0;
             // 
-            // dgvFuncionarios
+            // DgvFuncionarios
             // 
-            dgvFuncionarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvFuncionarios.Dock = DockStyle.Fill;
-            dgvFuncionarios.Location = new Point(3, 3);
-            dgvFuncionarios.Name = "dgvFuncionarios";
-            dgvFuncionarios.RowHeadersWidth = 51;
-            dgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvFuncionarios.Size = new Size(788, 485);
-            dgvFuncionarios.TabIndex = 0;
+            DgvFuncionarios.AllowUserToOrderColumns = true;
+            DgvFuncionarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvFuncionarios.Dock = DockStyle.Fill;
+            DgvFuncionarios.Location = new Point(3, 3);
+            DgvFuncionarios.Name = "DgvFuncionarios";
+            DgvFuncionarios.RowHeadersWidth = 51;
+            DgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvFuncionarios.Size = new Size(788, 485);
+            DgvFuncionarios.TabIndex = 0;
             // 
-            // panel1
+            // PanelControles
             // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(btnRemoveEmployee);
-            panel1.Controls.Add(btnEditEmployee);
-            panel1.Controls.Add(btnNewEmployee);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(3, 494);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(788, 63);
-            panel1.TabIndex = 3;
+            PanelControles.BackColor = SystemColors.ActiveCaption;
+            PanelControles.Controls.Add(BtnRemoverFuncionario);
+            PanelControles.Controls.Add(BtnEditarFuncionario);
+            PanelControles.Controls.Add(BtnNovoFuncionario);
+            PanelControles.Dock = DockStyle.Fill;
+            PanelControles.Location = new Point(3, 494);
+            PanelControles.Name = "PanelControles";
+            PanelControles.Size = new Size(788, 63);
+            PanelControles.TabIndex = 3;
             // 
-            // btnRemoveEmployee
+            // BtnRemoverFuncionario
             // 
-            btnRemoveEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnRemoveEmployee.BackColor = Color.White;
-            btnRemoveEmployee.Location = new Point(602, 5);
-            btnRemoveEmployee.MaximumSize = new Size(200, 60);
-            btnRemoveEmployee.MinimumSize = new Size(183, 53);
-            btnRemoveEmployee.Name = "btnRemoveEmployee";
-            btnRemoveEmployee.Size = new Size(183, 53);
-            btnRemoveEmployee.TabIndex = 2;
-            btnRemoveEmployee.Text = "Excluir";
-            btnRemoveEmployee.UseVisualStyleBackColor = false;
-            btnRemoveEmployee.Click += btnRemoveEmployee_Click;
+            BtnRemoverFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnRemoverFuncionario.BackColor = Color.White;
+            BtnRemoverFuncionario.Location = new Point(602, 5);
+            BtnRemoverFuncionario.MaximumSize = new Size(200, 60);
+            BtnRemoverFuncionario.MinimumSize = new Size(183, 53);
+            BtnRemoverFuncionario.Name = "BtnRemoverFuncionario";
+            BtnRemoverFuncionario.Size = new Size(183, 53);
+            BtnRemoverFuncionario.TabIndex = 2;
+            BtnRemoverFuncionario.Text = "Excluir";
+            BtnRemoverFuncionario.UseVisualStyleBackColor = false;
+            BtnRemoverFuncionario.Click += BtnRemoverFuncionario_Click;
             // 
-            // btnEditEmployee
+            // BtnEditarFuncionario
             // 
-            btnEditEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            btnEditEmployee.BackColor = Color.White;
-            btnEditEmployee.Location = new Point(409, 5);
-            btnEditEmployee.MaximumSize = new Size(200, 60);
-            btnEditEmployee.MinimumSize = new Size(183, 53);
-            btnEditEmployee.Name = "btnEditEmployee";
-            btnEditEmployee.Size = new Size(183, 53);
-            btnEditEmployee.TabIndex = 1;
-            btnEditEmployee.Text = "Editar";
-            btnEditEmployee.UseVisualStyleBackColor = false;
-            btnEditEmployee.Click += btnEditEmployee_Click;
+            BtnEditarFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            BtnEditarFuncionario.BackColor = Color.White;
+            BtnEditarFuncionario.Location = new Point(409, 5);
+            BtnEditarFuncionario.MaximumSize = new Size(200, 60);
+            BtnEditarFuncionario.MinimumSize = new Size(183, 53);
+            BtnEditarFuncionario.Name = "BtnEditarFuncionario";
+            BtnEditarFuncionario.Size = new Size(183, 53);
+            BtnEditarFuncionario.TabIndex = 1;
+            BtnEditarFuncionario.Text = "Editar";
+            BtnEditarFuncionario.UseVisualStyleBackColor = false;
+            BtnEditarFuncionario.Click += BtnEditarFuncionario_Click;
             // 
-            // btnNewEmployee
+            // BtnNovoFuncionario
             // 
-            btnNewEmployee.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
-            btnNewEmployee.BackColor = Color.White;
-            btnNewEmployee.Location = new Point(3, 5);
-            btnNewEmployee.MaximumSize = new Size(200, 60);
-            btnNewEmployee.MinimumSize = new Size(183, 53);
-            btnNewEmployee.Name = "btnNewEmployee";
-            btnNewEmployee.Size = new Size(183, 53);
-            btnNewEmployee.TabIndex = 0;
-            btnNewEmployee.Text = "Novo";
-            btnNewEmployee.UseVisualStyleBackColor = false;
-            btnNewEmployee.Click += btnNewEmployee_Click;
+            BtnNovoFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            BtnNovoFuncionario.BackColor = Color.White;
+            BtnNovoFuncionario.Location = new Point(3, 5);
+            BtnNovoFuncionario.MaximumSize = new Size(200, 60);
+            BtnNovoFuncionario.MinimumSize = new Size(183, 53);
+            BtnNovoFuncionario.Name = "BtnNovoFuncionario";
+            BtnNovoFuncionario.Size = new Size(183, 53);
+            BtnNovoFuncionario.TabIndex = 0;
+            BtnNovoFuncionario.Text = "Novo";
+            BtnNovoFuncionario.UseVisualStyleBackColor = false;
+            BtnNovoFuncionario.Click += BtnNovoFuncionario_Click;
             // 
             // FormTelaPrincipal
             // 
@@ -130,18 +131,18 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Principal";
             mainTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvFuncionarios).EndInit();
-            panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvFuncionarios).EndInit();
+            PanelControles.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
         private TableLayoutPanel mainTable;
-        private DataGridView dgvFuncionarios;
-        private Panel panel1;
-        private Button btnRemoveEmployee;
-        private Button btnEditEmployee;
-        private Button btnNewEmployee;
+        private DataGridView DgvFuncionarios;
+        private Panel PanelControles;
+        private Button BtnRemoverFuncionario;
+        private Button BtnEditarFuncionario;
+        private Button BtnNovoFuncionario;
     }
 }

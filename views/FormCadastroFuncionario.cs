@@ -22,9 +22,9 @@ namespace GerenciamentoDeFuncionarios.views
         public FormCadastroFuncionario()
         {
             InitializeComponent();
-            txtBoxFuncSalario.Text = "R$ 0,00";
+            TxtBoxCadastroSalario.Text = "R$ 0,00";
         }
-        private void mTxtBoxCpf_KeyPress(object sender, KeyPressEventArgs e)
+        private void MTxtBoxCadastroCpf_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
             {
@@ -36,7 +36,18 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void txtBoxFuncSalario_KeyPress(object sender, KeyPressEventArgs e)
+        private void AtualizarTextBoxSalario()
+        {
+            if (string.IsNullOrEmpty(salarioDigitado))
+            {
+                salarioFormatado = 0;
+            }
+            TxtBoxCadastroSalario.Text = "";
+            TxtBoxCadastroSalario.Text = salarioFormatado.ToString("C", brazilCulture);
+            TxtBoxCadastroSalario.Select(TxtBoxCadastroSalario.Text.Length, 0);
+        }
+
+        private void TxtBoxCadastroSalario_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
             {
@@ -65,7 +76,7 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void txtBoxFuncSalario_KeyDown(object sender, KeyEventArgs e)
+        private void TxtBoxCadastroSalario_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Back)
             {
@@ -81,33 +92,18 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void AtualizarTextBoxSalario()
-        {
-            if (string.IsNullOrEmpty(salarioDigitado))
-            {
-                salarioFormatado = 0;
-            }
-            txtBoxFuncSalario.Text = "";
-            txtBoxFuncSalario.Text = salarioFormatado.ToString("C", brazilCulture);
-            txtBoxFuncSalario.Select(txtBoxFuncSalario.Text.Length, 0);
-        }
-
         private async void btnSalvarFuncionario_Click(object sender, EventArgs e)
         {
-            labelNome.ForeColor = Color.Black;
-            labelCpf.ForeColor = Color.Black;
-            labelEmail.ForeColor = Color.Black;
-            labelSalario.ForeColor = Color.Black;
             labelErro.Text = "";
 
             var stringBuilder = new StringBuilder();
             var listaDeErros = new List<ValidationResult>();
 
-            string? nome = txtBoxFuncNome.Text;
-            string? cpf = mTxtBoxCpf.Text;
-            string? email = txtBoxFuncEmail.Text;
-            char sexo = radioBtnMasculino.Checked ? 'M' : 'F';
-            string? tipoContrato = radioBtnContratoClt.Checked ? "CLT" : radioBtnContratoPj.Checked ? "JP" : "Autônomo";
+            string? nome = TxtBoxCadastroNome.Text;
+            string? cpf = MTxtBoxCadastroCpf.Text;
+            string? email = TxtBoxCadastroEmail.Text;
+            char sexo = RadioBtnMasculino.Checked ? 'M' : 'F';
+            string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "JP" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
             var funcionario = new Funcionario(

@@ -9,19 +9,14 @@ namespace GerenciamentoDeFuncionarios
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAdmin_MouseClick(object sender, MouseEventArgs e)
+        private void BtnIdentificacaoAdmin_Click(object sender, MouseEventArgs e)
         {
             this.Hide();
             new FormLoginAdmin().ShowDialog();
             this.Show();
         }
 
-        private void btnFunc_MouseClick(object sender, MouseEventArgs e)
+        private void BtnIdentificacaoFunc_Click(object sender, EventArgs e)
         {
 
         }

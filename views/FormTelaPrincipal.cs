@@ -23,57 +23,101 @@ namespace GerenciamentoDeFuncionarios.views
 
         private void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
-            AtualizarGrid();
+            AtualizarDataGrid();
         }
 
-        public async void AtualizarGrid()
+        public async void AtualizarDataGrid()
         {
             var funcionarios = await FuncionarioRepository.ObterTodos();
 
-            dgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
+            DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
         }
 
-        private void btnNewEmployee_Click(object sender, EventArgs e)
+        private List<Funcionario> ExtrairFuncionarios()
+        {
+            List<Funcionario>? funcionarios = [];
+            foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
+            {
+                Funcionario? func = row.DataBoundItem as Funcionario;
+                if (func != null)
+                {
+                    funcionarios.Add(func);
+                }
+            }
+            return funcionarios;
+        }
+
+        private void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
             new FormCadastroFuncionario().ShowDialog();
-            AtualizarGrid();
+            AtualizarDataGrid();
         }
 
-        private void btnEditEmployee_Click(object sender, EventArgs e)
+        private void BtnEditarFuncionario_Click(object sender, EventArgs e)
         {
-
-            AtualizarGrid();
-        }
-
-        private async void btnRemoveEmployee_Click(object sender, EventArgs e)
-        {
-            if (dgvFuncionarios.CurrentRow != null)
+            if (DgvFuncionarios.CurrentRow != null)
             {
-                Funcionario? funcionario = dgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
+                Funcionario? funcionario = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
 
                 if (funcionario != null)
                 {
-                    DialogResult removerFuncionario = MessageBox.Show(
-                        $"Essa ação irá remover o funcionário \"{funcionario.Nome}\" (Id: {funcionario.Id})\nVocê tem certeza?",
-                        "Remover funcionário",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Warning,
-                        MessageBoxDefaultButton.Button2
-                        );
-                    
+                    new FormEditarFuncionario(funcionario).ShowDialog();
+
+                    AtualizarDataGrid();
+                }
+            }
+        }
+
+        private async void BtnRemoverFuncionario_Click(object sender, EventArgs e)
+        {
+            int quantidadeSelecionado = DgvFuncionarios.SelectedRows.Count;
+
+            if (quantidadeSelecionado > 0)
+            {
+                List<Funcionario>? funcionarios = ExtrairFuncionarios();
+
+                if (funcionarios.Count() > 0)
+                {
+                    DialogResult? removerFuncionario;
+
+                    if (quantidadeSelecionado == 1)
+                    {
+                        removerFuncionario = MessageBox.Show(
+                            $"Essa ação irá remover o funcionário \"{funcionarios.First().Nome}\" (Id: {funcionarios.First().Id})\nVocê tem certeza?",
+                            "Remover funcionário",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button2
+                            );
+                    }
+                    else
+                    {
+                        removerFuncionario = MessageBox.Show(
+                            $"Essa ação irá remover múltiplos funcionários\nVocê tem certeza?",
+                            "Remover funcionários",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button2
+                            );
+                    }
+
                     if (removerFuncionario == DialogResult.Yes)
                     {
-                        await FuncionarioRepository.Remover(funcionario);
+                        foreach (Funcionario func in funcionarios)
+                        {
+                            await FuncionarioRepository.Remover(func);
+                        }
+
                         MessageBox.Show(
-                            "Funcionário removido com sucesso!",
+                            "Operação concluida com sucesso!",
                             "Sucesso",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information
                             );
                     }
+                    AtualizarDataGrid();
                 }
             }
-            AtualizarGrid();
         }
     }
 }
