@@ -19,15 +19,19 @@ namespace GerenciamentoDeFuncionarios.views
         {
             InitializeComponent();
 
-            Load += FormTelaPrincipal_Load;
+            typeof(DataGridView).GetProperty(
+                "DoubleBuffered",
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.NonPublic) 
+                ?.SetValue(DgvFuncionarios, true);
         }
 
-        private void FormTelaPrincipal_Load(object? sender, EventArgs e)
+        private async void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
-            AtualizarDataGrid();
+            await AtualizarDataGrid();
         }
 
-        public async void AtualizarDataGrid()
+        public async Task AtualizarDataGrid()
         {
             var funcionarios = await FuncionarioRepository.ObterTodos();
 
@@ -60,7 +64,7 @@ namespace GerenciamentoDeFuncionarios.views
             }
             else
             {
-                AtualizarDataGrid();
+                await AtualizarDataGrid();
             }
         }
 
@@ -83,13 +87,13 @@ namespace GerenciamentoDeFuncionarios.views
         //    }
         //}
 
-        private void BtnNovoFuncionario_Click(object sender, EventArgs e)
+        private async void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
             new FormCadastroFuncionario().ShowDialog();
-            AtualizarDataGrid();
+            await AtualizarDataGrid();
         }
 
-        private void BtnEditarFuncionario_Click(object sender, EventArgs e)
+        private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
         {
             if (DgvFuncionarios.CurrentRow != null)
             {
@@ -99,7 +103,7 @@ namespace GerenciamentoDeFuncionarios.views
                 {
                     new FormEditarFuncionario(funcionario).ShowDialog();
 
-                    AtualizarDataGrid();
+                    await AtualizarDataGrid();
                 }
             }
         }
@@ -150,7 +154,7 @@ namespace GerenciamentoDeFuncionarios.views
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information
                             );
-                        AtualizarDataGrid();
+                        await AtualizarDataGrid();
                     }
                 }
             }
