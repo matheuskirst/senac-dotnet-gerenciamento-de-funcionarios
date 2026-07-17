@@ -33,7 +33,7 @@
             GroupBoxEditarNome = new GroupBox();
             TextBoxEditarNome = new TextBox();
             GroupBoxEditarCpf = new GroupBox();
-            TextBoxEditarCpf = new TextBox();
+            MTextBoxEditarCpf = new MaskedTextBox();
             GroupBoxEditarTipoContrato = new GroupBox();
             RadioBtnEditarAutonomo = new RadioButton();
             RadioBtnEditarPj = new RadioButton();
@@ -47,6 +47,7 @@
             TextBoxEditarEmail = new TextBox();
             tableLayoutPanel2 = new TableLayoutPanel();
             BtnEditarSalvar = new Button();
+            LabelEditarErro = new Label();
             tableLayoutPanelMain.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             GroupBoxEditarNome.SuspendLayout();
@@ -72,7 +73,7 @@
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanelMain.Size = new Size(432, 523);
+            tableLayoutPanelMain.Size = new Size(432, 633);
             tableLayoutPanelMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -85,33 +86,37 @@
             tableLayoutPanel1.Controls.Add(GroupBoxEditarSexo, 0, 4);
             tableLayoutPanel1.Controls.Add(GroupBoxEditarSalario, 0, 3);
             tableLayoutPanel1.Controls.Add(GroupBoxEditarEmail, 0, 2);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 6);
+            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 7);
+            tableLayoutPanel1.Controls.Add(LabelEditarErro, 0, 6);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(24, 29);
+            tableLayoutPanel1.Location = new Point(24, 34);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 7;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 14.2857141F));
-            tableLayoutPanel1.Size = new Size(382, 464);
+            tableLayoutPanel1.RowCount = 8;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.49953F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5032835F));
+            tableLayoutPanel1.Size = new Size(382, 563);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // GroupBoxEditarNome
             // 
             GroupBoxEditarNome.Controls.Add(TextBoxEditarNome);
+            GroupBoxEditarNome.Dock = DockStyle.Fill;
             GroupBoxEditarNome.Location = new Point(3, 3);
             GroupBoxEditarNome.Name = "GroupBoxEditarNome";
-            GroupBoxEditarNome.Size = new Size(376, 60);
+            GroupBoxEditarNome.Size = new Size(376, 64);
             GroupBoxEditarNome.TabIndex = 6;
             GroupBoxEditarNome.TabStop = false;
             GroupBoxEditarNome.Text = "Nome";
             // 
             // TextBoxEditarNome
             // 
+            TextBoxEditarNome.BackColor = SystemColors.Window;
             TextBoxEditarNome.Location = new Point(6, 26);
             TextBoxEditarNome.Name = "TextBoxEditarNome";
             TextBoxEditarNome.ReadOnly = true;
@@ -120,29 +125,32 @@
             // 
             // GroupBoxEditarCpf
             // 
-            GroupBoxEditarCpf.Controls.Add(TextBoxEditarCpf);
-            GroupBoxEditarCpf.Location = new Point(3, 69);
+            GroupBoxEditarCpf.Controls.Add(MTextBoxEditarCpf);
+            GroupBoxEditarCpf.Dock = DockStyle.Fill;
+            GroupBoxEditarCpf.Location = new Point(3, 73);
             GroupBoxEditarCpf.Name = "GroupBoxEditarCpf";
-            GroupBoxEditarCpf.Size = new Size(376, 60);
+            GroupBoxEditarCpf.Size = new Size(376, 64);
             GroupBoxEditarCpf.TabIndex = 7;
             GroupBoxEditarCpf.TabStop = false;
             GroupBoxEditarCpf.Text = "Cpf";
             // 
-            // TextBoxEditarCpf
+            // MTextBoxEditarCpf
             // 
-            TextBoxEditarCpf.Location = new Point(6, 26);
-            TextBoxEditarCpf.Name = "TextBoxEditarCpf";
-            TextBoxEditarCpf.Size = new Size(364, 27);
-            TextBoxEditarCpf.TabIndex = 0;
+            MTextBoxEditarCpf.Location = new Point(6, 26);
+            MTextBoxEditarCpf.Mask = "000\\.000\\.000\\-00";
+            MTextBoxEditarCpf.Name = "MTextBoxEditarCpf";
+            MTextBoxEditarCpf.Size = new Size(364, 27);
+            MTextBoxEditarCpf.TabIndex = 0;
             // 
             // GroupBoxEditarTipoContrato
             // 
             GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarAutonomo);
             GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarPj);
             GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarClt);
-            GroupBoxEditarTipoContrato.Location = new Point(3, 333);
+            GroupBoxEditarTipoContrato.Dock = DockStyle.Fill;
+            GroupBoxEditarTipoContrato.Location = new Point(3, 353);
             GroupBoxEditarTipoContrato.Name = "GroupBoxEditarTipoContrato";
-            GroupBoxEditarTipoContrato.Size = new Size(376, 60);
+            GroupBoxEditarTipoContrato.Size = new Size(376, 64);
             GroupBoxEditarTipoContrato.TabIndex = 5;
             GroupBoxEditarTipoContrato.TabStop = false;
             GroupBoxEditarTipoContrato.Text = "Tipo de Contrato";
@@ -153,7 +161,7 @@
             RadioBtnEditarAutonomo.Dock = DockStyle.Left;
             RadioBtnEditarAutonomo.Location = new Point(98, 23);
             RadioBtnEditarAutonomo.Name = "RadioBtnEditarAutonomo";
-            RadioBtnEditarAutonomo.Size = new Size(101, 34);
+            RadioBtnEditarAutonomo.Size = new Size(101, 38);
             RadioBtnEditarAutonomo.TabIndex = 4;
             RadioBtnEditarAutonomo.TabStop = true;
             RadioBtnEditarAutonomo.Text = "Autônomo";
@@ -165,7 +173,7 @@
             RadioBtnEditarPj.Dock = DockStyle.Left;
             RadioBtnEditarPj.Location = new Point(56, 23);
             RadioBtnEditarPj.Name = "RadioBtnEditarPj";
-            RadioBtnEditarPj.Size = new Size(42, 34);
+            RadioBtnEditarPj.Size = new Size(42, 38);
             RadioBtnEditarPj.TabIndex = 3;
             RadioBtnEditarPj.TabStop = true;
             RadioBtnEditarPj.Text = "PJ";
@@ -177,7 +185,7 @@
             RadioBtnEditarClt.Dock = DockStyle.Left;
             RadioBtnEditarClt.Location = new Point(3, 23);
             RadioBtnEditarClt.Name = "RadioBtnEditarClt";
-            RadioBtnEditarClt.Size = new Size(53, 34);
+            RadioBtnEditarClt.Size = new Size(53, 38);
             RadioBtnEditarClt.TabIndex = 2;
             RadioBtnEditarClt.TabStop = true;
             RadioBtnEditarClt.Text = "CLT";
@@ -187,9 +195,10 @@
             // 
             GroupBoxEditarSexo.Controls.Add(RadioBtnEditarFeminino);
             GroupBoxEditarSexo.Controls.Add(RadioBtnEditarMasculino);
-            GroupBoxEditarSexo.Location = new Point(3, 267);
+            GroupBoxEditarSexo.Dock = DockStyle.Fill;
+            GroupBoxEditarSexo.Location = new Point(3, 283);
             GroupBoxEditarSexo.Name = "GroupBoxEditarSexo";
-            GroupBoxEditarSexo.Size = new Size(376, 60);
+            GroupBoxEditarSexo.Size = new Size(376, 64);
             GroupBoxEditarSexo.TabIndex = 3;
             GroupBoxEditarSexo.TabStop = false;
             GroupBoxEditarSexo.Text = "Sexo";
@@ -200,7 +209,7 @@
             RadioBtnEditarFeminino.Dock = DockStyle.Left;
             RadioBtnEditarFeminino.Location = new Point(100, 23);
             RadioBtnEditarFeminino.Name = "RadioBtnEditarFeminino";
-            RadioBtnEditarFeminino.Size = new Size(91, 34);
+            RadioBtnEditarFeminino.Size = new Size(91, 38);
             RadioBtnEditarFeminino.TabIndex = 1;
             RadioBtnEditarFeminino.TabStop = true;
             RadioBtnEditarFeminino.Text = "Feminino";
@@ -212,7 +221,7 @@
             RadioBtnEditarMasculino.Dock = DockStyle.Left;
             RadioBtnEditarMasculino.Location = new Point(3, 23);
             RadioBtnEditarMasculino.Name = "RadioBtnEditarMasculino";
-            RadioBtnEditarMasculino.Size = new Size(97, 34);
+            RadioBtnEditarMasculino.Size = new Size(97, 38);
             RadioBtnEditarMasculino.TabIndex = 0;
             RadioBtnEditarMasculino.TabStop = true;
             RadioBtnEditarMasculino.Text = "Masculino";
@@ -221,26 +230,33 @@
             // GroupBoxEditarSalario
             // 
             GroupBoxEditarSalario.Controls.Add(TextBoxEditarSalario);
-            GroupBoxEditarSalario.Location = new Point(3, 201);
+            GroupBoxEditarSalario.Dock = DockStyle.Fill;
+            GroupBoxEditarSalario.Location = new Point(3, 213);
             GroupBoxEditarSalario.Name = "GroupBoxEditarSalario";
-            GroupBoxEditarSalario.Size = new Size(376, 60);
+            GroupBoxEditarSalario.Size = new Size(376, 64);
             GroupBoxEditarSalario.TabIndex = 9;
             GroupBoxEditarSalario.TabStop = false;
             GroupBoxEditarSalario.Text = "Salário";
             // 
             // TextBoxEditarSalario
             // 
+            TextBoxEditarSalario.BackColor = SystemColors.Window;
             TextBoxEditarSalario.Location = new Point(6, 26);
             TextBoxEditarSalario.Name = "TextBoxEditarSalario";
+            TextBoxEditarSalario.ReadOnly = true;
             TextBoxEditarSalario.Size = new Size(364, 27);
             TextBoxEditarSalario.TabIndex = 2;
+            TextBoxEditarSalario.Text = "R$ 0,00";
+            TextBoxEditarSalario.KeyDown += TextBoxEditarSalario_KeyDown;
+            TextBoxEditarSalario.KeyPress += TextBoxEditarSalario_KeyPress;
             // 
             // GroupBoxEditarEmail
             // 
             GroupBoxEditarEmail.Controls.Add(TextBoxEditarEmail);
-            GroupBoxEditarEmail.Location = new Point(3, 135);
+            GroupBoxEditarEmail.Dock = DockStyle.Fill;
+            GroupBoxEditarEmail.Location = new Point(3, 143);
             GroupBoxEditarEmail.Name = "GroupBoxEditarEmail";
-            GroupBoxEditarEmail.Size = new Size(376, 60);
+            GroupBoxEditarEmail.Size = new Size(376, 64);
             GroupBoxEditarEmail.TabIndex = 8;
             GroupBoxEditarEmail.TabStop = false;
             GroupBoxEditarEmail.Text = "Email";
@@ -260,38 +276,51 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanel2.Controls.Add(BtnEditarSalvar, 1, 1);
             tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 399);
+            tableLayoutPanel2.Location = new Point(3, 493);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.Size = new Size(376, 62);
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            tableLayoutPanel2.Size = new Size(376, 67);
             tableLayoutPanel2.TabIndex = 10;
             // 
             // BtnEditarSalvar
             // 
             BtnEditarSalvar.Dock = DockStyle.Fill;
-            BtnEditarSalvar.Location = new Point(78, 15);
+            BtnEditarSalvar.Location = new Point(78, 9);
             BtnEditarSalvar.Name = "BtnEditarSalvar";
-            BtnEditarSalvar.Size = new Size(219, 31);
+            BtnEditarSalvar.Size = new Size(219, 47);
             BtnEditarSalvar.TabIndex = 0;
             BtnEditarSalvar.Text = "Salvar";
             BtnEditarSalvar.UseVisualStyleBackColor = true;
             BtnEditarSalvar.Click += BtnEditarSalvar_Click;
             // 
+            // LabelEditarErro
+            // 
+            LabelEditarErro.AutoSize = true;
+            LabelEditarErro.BackColor = SystemColors.Control;
+            LabelEditarErro.Dock = DockStyle.Left;
+            LabelEditarErro.ForeColor = Color.Red;
+            LabelEditarErro.Location = new Point(3, 420);
+            LabelEditarErro.Name = "LabelEditarErro";
+            LabelEditarErro.Size = new Size(0, 70);
+            LabelEditarErro.TabIndex = 11;
+            // 
             // FormEditarFuncionario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 523);
+            ClientSize = new Size(432, 633);
             Controls.Add(tableLayoutPanelMain);
-            MinimumSize = new Size(450, 570);
+            MinimumSize = new Size(450, 680);
             Name = "FormEditarFuncionario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Editar Funcionario";
             Load += FormEditarFuncionario_Load;
             tableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             GroupBoxEditarNome.ResumeLayout(false);
             GroupBoxEditarNome.PerformLayout();
             GroupBoxEditarCpf.ResumeLayout(false);
@@ -320,7 +349,6 @@
         private RadioButton RadioBtnEditarClt;
         private TextBox TextBoxEditarNome;
         private GroupBox GroupBoxEditarCpf;
-        private TextBox TextBoxEditarCpf;
         private GroupBox GroupBoxEditarEmail;
         private TextBox TextBoxEditarEmail;
         private GroupBox GroupBoxEditarSalario;
@@ -329,5 +357,7 @@
         private RadioButton RadioBtnEditarPj;
         private TableLayoutPanel tableLayoutPanel2;
         private Button BtnEditarSalvar;
+        private MaskedTextBox MTextBoxEditarCpf;
+        private Label LabelEditarErro;
     }
 }

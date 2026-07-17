@@ -47,6 +47,22 @@ namespace GerenciamentoDeFuncionarios.views
             TxtBoxCadastroSalario.Select(TxtBoxCadastroSalario.Text.Length, 0);
         }
 
+        private void TxtBoxCadastroSalario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                if (salarioDigitado != "")
+                {
+                    salarioDigitado = salarioDigitado.Remove(salarioDigitado.Length - 1);
+                    if (!string.IsNullOrEmpty(salarioDigitado))
+                    {
+                        salarioFormatado = decimal.Parse(salarioDigitado) / 100;
+                    }
+                    AtualizarTextBoxSalario();
+                }
+            }
+        }
+
         private void TxtBoxCadastroSalario_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
@@ -76,22 +92,6 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void TxtBoxCadastroSalario_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Back)
-            {
-                if (salarioDigitado != "")
-                {
-                    salarioDigitado = salarioDigitado.Remove(salarioDigitado.Length - 1);
-                    if (!string.IsNullOrEmpty(salarioDigitado))
-                    {
-                        salarioFormatado = decimal.Parse(salarioDigitado) / 100;
-                    }
-                    AtualizarTextBoxSalario();
-                }
-            }
-        }
-
         private async void btnSalvarFuncionario_Click(object sender, EventArgs e)
         {
             labelErro.Text = "";
@@ -103,7 +103,7 @@ namespace GerenciamentoDeFuncionarios.views
             string? cpf = MTxtBoxCadastroCpf.Text;
             string? email = TxtBoxCadastroEmail.Text;
             char sexo = RadioBtnMasculino.Checked ? 'M' : 'F';
-            string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "JP" : "Autônomo";
+            string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "PJ" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
             var funcionario = new Funcionario(

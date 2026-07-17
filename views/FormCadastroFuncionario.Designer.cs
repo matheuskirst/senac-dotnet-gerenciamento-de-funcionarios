@@ -203,11 +203,13 @@
             // 
             // TxtBoxCadastroSalario
             // 
+            TxtBoxCadastroSalario.BackColor = SystemColors.Window;
             TxtBoxCadastroSalario.Location = new Point(11, 53);
             TxtBoxCadastroSalario.Name = "TxtBoxCadastroSalario";
             TxtBoxCadastroSalario.ReadOnly = true;
             TxtBoxCadastroSalario.Size = new Size(365, 27);
             TxtBoxCadastroSalario.TabIndex = 1;
+            TxtBoxCadastroSalario.Text = "R$ 0,00";
             TxtBoxCadastroSalario.KeyDown += TxtBoxCadastroSalario_KeyDown;
             TxtBoxCadastroSalario.KeyPress += TxtBoxCadastroSalario_KeyPress;
             // 

@@ -32,39 +32,80 @@ namespace GerenciamentoDeFuncionarios.views
         private void FormEditarFuncionario_Load(object sender, EventArgs e)
         {
             TextBoxEditarNome.Text = Funcionario.Nome;
-            //TextBoxEditarNome.Text = Funcionario.Cpf;
-            TextBoxEditarNome.Text = Funcionario.Email;
-            TextBoxEditarNome.Text = $"R$ {Funcionario.Salario}";
+            //TextBoxEditarCpf.Text = Funcionario.Cpf;
+            TextBoxEditarEmail.Text = Funcionario.Email;
+            salarioDigitado = Funcionario.Salario.ToString().Replace(",", "").Replace(".", "");
+            salarioFormatado = Funcionario.Salario;
+            AtualizarTextBoxSalario();
+            if (Funcionario.Sexo == 'M') { RadioBtnEditarMasculino.Checked = true; } else { RadioBtnEditarFeminino.Checked = true; }
+
+            if (Funcionario.TipoDeContrato == "CLT") { RadioBtnEditarClt.Checked = true; } 
+            else if (Funcionario.TipoDeContrato == "PJ") { RadioBtnEditarPj.Checked = true; }
+            else { RadioBtnEditarAutonomo.Checked = true; }
+        }
+
+        private void AtualizarTextBoxSalario()
+        {
+            if (string.IsNullOrEmpty(salarioDigitado))
+            {
+                salarioFormatado = 0;
+            }
+            TextBoxEditarSalario.Text = "";
+            TextBoxEditarSalario.Text = salarioFormatado.ToString("C", brazilCulture);
+            TextBoxEditarSalario.Select(TextBoxEditarSalario.Text.Length, 0);
+        }
+
+        private void TextBoxEditarSalario_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Back)
+            {
+                if (salarioDigitado != "")
+                {
+                    salarioDigitado = salarioDigitado.Remove(salarioDigitado.Length - 1);
+                    if (!string.IsNullOrEmpty(salarioDigitado))
+                    {
+                        salarioFormatado = decimal.Parse(salarioDigitado) / 100;
+                    }
+                    AtualizarTextBoxSalario();
+                }
+            }
+        }
+
+        private void TextBoxEditarSalario_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar))
+            {
+                salarioDigitado += e.KeyChar.ToString();
+
+                salarioFormatado = decimal.Parse(salarioDigitado) / 100;
+
+                AtualizarTextBoxSalario();
+            }
         }
 
         private async void BtnEditarSalvar_Click(object sender, EventArgs e)
         {
-            //labelErro.Text = "";
+            LabelEditarErro.Text = "";
 
             var stringBuilder = new StringBuilder();
             var listaDeErros = new List<ValidationResult>();
 
             string? nome = TextBoxEditarNome.Text;
-            string? cpf = .Text;
+            string? cpf = MTextBoxEditarCpf.Text;
             string? email = TextBoxEditarEmail.Text;
             char sexo = RadioBtnEditarMasculino.Checked ? 'M' : 'F';
-            string? tipoContrato = RadioBtnEditarClt.Checked ? "CLT" : RadioBtnEditarPj.Checked ? "JP" : "Autônomo";
+            string? tipoContrato = RadioBtnEditarClt.Checked ? "CLT" : RadioBtnEditarPj.Checked ? "PJ" : "Autônomo";
             var dataAtualizacao = DateTime.Now;
 
-            var funcionario = new Funcionario(
-                id: Funcionario.Id,
-                nome: nome,
-                sexo: sexo,
-                email: email,
-                salario: salarioFormatado,
-                tipoDeContrato: tipoContrato,
-                dataDeCadastro: Funcionario.DataDeCadastro,
-                dataDeAtualizacao: dataAtualizacao
-                );
+            Funcionario.SetEmail(email);
+            Funcionario.SetSexo(sexo);
+            Funcionario.SetSalario(salarioFormatado);
+            Funcionario.SetTipoDeContrato(tipoContrato);
+            Funcionario.DataDeAtualizacao = dataAtualizacao;
 
-            var contexto = new ValidationContext(funcionario);
+            var contexto = new ValidationContext(Funcionario);
 
-            Validator.TryValidateObject(funcionario, contexto, listaDeErros, true);
+            Validator.TryValidateObject(Funcionario, contexto, listaDeErros, true);
 
             if (listaDeErros.Count > 0)
             {
@@ -72,13 +113,13 @@ namespace GerenciamentoDeFuncionarios.views
                 {
                     stringBuilder.Append(erro.ErrorMessage + "\n");
                 }
-                //labelErro.Text = stringBuilder.ToString();
+                LabelEditarErro.Text = stringBuilder.ToString();
             }
             else
             {
                 try
                 {
-                    await FuncionarioRepository.Editar(funcionario);
+                    await FuncionarioRepository.Editar(Funcionario);
                     MessageBox.Show(
                         "Funcionário atualizado com sucesso!",
                         "Operação concluida",

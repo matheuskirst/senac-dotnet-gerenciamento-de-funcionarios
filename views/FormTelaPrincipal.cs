@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace GerenciamentoDeFuncionarios.views
         {
             var funcionarios = await FuncionarioRepository.ObterTodos();
 
-            DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
+            DgvFuncionarios.DataSource = new SortableBindingList<Funcionario>(funcionarios.ToList());
         }
 
         private List<Funcionario> ExtrairFuncionarios()
@@ -46,6 +47,41 @@ namespace GerenciamentoDeFuncionarios.views
             }
             return funcionarios;
         }
+
+        private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
+        {
+            string? prompt = TextBoxBuscarFuncionario.Text.ToLower();
+
+            if (!string.IsNullOrEmpty(prompt))
+            {
+                var funcionarios = await FuncionarioRepository.PesquisarFuncionarios(prompt);
+
+                DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
+            }
+            else
+            {
+                AtualizarDataGrid();
+            }
+        }
+
+        //private async void TextBoxBuscarFuncionario_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)
+        //    {
+        //        string? prompt = TextBoxBuscarFuncionario.Text.ToLower();
+
+        //        if (!string.IsNullOrEmpty(prompt))
+        //        {
+        //            var funcionarios = await FuncionarioRepository.PesquisarFuncionarios(prompt);
+
+        //            DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
+        //        }
+        //        else
+        //        {
+        //            AtualizarDataGrid();
+        //        }
+        //    }
+        //}
 
         private void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
@@ -114,8 +150,8 @@ namespace GerenciamentoDeFuncionarios.views
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information
                             );
+                        AtualizarDataGrid();
                     }
-                    AtualizarDataGrid();
                 }
             }
         }

@@ -43,15 +43,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
-                    UPDATE Funcionario (
-                        Nome,
-                        Email,
-                        Sexo,
-                        Salario,
-                        TipoDeContrato,
-                        DataDeCadastro,
-                        DataDeAtualizacao
-                        )    
+                    UPDATE Funcionario
                     SET
                         Nome = @Nome,
                         Email = @Email,
@@ -81,18 +73,29 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 @"
-                    SELECT
-                        Id,
-                        Nome,
-                        Email,
-                        Sexo,
-                        Salario,
-                        TipoDeContrato,
-                        DataDeCadastro,
-                        DataDeAtualizacao
-                    FROM
-                        Funcionario
+                    SELECT * FROM Funcionario
+                    ORDER BY Id
                 "
+                );
+            return funcionarios;
+        }
+
+        public static async Task<IEnumerable<Funcionario>> PesquisarFuncionarios(string prompt)
+        {
+            var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Nome ILIKE @Prompt
+
+                    UNION
+                    
+                    SELECT * FROM Funcionario
+                    WHERE Email ILIKE @Prompt
+                ",
+                new
+                {
+                    Prompt = $"{prompt}%"
+                }
                 );
             return funcionarios;
         }
