@@ -97,49 +97,75 @@ namespace GerenciamentoDeFuncionarios.views
             string? tipoContrato = RadioBtnEditarClt.Checked ? "CLT" : RadioBtnEditarPj.Checked ? "PJ" : "Autônomo";
             var dataAtualizacao = DateTime.Now;
 
-            Funcionario.SetEmail(email);
-            Funcionario.SetSexo(sexo);
-            Funcionario.SetSalario(salarioFormatado);
-            Funcionario.SetTipoDeContrato(tipoContrato);
-            Funcionario.DataDeAtualizacao = dataAtualizacao;
-
-            var contexto = new ValidationContext(Funcionario);
-
-            Validator.TryValidateObject(Funcionario, contexto, listaDeErros, true);
-
-            if (listaDeErros.Count > 0)
+            if (!string.IsNullOrEmpty(email))
             {
-                foreach (var erro in listaDeErros)
+                if (email != Funcionario.Email)
                 {
-                    stringBuilder.Append(erro.ErrorMessage + "\n");
+                    bool emailExiste = await FuncionarioRepository.ExisteFuncionarioComEmail(email);
+
+                    if (emailExiste == true)
+                    {
+                        var erroEmailJaExiste = new ValidationResult("Este Email já está cadastrado!");
+                        listaDeErros.Add(erroEmailJaExiste);
+                        email = Funcionario.Email;
+                    }
                 }
-                LabelEditarErro.Text = stringBuilder.ToString();
+            }
+
+            if (email == Funcionario.Email &&
+                sexo == Funcionario.Sexo &&
+                salarioFormatado == Funcionario.Salario &&
+                tipoContrato == Funcionario.TipoDeContrato
+                )
+            {
+                return;
             }
             else
             {
-                try
+                Funcionario.SetEmail(email);
+                Funcionario.SetSexo(sexo);
+                Funcionario.SetSalario(salarioFormatado);
+                Funcionario.SetTipoDeContrato(tipoContrato);
+                Funcionario.DataDeAtualizacao = dataAtualizacao;
+
+                var contexto = new ValidationContext(Funcionario);
+
+                Validator.TryValidateObject(Funcionario, contexto, listaDeErros, true);
+
+                if (listaDeErros.Count > 0)
                 {
-                    await FuncionarioRepository.Editar(Funcionario);
-                    MessageBox.Show(
-                        "Funcionário atualizado com sucesso!",
-                        "Operação concluida",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information
-                        );
-                    this.Close();
+                    foreach (var erro in listaDeErros)
+                    {
+                        stringBuilder.Append(erro.ErrorMessage + "\n");
+                    }
+                    LabelEditarErro.Text = stringBuilder.ToString();
                 }
-                catch
+                else
                 {
-                    MessageBox.Show(
-                        "Erro ao salvar para o banco de dados.",
-                        "Erro ao atualizar funcionário",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error
-                        );
+                    try
+                    {
+                        await FuncionarioRepository.Editar(Funcionario);
+                        MessageBox.Show(
+                            "Funcionário atualizado com sucesso!",
+                            "Operação concluida",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                            );
+                        this.Close();
+                    }
+                    catch
+                    {
+                        MessageBox.Show(
+                            "Erro ao salvar para o banco de dados.",
+                            "Erro ao atualizar funcionário",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                    }
                 }
+                salarioDigitado = "";
+                salarioFormatado = 0;
             }
-            salarioDigitado = "";
-            salarioFormatado = 0;
         }
     }
 }

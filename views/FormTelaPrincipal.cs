@@ -155,5 +155,16 @@ namespace GerenciamentoDeFuncionarios.views
                 }
             }
         }
+
+        private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            foreach (DataGridViewColumn col in DgvFuncionarios.Columns)
+            {
+                if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(DateTime?))
+                {
+                    col.DefaultCellStyle.Format = "yyyy/MM/dd - HH:mm:ss";
+                }
+            }
+        }
     }
 }

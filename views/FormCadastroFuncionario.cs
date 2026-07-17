@@ -106,6 +106,17 @@ namespace GerenciamentoDeFuncionarios.views
             string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "PJ" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
+            if (!string.IsNullOrEmpty(email))
+            {
+                bool emailExiste = await FuncionarioRepository.ExisteFuncionarioComEmail(email);
+
+                if (emailExiste == true)
+                {
+                    var erroEmailJaExiste = new ValidationResult("Este Email já está cadastrado!");
+                    listaDeErros.Add(erroEmailJaExiste);
+                }
+            }
+
             var funcionario = new Funcionario(
                 nome: nome,
                 sexo: sexo,

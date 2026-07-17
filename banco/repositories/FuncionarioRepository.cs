@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,18 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 ",
                 funcionario
                 );
+        }
+
+        public static async Task<bool> ExisteFuncionarioComEmail(string email)
+        {
+            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Email = @Email
+                ",
+                new { Email = email }
+                );
+            return resultado != null;
         }
 
         public static async Task Editar(Funcionario funcionario)
