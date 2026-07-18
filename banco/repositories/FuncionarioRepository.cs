@@ -62,14 +62,14 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 );
         }
         
-        public static async Task Remover(Funcionario funcionario)
+        public static async Task Remover(List<int> listaIds)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
                     DELETE FROM Funcionario
-                    WHERE Id = @Id
+                    WHERE Id = ANY(@ListaIds)
                 ",
-                funcionario
+                new { ListaIds = listaIds }
                 );
         }
         

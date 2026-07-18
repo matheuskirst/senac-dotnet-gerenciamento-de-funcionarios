@@ -149,16 +149,6 @@ namespace GerenciamentoDeFuncionarios.views
             cadastrar.ShowDialog();
         }
 
-        private async void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            await EditarFuncionario();
-        }
-
-        private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
-        {
-            await EditarFuncionario();
-        }
-
         private async Task EditarFuncionario()
         {
             if (DgvFuncionarios.CurrentRow != null)
@@ -172,6 +162,23 @@ namespace GerenciamentoDeFuncionarios.views
                     editor.ShowDialog();
                 }
             }
+        }
+
+        private async void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.ColumnIndex != -1)
+            {
+                await EditarFuncionario();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
+        {
+            await EditarFuncionario();
         }
 
         private async void SinalAtualizacao(object? sender, EventArgs e)
@@ -216,10 +223,15 @@ namespace GerenciamentoDeFuncionarios.views
                     {
                         try
                         {
+                            List<int>? listIds = [];
+
                             foreach (Funcionario func in funcionarios)
                             {
-                                await FuncionarioRepository.Remover(func);
+                                listIds.Add(func.Id);
                             }
+
+                            await FuncionarioRepository.Remover(listIds);
+
                             MessageBox.Show(
                                 "Operação concluida com sucesso!",
                                 "Sucesso",
