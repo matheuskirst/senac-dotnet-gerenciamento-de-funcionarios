@@ -17,6 +17,8 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormEditarFuncionario : Form
     {
+        public event EventHandler? FuncionarioAtualizado;
+
         CultureInfo brazilCulture = new CultureInfo("pt-BR");
         string salarioDigitado = "";
         decimal salarioFormatado = 0;
@@ -99,12 +101,15 @@ namespace GerenciamentoDeFuncionarios.views
 
             if (!string.IsNullOrEmpty(cpf))
             {
-                bool cpfExiste = await FuncionarioRepository.ExisteFuncionarioComCpf(cpf);
-
-                if (cpfExiste == true)
+                if (cpf != Funcionario.Cpf)
                 {
-                    var erroCpfJaExiste = new ValidationResult("Este CPF já está cadastrado!");
-                    listaDeErros.Add(erroCpfJaExiste);
+                    bool cpfExiste = await FuncionarioRepository.ExisteFuncionarioComCpf(cpf);
+
+                    if (cpfExiste == true)
+                    {
+                        var erroCpfJaExiste = new ValidationResult("Este CPF já está cadastrado!");
+                        listaDeErros.Add(erroCpfJaExiste);
+                    }
                 }
             }
 
@@ -131,7 +136,7 @@ namespace GerenciamentoDeFuncionarios.views
                 tipoContrato == Funcionario.TipoDeContrato
                 )
             {
-                return;
+                this.Close();
             }
             else
             {
@@ -165,20 +170,19 @@ namespace GerenciamentoDeFuncionarios.views
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information
                             );
+                        FuncionarioAtualizado?.Invoke(this, EventArgs.Empty);
                         this.Close();
                     }
                     catch
                     {
                         MessageBox.Show(
-                            "Erro ao salvar para o banco de dados.",
-                            "Erro ao atualizar funcionário",
+                            "Erro ao atualizar funcionário.",
+                            "Erro ao salvar para o banco de dados",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Error
                             );
                     }
                 }
-                salarioDigitado = "";
-                salarioFormatado = 0;
             }
         }
     }

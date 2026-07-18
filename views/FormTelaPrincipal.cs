@@ -15,6 +15,7 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormTelaPrincipal : Form
     {
+        public SortableBindingList<Funcionario> tabelaFuncionarios = new();
         public FormTelaPrincipal()
         {
             InitializeComponent();
@@ -28,28 +29,41 @@ namespace GerenciamentoDeFuncionarios.views
 
         private async void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
+            DgvFuncionarios.DataSource = tabelaFuncionarios;
+            
             await AtualizarDataGrid();
         }
 
-        public async Task AtualizarDataGrid()
+        public async Task AtualizarDataGrid(IEnumerable<Funcionario>? funcionarios = null)
         {
-            var funcionarios = await FuncionarioRepository.ObterTodos();
-
-            DgvFuncionarios.DataSource = new SortableBindingList<Funcionario>(funcionarios.ToList());
-        }
-
-        private List<Funcionario> ExtrairFuncionarios()
-        {
-            List<Funcionario>? funcionarios = [];
-            foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
+            try
             {
-                Funcionario? func = row.DataBoundItem as Funcionario;
-                if (func != null)
+                if (funcionarios == null)
                 {
-                    funcionarios.Add(func);
+                    funcionarios = await FuncionarioRepository.ObterTodos();
                 }
+
+                DgvFuncionarios.SuspendLayout();
+
+                tabelaFuncionarios.Clear();
+
+                foreach ( var funcionario in funcionarios )
+                {
+                    tabelaFuncionarios.Add(funcionario);
+                }
+
+                DgvFuncionarios.ClearSelection();
+                DgvFuncionarios.ResumeLayout();
             }
-            return funcionarios;
+            catch
+            {
+                MessageBox.Show(
+                    "Ocorreu um erro ao atualizar os dados",
+                    "Erro na conexão do banco de dados",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
         }
 
         private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -73,15 +87,49 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
+        private List<Funcionario> ExtrairFuncionarios()
+        {
+            List<Funcionario>? funcionarios = [];
+            foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
+            {
+                Funcionario? func = row.DataBoundItem as Funcionario;
+                if (func != null)
+                {
+                    funcionarios.Add(func);
+                }
+            }
+            return funcionarios;
+        }
+
         private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
         {
-            string? prompt = TextBoxBuscarFuncionario.Text.ToLower();
+            string? entry = TextBoxBuscarFuncionario.Text.ToLower();
 
-            if (!string.IsNullOrEmpty(prompt))
+            if (!string.IsNullOrEmpty(entry) && entry.ToLower().Contains("id:"))
             {
-                var funcionarios = await FuncionarioRepository.PesquisarFuncionarios(prompt);
-
-                DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
+                try
+                {
+                    string entryFormatada = entry.Replace("id:", "").Replace(" ", "").Trim();
+                    if (!string.IsNullOrEmpty(entryFormatada))
+                    {
+                        int id = int.Parse(entryFormatada);
+                        var funcionarios = await FuncionarioRepository.PesquisarId(id);
+                        await AtualizarDataGrid(funcionarios);
+                    }
+                    else
+                    {
+                        await AtualizarDataGrid();
+                    }
+                }
+                catch (FormatException)
+                {
+                    return;
+                }
+            }
+            else if (!string.IsNullOrEmpty(entry))
+            {
+                var funcionarios = await FuncionarioRepository.PesquisaGeral(entry);
+                await AtualizarDataGrid(funcionarios);
             }
             else
             {
@@ -94,32 +142,24 @@ namespace GerenciamentoDeFuncionarios.views
             await AtualizarDataGrid();
         }
 
-        //private async void TextBoxBuscarFuncionario_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    if (e.KeyCode == Keys.Enter)
-        //    {
-        //        string? prompt = TextBoxBuscarFuncionario.Text.ToLower();
-
-        //        if (!string.IsNullOrEmpty(prompt))
-        //        {
-        //            var funcionarios = await FuncionarioRepository.PesquisarFuncionarios(prompt);
-
-        //            DgvFuncionarios.DataSource = new BindingList<Funcionario>(funcionarios.ToList());
-        //        }
-        //        else
-        //        {
-        //            AtualizarDataGrid();
-        //        }
-        //    }
-        //}
-
         private async void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
-            new FormCadastroFuncionario().ShowDialog();
-            await AtualizarDataGrid();
+            FormCadastroFuncionario cadastrar = new FormCadastroFuncionario();
+            cadastrar.FuncionarioCadastrado += SinalAtualizacao;
+            cadastrar.ShowDialog();
+        }
+
+        private async void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            await EditarFuncionario();
         }
 
         private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
+        {
+            await EditarFuncionario();
+        }
+
+        private async Task EditarFuncionario()
         {
             if (DgvFuncionarios.CurrentRow != null)
             {
@@ -127,11 +167,16 @@ namespace GerenciamentoDeFuncionarios.views
 
                 if (funcionario != null)
                 {
-                    new FormEditarFuncionario(funcionario).ShowDialog();
-
-                    await AtualizarDataGrid();
+                    FormEditarFuncionario editor = new FormEditarFuncionario(funcionario);
+                    editor.FuncionarioAtualizado += SinalAtualizacao;
+                    editor.ShowDialog();
                 }
             }
+        }
+
+        private async void SinalAtualizacao(object? sender, EventArgs e)
+        {
+            await AtualizarDataGrid();
         }
 
         private async void BtnRemoverFuncionario_Click(object sender, EventArgs e)
@@ -169,18 +214,29 @@ namespace GerenciamentoDeFuncionarios.views
 
                     if (removerFuncionario == DialogResult.Yes)
                     {
-                        foreach (Funcionario func in funcionarios)
+                        try
                         {
-                            await FuncionarioRepository.Remover(func);
+                            foreach (Funcionario func in funcionarios)
+                            {
+                                await FuncionarioRepository.Remover(func);
+                            }
+                            MessageBox.Show(
+                                "Operação concluida com sucesso!",
+                                "Sucesso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                                );
+                            await AtualizarDataGrid();
                         }
-
-                        MessageBox.Show(
-                            "Operação concluida com sucesso!",
-                            "Sucesso",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information
-                            );
-                        await AtualizarDataGrid();
+                        catch
+                        {
+                            MessageBox.Show(
+                                "Ocorreu um erro ao remover o(s) funcionário(s)",
+                                "Erro na conexão do banco de dados",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                                );
+                        }
                     }
                 }
             }

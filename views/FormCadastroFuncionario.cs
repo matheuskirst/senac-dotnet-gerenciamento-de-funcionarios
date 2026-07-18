@@ -16,6 +16,8 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormCadastroFuncionario : Form
     {
+        public event EventHandler? FuncionarioCadastrado;
+
         CultureInfo brazilCulture = new CultureInfo("pt-BR");
         string salarioDigitado = "";
         decimal salarioFormatado = 0;
@@ -149,20 +151,20 @@ namespace GerenciamentoDeFuncionarios.views
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                         );
+                    FuncionarioCadastrado?.Invoke(this, EventArgs.Empty);
                     this.Close();
                 }
                 catch
                 {
                     MessageBox.Show(
-                        "Erro ao salvar para o banco de dados.",
-                        "Erro ao cadastrar funcionário",
+                        "Ocorreu um erro no cadastro do funcionário.",
+                        "Erro na conexão do banco de dados",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
                         );
                 }
             }
-            salarioDigitado = "";
-            salarioFormatado = 0;
+
         }
     }
 }

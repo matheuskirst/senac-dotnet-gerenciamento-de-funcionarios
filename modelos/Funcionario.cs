@@ -67,6 +67,7 @@ namespace GerenciamentoDeFuncionarios.modelos
 
         public char Sexo { get; private set; }
 
+        [Range(0.00, 99999999.99, ErrorMessage = "O valor de 'Salário' deve ser entre R$ 0,00 e R$ 99.999.999,99")]
         public decimal Salario { get; private set; }
 
         public string TipoDeContrato { get; private set; }
