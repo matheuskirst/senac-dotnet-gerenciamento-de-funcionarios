@@ -19,6 +19,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 @"
                     INSERT INTO Funcionario (
                         Nome,
+                        Cpf,
                         Email,
                         Sexo,
                         Salario,
@@ -28,6 +29,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         )    
                     VALUES (
                         @Nome,
+                        @Cpf,
                         @Email,
                         @Sexo,
                         @Salario,
@@ -40,18 +42,6 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 );
         }
 
-        public static async Task<bool> ExisteFuncionarioComEmail(string email)
-        {
-            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
-                @"
-                    SELECT * FROM Funcionario
-                    WHERE Email = @Email
-                ",
-                new { Email = email }
-                );
-            return resultado != null;
-        }
-
         public static async Task Editar(Funcionario funcionario)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
@@ -59,6 +49,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                     UPDATE Funcionario
                     SET
                         Nome = @Nome,
+                        Cpf = @Cpf
                         Email = @Email,
                         Sexo = @Sexo,
                         Salario = @Salario,
@@ -99,18 +90,45 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 @"
                     SELECT * FROM Funcionario
                     WHERE Nome ILIKE @Prompt
+        
+                    UNION
+        
+                    SELECT * FROM Funcionario
+                    WHERE Cpf ILIKE @Prompt
 
                     UNION
                     
                     SELECT * FROM Funcionario
                     WHERE Email ILIKE @Prompt
                 ",
-                new
-                {
-                    Prompt = $"{prompt}%"
+                new {Prompt = $"{prompt}%"
                 }
                 );
             return funcionarios;
+        }
+
+        public static async Task<bool> ExisteFuncionarioComCpf(string cpf)
+        {
+            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Cpf = @Cpf
+                ",
+                new { Cpf = cpf }
+                );
+            return resultado != null;
+        }
+
+        public static async Task<bool> ExisteFuncionarioComEmail(string email)
+        {
+            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Email = @Email
+                ",
+                new { Email = email }
+                );
+            return resultado != null;
         }
     }
 }

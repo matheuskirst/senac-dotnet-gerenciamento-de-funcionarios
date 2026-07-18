@@ -22,7 +22,7 @@ namespace GerenciamentoDeFuncionarios.views
             typeof(DataGridView).GetProperty(
                 "DoubleBuffered",
                 System.Reflection.BindingFlags.Instance |
-                System.Reflection.BindingFlags.NonPublic) 
+                System.Reflection.BindingFlags.NonPublic)
                 ?.SetValue(DgvFuncionarios, true);
         }
 
@@ -52,6 +52,27 @@ namespace GerenciamentoDeFuncionarios.views
             return funcionarios;
         }
 
+        private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (DgvFuncionarios.Columns[e.ColumnIndex].Name == "Cpf" && e.Value != null)
+            {
+                string? cpf = e.Value?.ToString();
+
+                if (cpf != null && cpf.Length == 11)
+                {
+                    e.Value = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+                    e.FormattingApplied = true;
+                }
+            }
+            foreach (DataGridViewColumn col in DgvFuncionarios.Columns)
+            {
+                if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(DateTime?))
+                {
+                    col.DefaultCellStyle.Format = "yyyy/MM/dd - HH:mm:ss";
+                }
+            }
+        }
+
         private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
         {
             string? prompt = TextBoxBuscarFuncionario.Text.ToLower();
@@ -66,6 +87,11 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 await AtualizarDataGrid();
             }
+        }
+
+        private async void BtnAtualizarDgv_Click(object sender, EventArgs e)
+        {
+            await AtualizarDataGrid();
         }
 
         //private async void TextBoxBuscarFuncionario_KeyDown(object sender, KeyEventArgs e)
@@ -156,17 +182,6 @@ namespace GerenciamentoDeFuncionarios.views
                             );
                         await AtualizarDataGrid();
                     }
-                }
-            }
-        }
-
-        private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            foreach (DataGridViewColumn col in DgvFuncionarios.Columns)
-            {
-                if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(DateTime?))
-                {
-                    col.DefaultCellStyle.Format = "yyyy/MM/dd - HH:mm:ss";
                 }
             }
         }

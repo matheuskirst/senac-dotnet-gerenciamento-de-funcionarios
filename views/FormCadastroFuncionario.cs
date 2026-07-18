@@ -69,18 +69,6 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 return;
             }
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != ',')
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == ',' && ((TextBox)sender).Text.Contains(','))
-            {
-                e.Handled = true;
-            }
-            if (e.KeyChar == '.' && ((TextBox)sender).Text.Contains(','))
-            {
-                e.Handled = true;
-            }
 
             if (char.IsDigit(e.KeyChar))
             {
@@ -106,6 +94,17 @@ namespace GerenciamentoDeFuncionarios.views
             string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "PJ" : "Autônomo";
             var dataCadastro = DateTime.Now;
 
+            if (!string.IsNullOrEmpty(cpf))
+            {
+                bool cpfExiste = await FuncionarioRepository.ExisteFuncionarioComCpf(cpf);
+
+                if (cpfExiste == true)
+                {
+                    var erroCpfJaExiste = new ValidationResult("Este CPF já está cadastrado!");
+                    listaDeErros.Add(erroCpfJaExiste);
+                }
+            }
+
             if (!string.IsNullOrEmpty(email))
             {
                 bool emailExiste = await FuncionarioRepository.ExisteFuncionarioComEmail(email);
@@ -119,6 +118,7 @@ namespace GerenciamentoDeFuncionarios.views
 
             var funcionario = new Funcionario(
                 nome: nome,
+                cpf: cpf,
                 sexo: sexo,
                 email: email,
                 salario: salarioFormatado,

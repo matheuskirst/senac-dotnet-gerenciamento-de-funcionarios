@@ -11,6 +11,7 @@ namespace GerenciamentoDeFuncionarios.modelos
     {
         public Funcionario(
             string nome,
+            string cpf,
             string email,
             char sexo,
             decimal salario,
@@ -19,6 +20,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             )
         {
             Nome = nome;
+            Cpf = cpf;
             Email = email;
             Sexo = sexo;
             Salario = salario;
@@ -29,6 +31,7 @@ namespace GerenciamentoDeFuncionarios.modelos
         public Funcionario(
             int id,
             string nome,
+            string cpf,
             string email,
             char sexo,
             decimal salario,
@@ -39,6 +42,7 @@ namespace GerenciamentoDeFuncionarios.modelos
         {
             Id = id;
             Nome = nome;
+            Cpf = cpf;
             Email = email;
             Sexo = sexo;
             Salario = salario;
@@ -53,6 +57,10 @@ namespace GerenciamentoDeFuncionarios.modelos
         [StringLength(255, MinimumLength = 2, ErrorMessage = "O campo 'Nome' deve ter entre 3 e 255 caracteres.")]
         public string Nome { get; private set; }
 
+        [Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
+        [StringLength(11, MinimumLength = 11, ErrorMessage = "O campo 'CPF' deve ter 11 caracteres.")]
+        public string Cpf { get; private set; }
+
         [Required(ErrorMessage = "O campo 'Email' é obrigatório.")]
         [EmailAddress(ErrorMessage = "O 'Email' é inválido.")]
         public string Email { get; private set; }
@@ -66,6 +74,16 @@ namespace GerenciamentoDeFuncionarios.modelos
         public DateTime DataDeCadastro { get; private set; }
 
         public DateTime? DataDeAtualizacao { get; set; }
+
+        public void SetNome(string nome)
+        {
+            Nome = nome;
+        }
+
+        public void SetCpf(string cpf)
+        {
+            Cpf = cpf;
+        }
 
         public void SetEmail(string email)
         {

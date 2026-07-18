@@ -32,7 +32,7 @@ namespace GerenciamentoDeFuncionarios.views
         private void FormEditarFuncionario_Load(object sender, EventArgs e)
         {
             TextBoxEditarNome.Text = Funcionario.Nome;
-            //TextBoxEditarCpf.Text = Funcionario.Cpf;
+            MTextBoxEditarCpf.Text = Funcionario.Cpf;
             TextBoxEditarEmail.Text = Funcionario.Email;
             salarioDigitado = Funcionario.Salario.ToString().Replace(",", "").Replace(".", "");
             salarioFormatado = Funcionario.Salario;
@@ -97,6 +97,17 @@ namespace GerenciamentoDeFuncionarios.views
             string? tipoContrato = RadioBtnEditarClt.Checked ? "CLT" : RadioBtnEditarPj.Checked ? "PJ" : "Autônomo";
             var dataAtualizacao = DateTime.Now;
 
+            if (!string.IsNullOrEmpty(cpf))
+            {
+                bool cpfExiste = await FuncionarioRepository.ExisteFuncionarioComCpf(cpf);
+
+                if (cpfExiste == true)
+                {
+                    var erroCpfJaExiste = new ValidationResult("Este CPF já está cadastrado!");
+                    listaDeErros.Add(erroCpfJaExiste);
+                }
+            }
+
             if (!string.IsNullOrEmpty(email))
             {
                 if (email != Funcionario.Email)
@@ -112,7 +123,9 @@ namespace GerenciamentoDeFuncionarios.views
                 }
             }
 
-            if (email == Funcionario.Email &&
+            if (nome == Funcionario.Nome &&
+                cpf == Funcionario.Cpf &&
+                email == Funcionario.Email &&
                 sexo == Funcionario.Sexo &&
                 salarioFormatado == Funcionario.Salario &&
                 tipoContrato == Funcionario.TipoDeContrato
@@ -122,6 +135,7 @@ namespace GerenciamentoDeFuncionarios.views
             }
             else
             {
+                Funcionario.SetCpf(cpf);
                 Funcionario.SetEmail(email);
                 Funcionario.SetSexo(sexo);
                 Funcionario.SetSalario(salarioFormatado);
