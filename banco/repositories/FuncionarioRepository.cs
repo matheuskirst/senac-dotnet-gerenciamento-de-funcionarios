@@ -118,6 +118,18 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
             return funcionarios;
         }
 
+        public static async Task<bool> ExisteFuncionarioComId(int id)
+        {
+            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Id = @Id
+                ",
+                new { Id = id }
+                );
+            return resultado != null;
+        }        
+        
         public static async Task<bool> ExisteFuncionarioComCpf(string cpf)
         {
             var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(

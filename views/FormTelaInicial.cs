@@ -1,3 +1,4 @@
+using GerenciamentoDeFuncionarios.modelos;
 using GerenciamentoDeFuncionarios.views;
 
 namespace GerenciamentoDeFuncionarios
@@ -18,7 +19,9 @@ namespace GerenciamentoDeFuncionarios
 
         private void BtnIdentificacaoFunc_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            new FormLoginFuncionario().ShowDialog();
+            this.Show();
         }
     }
 }

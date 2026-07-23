@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,11 +16,14 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormTelaPrincipal : Form
     {
+        private Usuario _usuario;
+
         public SortableBindingList<Funcionario> tabelaFuncionarios = new();
-        public FormTelaPrincipal()
+        public FormTelaPrincipal(Usuario usuario)
         {
             InitializeComponent();
 
+            _usuario = usuario;
             typeof(DataGridView).GetProperty(
                 "DoubleBuffered",
                 System.Reflection.BindingFlags.Instance |
@@ -30,6 +34,12 @@ namespace GerenciamentoDeFuncionarios.views
         private async void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
             DgvFuncionarios.DataSource = tabelaFuncionarios;
+
+            if (_usuario.IsAdmin)
+            {
+                BtnNovoFuncionario.Visible = true;
+                BtnRemoverFuncionario.Visible = true;
+            }
             
             await AtualizarDataGrid();
         }
@@ -58,7 +68,7 @@ namespace GerenciamentoDeFuncionarios.views
             catch
             {
                 MessageBox.Show(
-                    "Ocorreu um erro ao atualizar os dados",
+                    "Ocorreu um erro ao atualizar os funcionários",
                     "Erro na conexão do banco de dados",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -142,14 +152,14 @@ namespace GerenciamentoDeFuncionarios.views
             await AtualizarDataGrid();
         }
 
-        private async void BtnNovoFuncionario_Click(object sender, EventArgs e)
+        private void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
             FormCadastroFuncionario cadastrar = new FormCadastroFuncionario();
             cadastrar.FuncionarioCadastrado += SinalAtualizacao;
             cadastrar.ShowDialog();
         }
 
-        private async Task EditarFuncionario()
+        private void EditarFuncionario()
         {
             if (DgvFuncionarios.CurrentRow != null)
             {
@@ -157,18 +167,32 @@ namespace GerenciamentoDeFuncionarios.views
 
                 if (funcionario != null)
                 {
-                    FormEditarFuncionario editor = new FormEditarFuncionario(funcionario);
-                    editor.FuncionarioAtualizado += SinalAtualizacao;
-                    editor.ShowDialog();
+                    if (_usuario.IsAdmin == true || funcionario.Id == _usuario.Id)
+                    {
+                        FormEditarFuncionario editor = new FormEditarFuncionario(funcionario);
+                        editor.FuncionarioAtualizado += SinalAtualizacao;
+                        editor.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Você não tem permissão para editar esse funcionário",
+                            "Erro de permissão",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                        return;
+                    }
+
                 }
             }
         }
 
-        private async void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        private void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             if (e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                await EditarFuncionario();
+                EditarFuncionario();
             }
             else
             {
@@ -176,9 +200,9 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
+        private void BtnEditarFuncionario_Click(object sender, EventArgs e)
         {
-            await EditarFuncionario();
+            EditarFuncionario();
         }
 
         private async void SinalAtualizacao(object? sender, EventArgs e)

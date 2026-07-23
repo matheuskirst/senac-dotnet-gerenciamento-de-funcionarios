@@ -46,7 +46,7 @@
             LabelAdminLoginTitulo.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             LabelAdminLoginTitulo.Location = new Point(0, 0);
             LabelAdminLoginTitulo.Name = "LabelAdminLoginTitulo";
-            LabelAdminLoginTitulo.Size = new Size(207, 21);
+            LabelAdminLoginTitulo.Size = new Size(236, 28);
             LabelAdminLoginTitulo.TabIndex = 1;
             LabelAdminLoginTitulo.Text = "Login Administrador";
             LabelAdminLoginTitulo.TextAlign = ContentAlignment.MiddleCenter;
@@ -61,11 +61,10 @@
             PanelCredenciaisAdmin.Controls.Add(LabelAdminSenha);
             PanelCredenciaisAdmin.Controls.Add(TxtBoxAdminSenha);
             PanelCredenciaisAdmin.Controls.Add(BtnAdminLogin);
-            PanelCredenciaisAdmin.Location = new Point(74, 159);
-            PanelCredenciaisAdmin.Margin = new Padding(3, 2, 3, 2);
-            PanelCredenciaisAdmin.MaximumSize = new Size(345, 175);
+            PanelCredenciaisAdmin.Location = new Point(84, 209);
+            PanelCredenciaisAdmin.MaximumSize = new Size(394, 233);
             PanelCredenciaisAdmin.Name = "PanelCredenciaisAdmin";
-            PanelCredenciaisAdmin.Size = new Size(209, 131);
+            PanelCredenciaisAdmin.Size = new Size(238, 171);
             PanelCredenciaisAdmin.TabIndex = 0;
             // 
             // LabelAdminUsuario
@@ -73,9 +72,9 @@
             LabelAdminUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LabelAdminUsuario.AutoSize = true;
             LabelAdminUsuario.Font = new Font("Segoe UI", 10.2F);
-            LabelAdminUsuario.Location = new Point(3, 45);
+            LabelAdminUsuario.Location = new Point(3, 60);
             LabelAdminUsuario.Name = "LabelAdminUsuario";
-            LabelAdminUsuario.Size = new Size(59, 19);
+            LabelAdminUsuario.Size = new Size(72, 23);
             LabelAdminUsuario.TabIndex = 0;
             LabelAdminUsuario.Text = "Usuário:";
             // 
@@ -83,10 +82,9 @@
             // 
             TxtBoxAdminUsuario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TxtBoxAdminUsuario.Font = new Font("Segoe UI", 10.2F);
-            TxtBoxAdminUsuario.Location = new Point(62, 43);
-            TxtBoxAdminUsuario.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxAdminUsuario.Location = new Point(71, 57);
             TxtBoxAdminUsuario.Name = "TxtBoxAdminUsuario";
-            TxtBoxAdminUsuario.Size = new Size(138, 26);
+            TxtBoxAdminUsuario.Size = new Size(156, 30);
             TxtBoxAdminUsuario.TabIndex = 1;
             // 
             // LabelAdminSenha
@@ -94,9 +92,9 @@
             LabelAdminSenha.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             LabelAdminSenha.AutoSize = true;
             LabelAdminSenha.Font = new Font("Segoe UI", 10.2F);
-            LabelAdminSenha.Location = new Point(4, 74);
+            LabelAdminSenha.Location = new Point(5, 99);
             LabelAdminSenha.Name = "LabelAdminSenha";
-            LabelAdminSenha.Size = new Size(49, 19);
+            LabelAdminSenha.Size = new Size(61, 23);
             LabelAdminSenha.TabIndex = 3;
             LabelAdminSenha.Text = "Senha:";
             // 
@@ -104,10 +102,9 @@
             // 
             TxtBoxAdminSenha.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TxtBoxAdminSenha.Font = new Font("Segoe UI", 10.2F);
-            TxtBoxAdminSenha.Location = new Point(62, 72);
-            TxtBoxAdminSenha.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxAdminSenha.Location = new Point(71, 96);
             TxtBoxAdminSenha.Name = "TxtBoxAdminSenha";
-            TxtBoxAdminSenha.Size = new Size(138, 26);
+            TxtBoxAdminSenha.Size = new Size(156, 30);
             TxtBoxAdminSenha.TabIndex = 2;
             TxtBoxAdminSenha.UseSystemPasswordChar = true;
             // 
@@ -115,10 +112,9 @@
             // 
             BtnAdminLogin.Dock = DockStyle.Bottom;
             BtnAdminLogin.Font = new Font("Segoe UI", 10.2F);
-            BtnAdminLogin.Location = new Point(0, 102);
-            BtnAdminLogin.Margin = new Padding(3, 2, 3, 2);
+            BtnAdminLogin.Location = new Point(0, 133);
             BtnAdminLogin.Name = "BtnAdminLogin";
-            BtnAdminLogin.Size = new Size(207, 27);
+            BtnAdminLogin.Size = new Size(236, 36);
             BtnAdminLogin.TabIndex = 4;
             BtnAdminLogin.Text = "Entrar";
             BtnAdminLogin.UseVisualStyleBackColor = true;
@@ -139,19 +135,18 @@
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 30F));
             tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 35F));
-            tableLayoutPanelMain.Size = new Size(359, 451);
+            tableLayoutPanelMain.Size = new Size(408, 591);
             tableLayoutPanelMain.TabIndex = 5;
             // 
             // FormLoginAdmin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(359, 451);
+            ClientSize = new Size(408, 591);
             Controls.Add(tableLayoutPanelMain);
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
-            MaximumSize = new Size(375, 490);
-            MinimumSize = new Size(375, 490);
+            MaximumSize = new Size(426, 638);
+            MinimumSize = new Size(426, 638);
             Name = "FormLoginAdmin";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login Administrador";

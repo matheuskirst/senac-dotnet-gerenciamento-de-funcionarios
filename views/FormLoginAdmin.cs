@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GerenciamentoDeFuncionarios.modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +21,9 @@ namespace GerenciamentoDeFuncionarios.views
         {
             if (TxtBoxAdminUsuario.Text == "admin" && TxtBoxAdminSenha.Text == "1234")
             {
+                var usuario = new Usuario(id: null, is_admin: true);
                 this.Hide();
-                new FormTelaPrincipal().ShowDialog();
+                new FormTelaPrincipal(usuario).ShowDialog();
             }
             else
             {

@@ -39,11 +39,24 @@ namespace GerenciamentoDeFuncionarios.views
             salarioDigitado = Funcionario.Salario.ToString().Replace(",", "").Replace(".", "");
             salarioFormatado = Funcionario.Salario;
             AtualizarTextBoxSalario();
-            if (Funcionario.Sexo == 'M') { RadioBtnEditarMasculino.Checked = true; } else { RadioBtnEditarFeminino.Checked = true; }
+            if (Funcionario.Sexo == 'M') { RadioBtnEditarMasculino.Checked = true; }
+            else { RadioBtnEditarFeminino.Checked = true; }
 
-            if (Funcionario.TipoDeContrato == "CLT") { RadioBtnEditarClt.Checked = true; } 
-            else if (Funcionario.TipoDeContrato == "PJ") { RadioBtnEditarPj.Checked = true; }
-            else { RadioBtnEditarAutonomo.Checked = true; }
+            switch (Funcionario.TipoDeContrato)
+            {
+                case "CLT":
+                    RadioBtnEditarClt.Checked = true;
+                    break;
+                case "PJ":
+                    RadioBtnEditarPj.Checked = true;
+                    break;
+                case "Autonomo":
+                    RadioBtnEditarAutonomo.Checked = true;
+                    break;
+                default:
+                    RadioBtnEditarClt.Checked = true;
+                    break;
+            }
         }
 
         private void AtualizarTextBoxSalario()

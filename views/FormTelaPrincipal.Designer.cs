@@ -54,34 +54,32 @@
             mainTable.Controls.Add(DgvFuncionarios, 0, 1);
             mainTable.Dock = DockStyle.Fill;
             mainTable.Location = new Point(0, 0);
-            mainTable.Margin = new Padding(3, 2, 3, 2);
             mainTable.Name = "mainTable";
             mainTable.RowCount = 3;
-            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
-            mainTable.Size = new Size(651, 452);
+            mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 69F));
+            mainTable.Size = new Size(742, 603);
             mainTable.TabIndex = 0;
             // 
             // PanelPesquisar
             // 
             PanelPesquisar.ColumnCount = 4;
-            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
-            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 359F));
-            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 88F));
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 410F));
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
             PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             PanelPesquisar.Controls.Add(LabelPesquisar, 0, 1);
             PanelPesquisar.Controls.Add(TextBoxBuscarFuncionario, 1, 1);
             PanelPesquisar.Controls.Add(BtnAtualizarDgv, 2, 1);
             PanelPesquisar.Dock = DockStyle.Fill;
-            PanelPesquisar.Location = new Point(3, 2);
-            PanelPesquisar.Margin = new Padding(3, 2, 3, 2);
+            PanelPesquisar.Location = new Point(3, 3);
             PanelPesquisar.Name = "PanelPesquisar";
             PanelPesquisar.RowCount = 3;
             PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Absolute, 26F));
+            PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            PanelPesquisar.Size = new Size(645, 41);
+            PanelPesquisar.Size = new Size(736, 54);
             PanelPesquisar.TabIndex = 4;
             // 
             // LabelPesquisar
@@ -89,9 +87,9 @@
             LabelPesquisar.AutoSize = true;
             LabelPesquisar.Dock = DockStyle.Fill;
             LabelPesquisar.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LabelPesquisar.Location = new Point(3, 7);
+            LabelPesquisar.Location = new Point(3, 9);
             LabelPesquisar.Name = "LabelPesquisar";
-            LabelPesquisar.Size = new Size(82, 26);
+            LabelPesquisar.Size = new Size(95, 35);
             LabelPesquisar.TabIndex = 0;
             LabelPesquisar.Text = "Pesquisar:";
             LabelPesquisar.TextAlign = ContentAlignment.MiddleCenter;
@@ -100,20 +98,18 @@
             // 
             TextBoxBuscarFuncionario.BackColor = SystemColors.Window;
             TextBoxBuscarFuncionario.BorderStyle = BorderStyle.FixedSingle;
-            TextBoxBuscarFuncionario.Location = new Point(91, 9);
-            TextBoxBuscarFuncionario.Margin = new Padding(3, 2, 3, 2);
+            TextBoxBuscarFuncionario.Location = new Point(104, 12);
             TextBoxBuscarFuncionario.Name = "TextBoxBuscarFuncionario";
-            TextBoxBuscarFuncionario.Size = new Size(350, 23);
+            TextBoxBuscarFuncionario.Size = new Size(400, 27);
             TextBoxBuscarFuncionario.TabIndex = 1;
             TextBoxBuscarFuncionario.TextChanged += TextBoxBuscarFuncionario_TextChanged;
             // 
             // BtnAtualizarDgv
             // 
             BtnAtualizarDgv.Dock = DockStyle.Fill;
-            BtnAtualizarDgv.Location = new Point(450, 9);
-            BtnAtualizarDgv.Margin = new Padding(3, 2, 3, 2);
+            BtnAtualizarDgv.Location = new Point(514, 12);
             BtnAtualizarDgv.Name = "BtnAtualizarDgv";
-            BtnAtualizarDgv.Size = new Size(82, 22);
+            BtnAtualizarDgv.Size = new Size(95, 29);
             BtnAtualizarDgv.TabIndex = 2;
             BtnAtualizarDgv.Text = "Atualizar";
             BtnAtualizarDgv.UseVisualStyleBackColor = true;
@@ -126,37 +122,35 @@
             PanelControles.Controls.Add(BtnEditarFuncionario);
             PanelControles.Controls.Add(BtnNovoFuncionario);
             PanelControles.Dock = DockStyle.Fill;
-            PanelControles.Location = new Point(3, 402);
-            PanelControles.Margin = new Padding(3, 2, 3, 2);
+            PanelControles.Location = new Point(3, 537);
             PanelControles.Name = "PanelControles";
-            PanelControles.Size = new Size(645, 48);
+            PanelControles.Size = new Size(736, 63);
             PanelControles.TabIndex = 3;
             // 
             // BtnRemoverFuncionario
             // 
             BtnRemoverFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             BtnRemoverFuncionario.BackColor = Color.White;
-            BtnRemoverFuncionario.Location = new Point(424, 4);
-            BtnRemoverFuncionario.Margin = new Padding(3, 2, 3, 2);
-            BtnRemoverFuncionario.MaximumSize = new Size(175, 45);
-            BtnRemoverFuncionario.MinimumSize = new Size(160, 40);
+            BtnRemoverFuncionario.Location = new Point(544, 5);
+            BtnRemoverFuncionario.MaximumSize = new Size(200, 60);
+            BtnRemoverFuncionario.MinimumSize = new Size(183, 53);
             BtnRemoverFuncionario.Name = "BtnRemoverFuncionario";
-            BtnRemoverFuncionario.Size = new Size(160, 41);
+            BtnRemoverFuncionario.Size = new Size(183, 54);
             BtnRemoverFuncionario.TabIndex = 2;
             BtnRemoverFuncionario.Text = "Excluir";
             BtnRemoverFuncionario.UseVisualStyleBackColor = false;
+            BtnRemoverFuncionario.Visible = false;
             BtnRemoverFuncionario.Click += BtnRemoverFuncionario_Click;
             // 
             // BtnEditarFuncionario
             // 
             BtnEditarFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             BtnEditarFuncionario.BackColor = Color.White;
-            BtnEditarFuncionario.Location = new Point(254, 4);
-            BtnEditarFuncionario.Margin = new Padding(3, 2, 3, 2);
-            BtnEditarFuncionario.MaximumSize = new Size(175, 45);
-            BtnEditarFuncionario.MinimumSize = new Size(160, 40);
+            BtnEditarFuncionario.Location = new Point(349, 5);
+            BtnEditarFuncionario.MaximumSize = new Size(200, 60);
+            BtnEditarFuncionario.MinimumSize = new Size(183, 53);
             BtnEditarFuncionario.Name = "BtnEditarFuncionario";
-            BtnEditarFuncionario.Size = new Size(160, 41);
+            BtnEditarFuncionario.Size = new Size(183, 54);
             BtnEditarFuncionario.TabIndex = 1;
             BtnEditarFuncionario.Text = "Editar";
             BtnEditarFuncionario.UseVisualStyleBackColor = false;
@@ -166,15 +160,15 @@
             // 
             BtnNovoFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             BtnNovoFuncionario.BackColor = Color.White;
-            BtnNovoFuncionario.Location = new Point(3, 4);
-            BtnNovoFuncionario.Margin = new Padding(3, 2, 3, 2);
-            BtnNovoFuncionario.MaximumSize = new Size(175, 45);
-            BtnNovoFuncionario.MinimumSize = new Size(160, 40);
+            BtnNovoFuncionario.Location = new Point(3, 5);
+            BtnNovoFuncionario.MaximumSize = new Size(200, 60);
+            BtnNovoFuncionario.MinimumSize = new Size(183, 53);
             BtnNovoFuncionario.Name = "BtnNovoFuncionario";
-            BtnNovoFuncionario.Size = new Size(160, 41);
+            BtnNovoFuncionario.Size = new Size(183, 54);
             BtnNovoFuncionario.TabIndex = 0;
             BtnNovoFuncionario.Text = "Novo";
             BtnNovoFuncionario.UseVisualStyleBackColor = false;
+            BtnNovoFuncionario.Visible = false;
             BtnNovoFuncionario.Click += BtnNovoFuncionario_Click;
             // 
             // DgvFuncionarios
@@ -191,24 +185,22 @@
             DgvFuncionarios.DefaultCellStyle = dataGridViewCellStyle1;
             DgvFuncionarios.Dock = DockStyle.Fill;
             DgvFuncionarios.EditMode = DataGridViewEditMode.EditProgrammatically;
-            DgvFuncionarios.Location = new Point(3, 47);
-            DgvFuncionarios.Margin = new Padding(3, 2, 3, 2);
+            DgvFuncionarios.Location = new Point(3, 63);
             DgvFuncionarios.Name = "DgvFuncionarios";
             DgvFuncionarios.RowHeadersWidth = 51;
             DgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvFuncionarios.Size = new Size(645, 351);
+            DgvFuncionarios.Size = new Size(736, 468);
             DgvFuncionarios.TabIndex = 0;
             DgvFuncionarios.CellFormatting += DgvFuncionarios_CellFormatting;
             DgvFuncionarios.CellMouseDoubleClick += DgvFuncionarios_CellMouseDoubleClick;
             // 
             // FormTelaPrincipal
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(651, 452);
+            ClientSize = new Size(742, 603);
             Controls.Add(mainTable);
-            Margin = new Padding(3, 2, 3, 2);
-            MinimumSize = new Size(667, 491);
+            MinimumSize = new Size(760, 639);
             Name = "FormTelaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Principal";
