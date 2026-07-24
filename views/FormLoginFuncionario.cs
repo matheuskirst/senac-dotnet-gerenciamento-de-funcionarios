@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
+using BCrypt.Net;
 
 namespace GerenciamentoDeFuncionarios.views
 {
@@ -21,15 +23,35 @@ namespace GerenciamentoDeFuncionarios.views
 
         private async void BtnFuncLogin_Click(object sender, EventArgs e)
         {
-            if (int.TryParse(TxtBoxFuncMatricula.Text, out var funcionarioId))
+            if (int.TryParse(TxtBoxMatriculaFunc.Text, out var funcionarioId))
             {
-                bool funcionarioExiste = await FuncionarioRepository.ExisteFuncionarioComId(funcionarioId);
+                bool isFuncionarioExiste = await FuncionarioRepository.ExisteFuncionarioComId(funcionarioId);
 
-                if (funcionarioExiste)
+                if (isFuncionarioExiste)
                 {
-                    var usuario = new Usuario(id: funcionarioId, is_admin: false);
-                    this.Hide();
-                    new FormTelaPrincipal(usuario).ShowDialog();
+                    var funcionarios = await FuncionarioRepository.ObterPorId([funcionarioId]);
+                    Funcionario? funcionario = funcionarios.First();
+
+                    string loginSenha = TxtBoxSenhaFunc.Text;
+                    string senhaSalva = funcionario.Senha;
+
+                    bool isSenhaValida = BCrypt.Net.BCrypt.EnhancedVerify(loginSenha, senhaSalva);
+
+                    if (isSenhaValida)
+                    {
+                        var usuario = new Usuario(id: funcionarioId, is_admin: false);
+                        this.Hide();
+                        new FormTelaPrincipal(usuario).ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "A matrícula ou a senha estão incorretos.",
+                            "Erro no login",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                    }
                 }
                 else
                 {
@@ -50,6 +72,11 @@ namespace GerenciamentoDeFuncionarios.views
                     MessageBoxIcon.Error
                     );
             }
+        }
+
+        private void VoltarButtonFunc_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

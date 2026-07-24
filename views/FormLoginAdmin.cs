@@ -19,7 +19,7 @@ namespace GerenciamentoDeFuncionarios.views
         }
         private void BtnAdminLogin_Click(object sender, EventArgs e)
         {
-            if (TxtBoxAdminUsuario.Text == "admin" && TxtBoxAdminSenha.Text == "1234")
+            if (TxtBoxUsuarioAdmin.Text == "admin" && TxtBoxSenhaAdmin.Text == "1234")
             {
                 var usuario = new Usuario(id: null, is_admin: true);
                 this.Hide();
@@ -34,6 +34,11 @@ namespace GerenciamentoDeFuncionarios.views
                     MessageBoxIcon.Error
                     );
             }
+        }
+
+        private void VoltarButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

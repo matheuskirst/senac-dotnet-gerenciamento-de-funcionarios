@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -92,6 +93,7 @@ namespace GerenciamentoDeFuncionarios.views
             string? nome = TxtBoxCadastroNome.Text;
             string? cpf = MTxtBoxCadastroCpf.Text;
             string? email = TxtBoxCadastroEmail.Text;
+            string? senha = TxtBoxCadastroSenha.Text;
             char sexo = RadioBtnMasculino.Checked ? 'M' : 'F';
             string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "PJ" : "Autônomo";
             var dataCadastro = DateTime.Now;
@@ -118,11 +120,31 @@ namespace GerenciamentoDeFuncionarios.views
                 }
             }
 
+            if (!string.IsNullOrEmpty(senha))
+            {
+                bool isTamanhoInvalido = false;
+                int tamanhoSenha = senha.Length;
+
+                if (tamanhoSenha < 3 || tamanhoSenha > 30)
+                {
+                    isTamanhoInvalido = true;
+                }
+
+                if (isTamanhoInvalido)
+                {
+                    var erroEmailJaExiste = new ValidationResult("A senha deve ter entre 3 e 30 caracteres!");
+                    listaDeErros.Add(erroEmailJaExiste);
+                }
+            }
+
+            string hashedSenha = BCrypt.Net.BCrypt.EnhancedHashPassword(senha);
+
             var funcionario = new Funcionario(
                 nome: nome,
                 cpf: cpf,
-                sexo: sexo,
                 email: email,
+                senha: hashedSenha,
+                sexo: sexo,
                 salario: salarioFormatado,
                 tipoDeContrato: tipoContrato,
                 dataDeCadastro: dataCadastro

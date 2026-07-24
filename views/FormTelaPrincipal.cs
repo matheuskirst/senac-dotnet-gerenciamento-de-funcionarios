@@ -16,7 +16,7 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormTelaPrincipal : Form
     {
-        private Usuario _usuario;
+        private Usuario? _usuario;
 
         public SortableBindingList<Funcionario> tabelaFuncionarios = new();
         public FormTelaPrincipal(Usuario usuario)
@@ -34,13 +34,14 @@ namespace GerenciamentoDeFuncionarios.views
         private async void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
             DgvFuncionarios.DataSource = tabelaFuncionarios;
+            DgvFuncionarios.Columns["Senha"].Visible = false;
 
             if (_usuario.IsAdmin)
             {
                 BtnNovoFuncionario.Visible = true;
                 BtnRemoverFuncionario.Visible = true;
             }
-            
+
             await AtualizarDataGrid();
         }
 
@@ -57,7 +58,7 @@ namespace GerenciamentoDeFuncionarios.views
 
                 tabelaFuncionarios.Clear();
 
-                foreach ( var funcionario in funcionarios )
+                foreach (var funcionario in funcionarios)
                 {
                     tabelaFuncionarios.Add(funcionario);
                 }
@@ -97,17 +98,19 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private List<Funcionario> ExtrairFuncionarios()
+        private Task<IEnumerable<Funcionario>> ExtrairFuncionarios()
         {
-            List<Funcionario>? funcionarios = [];
+            List<int>? funcionariosId = [];
+            Task<IEnumerable<Funcionario>> funcionarios;
             foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
             {
                 Funcionario? func = row.DataBoundItem as Funcionario;
                 if (func != null)
                 {
-                    funcionarios.Add(func);
+                    funcionariosId.Add(func.Id);
                 }
             }
+            funcionarios = FuncionarioRepository.ObterPorId(funcionariosId);
             return funcionarios;
         }
 
@@ -159,17 +162,20 @@ namespace GerenciamentoDeFuncionarios.views
             cadastrar.ShowDialog();
         }
 
-        private void EditarFuncionario()
+        private async void EditarFuncionario()
         {
             if (DgvFuncionarios.CurrentRow != null)
             {
-                Funcionario? funcionario = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
+                Funcionario? funcionarioSelecionado = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
 
-                if (funcionario != null)
+                if (funcionarioSelecionado != null)
                 {
-                    if (_usuario.IsAdmin == true || funcionario.Id == _usuario.Id)
+                    int funcionarioId = funcionarioSelecionado.Id;
+                    var funcionario = await FuncionarioRepository.ObterPorId([funcionarioId]);
+
+                    if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
                     {
-                        FormEditarFuncionario editor = new FormEditarFuncionario(funcionario);
+                        FormEditarFuncionario editor = new FormEditarFuncionario(funcionario.First());
                         editor.FuncionarioAtualizado += SinalAtualizacao;
                         editor.ShowDialog();
                     }
@@ -216,7 +222,7 @@ namespace GerenciamentoDeFuncionarios.views
 
             if (quantidadeSelecionado > 0)
             {
-                List<Funcionario>? funcionarios = ExtrairFuncionarios();
+                var funcionarios = await ExtrairFuncionarios();
 
                 if (funcionarios.Count() > 0)
                 {
@@ -276,6 +282,12 @@ namespace GerenciamentoDeFuncionarios.views
                     }
                 }
             }
+        }
+
+        private void TelaInicialButton_Click(object sender, EventArgs e)
+        {
+            _usuario = null;
+            this.Close();
         }
     }
 }

@@ -10,7 +10,7 @@ namespace GerenciamentoDeFuncionarios
             InitializeComponent();
         }
 
-        private void BtnIdentificacaoAdmin_Click(object sender, MouseEventArgs e)
+        private void BtnIdentificacaoAdmin_Click(object sender, EventArgs e)
         {
             this.Hide();
             new FormLoginAdmin().ShowDialog();

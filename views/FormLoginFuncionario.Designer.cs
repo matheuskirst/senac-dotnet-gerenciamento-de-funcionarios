@@ -30,10 +30,13 @@
         {
             tableLayoutPanelMain = new TableLayoutPanel();
             PanelCredenciaisFunc = new Panel();
+            LabelSenhaFunc = new Label();
+            TxtBoxSenhaFunc = new TextBox();
             LabelFuncLoginTitulo = new Label();
-            LabelFuncMatricula = new Label();
-            TxtBoxFuncMatricula = new TextBox();
+            LabelMatriculaFunc = new Label();
+            TxtBoxMatriculaFunc = new TextBox();
             BtnFuncLogin = new Button();
+            FuncVoltarButton = new Button();
             tableLayoutPanelMain.SuspendLayout();
             PanelCredenciaisFunc.SuspendLayout();
             SuspendLayout();
@@ -45,6 +48,7 @@
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
             tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             tableLayoutPanelMain.Controls.Add(PanelCredenciaisFunc, 1, 1);
+            tableLayoutPanelMain.Controls.Add(FuncVoltarButton, 0, 0);
             tableLayoutPanelMain.Dock = DockStyle.Fill;
             tableLayoutPanelMain.Location = new Point(0, 0);
             tableLayoutPanelMain.Margin = new Padding(0);
@@ -60,15 +64,38 @@
             // 
             PanelCredenciaisFunc.Anchor = AnchorStyles.None;
             PanelCredenciaisFunc.BorderStyle = BorderStyle.FixedSingle;
+            PanelCredenciaisFunc.Controls.Add(LabelSenhaFunc);
+            PanelCredenciaisFunc.Controls.Add(TxtBoxSenhaFunc);
             PanelCredenciaisFunc.Controls.Add(LabelFuncLoginTitulo);
-            PanelCredenciaisFunc.Controls.Add(LabelFuncMatricula);
-            PanelCredenciaisFunc.Controls.Add(TxtBoxFuncMatricula);
+            PanelCredenciaisFunc.Controls.Add(LabelMatriculaFunc);
+            PanelCredenciaisFunc.Controls.Add(TxtBoxMatriculaFunc);
             PanelCredenciaisFunc.Controls.Add(BtnFuncLogin);
             PanelCredenciaisFunc.Location = new Point(84, 209);
             PanelCredenciaisFunc.MaximumSize = new Size(394, 233);
             PanelCredenciaisFunc.Name = "PanelCredenciaisFunc";
             PanelCredenciaisFunc.Size = new Size(238, 171);
             PanelCredenciaisFunc.TabIndex = 0;
+            // 
+            // LabelSenhaFunc
+            // 
+            LabelSenhaFunc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            LabelSenhaFunc.AutoSize = true;
+            LabelSenhaFunc.Font = new Font("Segoe UI", 10.2F);
+            LabelSenhaFunc.Location = new Point(3, 99);
+            LabelSenhaFunc.Name = "LabelSenhaFunc";
+            LabelSenhaFunc.Size = new Size(61, 23);
+            LabelSenhaFunc.TabIndex = 6;
+            LabelSenhaFunc.Text = "Senha:";
+            // 
+            // TxtBoxSenhaFunc
+            // 
+            TxtBoxSenhaFunc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            TxtBoxSenhaFunc.Font = new Font("Segoe UI", 10.2F);
+            TxtBoxSenhaFunc.Location = new Point(77, 96);
+            TxtBoxSenhaFunc.Name = "TxtBoxSenhaFunc";
+            TxtBoxSenhaFunc.Size = new Size(150, 30);
+            TxtBoxSenhaFunc.TabIndex = 5;
+            TxtBoxSenhaFunc.UseSystemPasswordChar = true;
             // 
             // LabelFuncLoginTitulo
             // 
@@ -81,23 +108,23 @@
             LabelFuncLoginTitulo.Text = "Login Funcionário";
             LabelFuncLoginTitulo.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // LabelFuncMatricula
+            // LabelMatriculaFunc
             // 
-            LabelFuncMatricula.AutoSize = true;
-            LabelFuncMatricula.Font = new Font("Segoe UI", 10.2F);
-            LabelFuncMatricula.Location = new Point(3, 72);
-            LabelFuncMatricula.Name = "LabelFuncMatricula";
-            LabelFuncMatricula.Size = new Size(85, 23);
-            LabelFuncMatricula.TabIndex = 0;
-            LabelFuncMatricula.Text = "Mátricula:";
+            LabelMatriculaFunc.AutoSize = true;
+            LabelMatriculaFunc.Font = new Font("Segoe UI", 10.2F);
+            LabelMatriculaFunc.Location = new Point(3, 60);
+            LabelMatriculaFunc.Name = "LabelMatriculaFunc";
+            LabelMatriculaFunc.Size = new Size(85, 23);
+            LabelMatriculaFunc.TabIndex = 0;
+            LabelMatriculaFunc.Text = "Mátricula:";
             // 
-            // TxtBoxFuncMatricula
+            // TxtBoxMatriculaFunc
             // 
-            TxtBoxFuncMatricula.Font = new Font("Segoe UI", 10.2F);
-            TxtBoxFuncMatricula.Location = new Point(94, 69);
-            TxtBoxFuncMatricula.Name = "TxtBoxFuncMatricula";
-            TxtBoxFuncMatricula.Size = new Size(133, 30);
-            TxtBoxFuncMatricula.TabIndex = 1;
+            TxtBoxMatriculaFunc.Font = new Font("Segoe UI", 10.2F);
+            TxtBoxMatriculaFunc.Location = new Point(94, 57);
+            TxtBoxMatriculaFunc.Name = "TxtBoxMatriculaFunc";
+            TxtBoxMatriculaFunc.Size = new Size(133, 30);
+            TxtBoxMatriculaFunc.TabIndex = 1;
             // 
             // BtnFuncLogin
             // 
@@ -110,6 +137,16 @@
             BtnFuncLogin.Text = "Entrar";
             BtnFuncLogin.UseVisualStyleBackColor = true;
             BtnFuncLogin.Click += BtnFuncLogin_Click;
+            // 
+            // FuncVoltarButton
+            // 
+            FuncVoltarButton.Location = new Point(3, 3);
+            FuncVoltarButton.Name = "FuncVoltarButton";
+            FuncVoltarButton.Size = new Size(75, 29);
+            FuncVoltarButton.TabIndex = 1;
+            FuncVoltarButton.Text = "Voltar";
+            FuncVoltarButton.UseVisualStyleBackColor = true;
+            FuncVoltarButton.Click += VoltarButtonFunc_Click;
             // 
             // FormLoginFuncionario
             // 
@@ -133,8 +170,11 @@
         private TableLayoutPanel tableLayoutPanelMain;
         private Panel PanelCredenciaisFunc;
         private Label LabelFuncLoginTitulo;
-        private Label LabelFuncMatricula;
-        private TextBox TxtBoxFuncMatricula;
+        private Label LabelMatriculaFunc;
+        private TextBox TxtBoxMatriculaFunc;
         private Button BtnFuncLogin;
+        private Label LabelSenhaFunc;
+        private TextBox TxtBoxSenhaFunc;
+        private Button FuncVoltarButton;
     }
 }

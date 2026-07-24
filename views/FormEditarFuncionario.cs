@@ -22,7 +22,8 @@ namespace GerenciamentoDeFuncionarios.views
         CultureInfo brazilCulture = new CultureInfo("pt-BR");
         string salarioDigitado = "";
         decimal salarioFormatado = 0;
-        public Funcionario Funcionario { get; set; }
+
+        private Funcionario Funcionario;
 
         public FormEditarFuncionario(Funcionario funcionario)
         {

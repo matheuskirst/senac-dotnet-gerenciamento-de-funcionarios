@@ -31,6 +31,7 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             mainTable = new TableLayoutPanel();
             PanelPesquisar = new TableLayoutPanel();
+            TelaInicialButton = new Button();
             LabelPesquisar = new Label();
             TextBoxBuscarFuncionario = new TextBox();
             BtnAtualizarDgv = new Button();
@@ -59,19 +60,23 @@
             mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             mainTable.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             mainTable.RowStyles.Add(new RowStyle(SizeType.Absolute, 69F));
-            mainTable.Size = new Size(742, 603);
+            mainTable.Size = new Size(922, 603);
             mainTable.TabIndex = 0;
             // 
             // PanelPesquisar
             // 
-            PanelPesquisar.ColumnCount = 4;
+            PanelPesquisar.ColumnCount = 7;
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 30F));
             PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
             PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 410F));
             PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
             PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            PanelPesquisar.Controls.Add(LabelPesquisar, 0, 1);
-            PanelPesquisar.Controls.Add(TextBoxBuscarFuncionario, 1, 1);
-            PanelPesquisar.Controls.Add(BtnAtualizarDgv, 2, 1);
+            PanelPesquisar.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
+            PanelPesquisar.Controls.Add(TelaInicialButton, 0, 1);
+            PanelPesquisar.Controls.Add(LabelPesquisar, 2, 1);
+            PanelPesquisar.Controls.Add(TextBoxBuscarFuncionario, 3, 1);
+            PanelPesquisar.Controls.Add(BtnAtualizarDgv, 4, 1);
             PanelPesquisar.Dock = DockStyle.Fill;
             PanelPesquisar.Location = new Point(3, 3);
             PanelPesquisar.Name = "PanelPesquisar";
@@ -79,15 +84,25 @@
             PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Absolute, 35F));
             PanelPesquisar.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            PanelPesquisar.Size = new Size(736, 54);
+            PanelPesquisar.Size = new Size(916, 54);
             PanelPesquisar.TabIndex = 4;
+            // 
+            // TelaInicialButton
+            // 
+            TelaInicialButton.Location = new Point(3, 12);
+            TelaInicialButton.Name = "TelaInicialButton";
+            TelaInicialButton.Size = new Size(94, 29);
+            TelaInicialButton.TabIndex = 3;
+            TelaInicialButton.Text = "Tela Inicial";
+            TelaInicialButton.UseVisualStyleBackColor = true;
+            TelaInicialButton.Click += TelaInicialButton_Click;
             // 
             // LabelPesquisar
             // 
             LabelPesquisar.AutoSize = true;
             LabelPesquisar.Dock = DockStyle.Fill;
             LabelPesquisar.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            LabelPesquisar.Location = new Point(3, 9);
+            LabelPesquisar.Location = new Point(134, 9);
             LabelPesquisar.Name = "LabelPesquisar";
             LabelPesquisar.Size = new Size(95, 35);
             LabelPesquisar.TabIndex = 0;
@@ -98,16 +113,17 @@
             // 
             TextBoxBuscarFuncionario.BackColor = SystemColors.Window;
             TextBoxBuscarFuncionario.BorderStyle = BorderStyle.FixedSingle;
-            TextBoxBuscarFuncionario.Location = new Point(104, 12);
+            TextBoxBuscarFuncionario.Dock = DockStyle.Fill;
+            TextBoxBuscarFuncionario.Location = new Point(235, 12);
             TextBoxBuscarFuncionario.Name = "TextBoxBuscarFuncionario";
-            TextBoxBuscarFuncionario.Size = new Size(400, 27);
+            TextBoxBuscarFuncionario.Size = new Size(404, 27);
             TextBoxBuscarFuncionario.TabIndex = 1;
             TextBoxBuscarFuncionario.TextChanged += TextBoxBuscarFuncionario_TextChanged;
             // 
             // BtnAtualizarDgv
             // 
             BtnAtualizarDgv.Dock = DockStyle.Fill;
-            BtnAtualizarDgv.Location = new Point(514, 12);
+            BtnAtualizarDgv.Location = new Point(645, 12);
             BtnAtualizarDgv.Name = "BtnAtualizarDgv";
             BtnAtualizarDgv.Size = new Size(95, 29);
             BtnAtualizarDgv.TabIndex = 2;
@@ -124,14 +140,14 @@
             PanelControles.Dock = DockStyle.Fill;
             PanelControles.Location = new Point(3, 537);
             PanelControles.Name = "PanelControles";
-            PanelControles.Size = new Size(736, 63);
+            PanelControles.Size = new Size(916, 63);
             PanelControles.TabIndex = 3;
             // 
             // BtnRemoverFuncionario
             // 
             BtnRemoverFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             BtnRemoverFuncionario.BackColor = Color.White;
-            BtnRemoverFuncionario.Location = new Point(544, 5);
+            BtnRemoverFuncionario.Location = new Point(724, 5);
             BtnRemoverFuncionario.MaximumSize = new Size(200, 60);
             BtnRemoverFuncionario.MinimumSize = new Size(183, 53);
             BtnRemoverFuncionario.Name = "BtnRemoverFuncionario";
@@ -146,7 +162,7 @@
             // 
             BtnEditarFuncionario.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             BtnEditarFuncionario.BackColor = Color.White;
-            BtnEditarFuncionario.Location = new Point(349, 5);
+            BtnEditarFuncionario.Location = new Point(529, 5);
             BtnEditarFuncionario.MaximumSize = new Size(200, 60);
             BtnEditarFuncionario.MinimumSize = new Size(183, 53);
             BtnEditarFuncionario.Name = "BtnEditarFuncionario";
@@ -189,7 +205,7 @@
             DgvFuncionarios.Name = "DgvFuncionarios";
             DgvFuncionarios.RowHeadersWidth = 51;
             DgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            DgvFuncionarios.Size = new Size(736, 468);
+            DgvFuncionarios.Size = new Size(916, 468);
             DgvFuncionarios.TabIndex = 0;
             DgvFuncionarios.CellFormatting += DgvFuncionarios_CellFormatting;
             DgvFuncionarios.CellMouseDoubleClick += DgvFuncionarios_CellMouseDoubleClick;
@@ -198,9 +214,9 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(742, 603);
+            ClientSize = new Size(922, 603);
             Controls.Add(mainTable);
-            MinimumSize = new Size(760, 639);
+            MinimumSize = new Size(940, 650);
             Name = "FormTelaPrincipal";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Tela Principal";
@@ -226,5 +242,6 @@
         private Label LabelPesquisar;
         private TextBox TextBoxBuscarFuncionario;
         private Button BtnAtualizarDgv;
+        private Button TelaInicialButton;
     }
 }

@@ -13,6 +13,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             string nome,
             string cpf,
             string email,
+            string senha,
             char sexo,
             decimal salario,
             string tipoDeContrato,
@@ -22,6 +23,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             Nome = nome;
             Cpf = cpf;
             Email = email;
+            Senha = senha;
             Sexo = sexo;
             Salario = salario;
             TipoDeContrato = tipoDeContrato;
@@ -33,6 +35,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             string nome,
             string cpf,
             string email,
+            string senha,
             char sexo,
             decimal salario,
             string tipoDeContrato,
@@ -44,6 +47,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             Nome = nome;
             Cpf = cpf;
             Email = email;
+            Senha = senha;
             Sexo = sexo;
             Salario = salario;
             TipoDeContrato = tipoDeContrato;
@@ -64,6 +68,8 @@ namespace GerenciamentoDeFuncionarios.modelos
         [Required(ErrorMessage = "O campo 'Email' é obrigatório.")]
         [EmailAddress(ErrorMessage = "O 'Email' é inválido.")]
         public string Email { get; private set; }
+
+        public string Senha { get; private set; }
 
         public char Sexo { get; private set; }
 
@@ -90,14 +96,22 @@ namespace GerenciamentoDeFuncionarios.modelos
         {
             Email = email;
         }
+
+        public void SetSenha(string senha)
+        {
+            Senha = senha;
+        }
+
         public void SetSexo(char sexo)
         {
             Sexo = sexo;
         }
+
         public void SetSalario(decimal salario)
         {
             Salario = salario;
         }
+
         public void SetTipoDeContrato(string tipoDeContrato)
         {
             TipoDeContrato = tipoDeContrato;

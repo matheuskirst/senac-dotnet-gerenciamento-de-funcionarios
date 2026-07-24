@@ -21,6 +21,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         Nome,
                         Cpf,
                         Email,
+                        Senha,
                         Sexo,
                         Salario,
                         TipoDeContrato,
@@ -31,6 +32,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         @Nome,
                         @Cpf,
                         @Email,
+                        @Senha,
                         @Sexo,
                         @Salario,
                         @TipoDeContrato,
@@ -51,6 +53,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         Nome = @Nome,
                         Cpf = @Cpf,
                         Email = @Email,
+                        Senha = @Senha,
                         Sexo = @Sexo,
                         Salario = @Salario,
                         TipoDeContrato = @TipoDeContrato,
@@ -80,6 +83,18 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                     SELECT * FROM Funcionario
                     ORDER BY Id
                 "
+                );
+            return funcionarios;
+        }
+        
+        public static async Task<IEnumerable<Funcionario>> ObterPorId(List<int> funcionariosId)
+        {
+            var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
+                @"
+                    SELECT * FROM Funcionario
+                    WHERE Id = ANY(@funcionariosId)
+                ",
+                new { FuncionariosId = funcionariosId }
                 );
             return funcionarios;
         }
