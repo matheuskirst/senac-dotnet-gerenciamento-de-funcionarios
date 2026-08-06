@@ -10,18 +10,28 @@ namespace GerenciamentoDeFuncionarios
             InitializeComponent();
         }
 
-        private void BtnIdentificacaoAdmin_Click(object sender, EventArgs e)
+        private void LogarAdmin()
         {
             this.Hide();
             new FormLoginAdmin().ShowDialog();
             this.Show();
         }
 
-        private void BtnIdentificacaoFunc_Click(object sender, EventArgs e)
+        private void BtnIdentificacaoAdmin_Click(object sender, EventArgs e)
+        {
+            LogarAdmin();
+        }
+
+        private void LogarFuncionario()
         {
             this.Hide();
             new FormLoginFuncionario().ShowDialog();
             this.Show();
+        }
+
+        private void BtnIdentificacaoFunc_Click(object sender, EventArgs e)
+        {
+            LogarFuncionario();
         }
     }
 }

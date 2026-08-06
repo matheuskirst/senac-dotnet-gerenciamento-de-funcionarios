@@ -35,6 +35,10 @@ namespace GerenciamentoDeFuncionarios.views
         {
             DgvFuncionarios.DataSource = tabelaFuncionarios;
             DgvFuncionarios.Columns["Senha"].Visible = false;
+            ContratoComboBox.Items.Add("Todos");
+            ContratoComboBox.Items.Add("CLT");
+            ContratoComboBox.Items.Add("JP");
+            ContratoComboBox.Items.Add("Autônomo");
 
             if (_usuario.IsAdmin)
             {
@@ -45,10 +49,16 @@ namespace GerenciamentoDeFuncionarios.views
             await AtualizarDataGrid();
         }
 
+        public void NenhumFuncionarioEncontrado()
+        {
+            LabelNenhumFuncErro.Text = "NENHUM FUNCIONÁRIO FOI ENCONTRADO!";
+        }
+
         public async Task AtualizarDataGrid(IEnumerable<Funcionario>? funcionarios = null)
         {
             try
             {
+                LabelNenhumFuncErro.Text = string.Empty;
                 if (funcionarios == null)
                 {
                     funcionarios = await FuncionarioRepository.ObterTodos();
@@ -65,9 +75,16 @@ namespace GerenciamentoDeFuncionarios.views
 
                 DgvFuncionarios.ClearSelection();
                 DgvFuncionarios.ResumeLayout();
+
+                if (tabelaFuncionarios.Count <= 0)
+                {
+                    NenhumFuncionarioEncontrado();
+                }
+
             }
             catch
             {
+                NenhumFuncionarioEncontrado();
                 MessageBox.Show(
                     "Ocorreu um erro ao atualizar os funcionários",
                     "Erro na conexão do banco de dados",
@@ -114,7 +131,7 @@ namespace GerenciamentoDeFuncionarios.views
             return funcionarios;
         }
 
-        private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
+        private async Task PesquisarFuncionario()
         {
             string? entry = TextBoxBuscarFuncionario.Text.ToLower();
 
@@ -150,15 +167,62 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
+        private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
+        {
+            //await PesquisarFuncionario();
+        }
+
+        private async void TextBoxBuscarFuncionario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await PesquisarFuncionario();
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private async void BtnLimparPesquisa_Click(object sender, EventArgs e)
+        {
+            TextBoxBuscarFuncionario.Text = "";
+            TextBoxBuscarFuncionario.Select();
+            await AtualizarDataGrid();
+        }
+
+        private void ContratoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ContratoComboBox.SelectedIndex != -1)
+            {
+                if (ContratoComboBox.SelectedItem?.ToString() == "Todos")
+                {
+
+                }
+            }
+        }
+
+        private async void BtnRealizarPesquisa_Click(object sender, EventArgs e)
+        {
+            await PesquisarFuncionario();
+        }
+
         private async void BtnAtualizarDgv_Click(object sender, EventArgs e)
         {
-            await AtualizarDataGrid();
+            if (!string.IsNullOrEmpty(TextBoxBuscarFuncionario.Text))
+            {
+                await PesquisarFuncionario();
+            }
+            else
+            {
+                await AtualizarDataGrid();
+            }
         }
 
         private void BtnNovoFuncionario_Click(object sender, EventArgs e)
         {
             FormCadastroFuncionario cadastrar = new FormCadastroFuncionario();
-            cadastrar.FuncionarioCadastrado += SinalAtualizacao;
+            cadastrar.FuncionarioCadastrado += SinalFuncionarioAtualizado;
             cadastrar.ShowDialog();
         }
 
@@ -176,7 +240,7 @@ namespace GerenciamentoDeFuncionarios.views
                     if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
                     {
                         FormEditarFuncionario editor = new FormEditarFuncionario(funcionario.First());
-                        editor.FuncionarioAtualizado += SinalAtualizacao;
+                        editor.FuncionarioAtualizado += SinalFuncionarioAtualizado;
                         editor.ShowDialog();
                     }
                     else
@@ -211,7 +275,7 @@ namespace GerenciamentoDeFuncionarios.views
             EditarFuncionario();
         }
 
-        private async void SinalAtualizacao(object? sender, EventArgs e)
+        private async void SinalFuncionarioAtualizado(object? sender, EventArgs e)
         {
             await AtualizarDataGrid();
         }

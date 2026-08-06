@@ -91,10 +91,10 @@
             // 
             TxtBoxSenhaFunc.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TxtBoxSenhaFunc.Font = new Font("Segoe UI", 10.2F);
-            TxtBoxSenhaFunc.Location = new Point(77, 96);
+            TxtBoxSenhaFunc.Location = new Point(94, 96);
             TxtBoxSenhaFunc.Name = "TxtBoxSenhaFunc";
-            TxtBoxSenhaFunc.Size = new Size(150, 30);
-            TxtBoxSenhaFunc.TabIndex = 5;
+            TxtBoxSenhaFunc.Size = new Size(133, 30);
+            TxtBoxSenhaFunc.TabIndex = 2;
             TxtBoxSenhaFunc.UseSystemPasswordChar = true;
             // 
             // LabelFuncLoginTitulo
@@ -133,7 +133,7 @@
             BtnFuncLogin.Location = new Point(0, 133);
             BtnFuncLogin.Name = "BtnFuncLogin";
             BtnFuncLogin.Size = new Size(236, 36);
-            BtnFuncLogin.TabIndex = 4;
+            BtnFuncLogin.TabIndex = 3;
             BtnFuncLogin.Text = "Entrar";
             BtnFuncLogin.UseVisualStyleBackColor = true;
             BtnFuncLogin.Click += BtnFuncLogin_Click;
@@ -143,7 +143,7 @@
             FuncVoltarButton.Location = new Point(3, 3);
             FuncVoltarButton.Name = "FuncVoltarButton";
             FuncVoltarButton.Size = new Size(75, 29);
-            FuncVoltarButton.TabIndex = 1;
+            FuncVoltarButton.TabIndex = 0;
             FuncVoltarButton.Text = "Voltar";
             FuncVoltarButton.UseVisualStyleBackColor = true;
             FuncVoltarButton.Click += VoltarButtonFunc_Click;

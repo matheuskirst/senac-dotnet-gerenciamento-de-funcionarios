@@ -86,7 +86,7 @@
             TxtBoxUsuarioAdmin.Location = new Point(77, 57);
             TxtBoxUsuarioAdmin.Name = "TxtBoxUsuarioAdmin";
             TxtBoxUsuarioAdmin.Size = new Size(150, 30);
-            TxtBoxUsuarioAdmin.TabIndex = 1;
+            TxtBoxUsuarioAdmin.TabIndex = 0;
             // 
             // LabelSenhaAdmin
             // 
@@ -106,7 +106,7 @@
             TxtBoxSenhaAdmin.Location = new Point(77, 97);
             TxtBoxSenhaAdmin.Name = "TxtBoxSenhaAdmin";
             TxtBoxSenhaAdmin.Size = new Size(150, 30);
-            TxtBoxSenhaAdmin.TabIndex = 2;
+            TxtBoxSenhaAdmin.TabIndex = 1;
             TxtBoxSenhaAdmin.UseSystemPasswordChar = true;
             // 
             // BtnAdminLogin
@@ -116,7 +116,7 @@
             BtnAdminLogin.Location = new Point(0, 133);
             BtnAdminLogin.Name = "BtnAdminLogin";
             BtnAdminLogin.Size = new Size(236, 36);
-            BtnAdminLogin.TabIndex = 4;
+            BtnAdminLogin.TabIndex = 2;
             BtnAdminLogin.Text = "Entrar";
             BtnAdminLogin.UseVisualStyleBackColor = true;
             BtnAdminLogin.Click += BtnAdminLogin_Click;
@@ -145,7 +145,7 @@
             AdminVoltarButton.Location = new Point(3, 3);
             AdminVoltarButton.Name = "AdminVoltarButton";
             AdminVoltarButton.Size = new Size(75, 29);
-            AdminVoltarButton.TabIndex = 1;
+            AdminVoltarButton.TabIndex = 0;
             AdminVoltarButton.Text = "Voltar";
             AdminVoltarButton.UseVisualStyleBackColor = true;
             AdminVoltarButton.Click += VoltarButton_Click;
