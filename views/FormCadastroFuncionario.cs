@@ -25,8 +25,13 @@ namespace GerenciamentoDeFuncionarios.views
         public FormCadastroFuncionario()
         {
             InitializeComponent();
-            TxtBoxCadastroSalario.Text = "R$ 0,00";
         }
+
+        private void FormCadastroFuncionario_Load(object sender, EventArgs e)
+        {
+            AtualizarTextBoxSalario();
+        }
+
         private void MTxtBoxCadastroCpf_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsControl(e.KeyChar))
@@ -136,8 +141,8 @@ namespace GerenciamentoDeFuncionarios.views
 
                 if (isTamanhoInvalido)
                 {
-                    var erroEmailJaExiste = new ValidationResult("A senha deve ter entre 3 e 30 caracteres!");
-                    listaDeErros.Add(erroEmailJaExiste);
+                    var senhaInvalida = new ValidationResult("A senha deve ter entre 3 e 30 caracteres!");
+                    listaDeErros.Add(senhaInvalida);
                 }
             }
 

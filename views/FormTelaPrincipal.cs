@@ -37,7 +37,6 @@ namespace GerenciamentoDeFuncionarios.views
         {
             await CarregarContratos();
 
-
             DgvFuncionarios.DataSource = tabelaFuncionarios;
             DgvFuncionarios.Columns["Senha"].Visible = false;
             DgvFuncionarios.Columns["TipoDeContratoId"].Visible = false;
@@ -59,8 +58,11 @@ namespace GerenciamentoDeFuncionarios.views
             await AtualizarDataGrid();
         }
 
+        // Métodos Gerais
+
         public async Task CarregarContratos()
         {
+            // Cria os tipos de contrato CLT, JP e Autonomo se não tiver nenhum tipo salvo
             bool contratos = await ContratosRepository.ExisteContratos();
             if (contratos == false)
             {
@@ -182,7 +184,7 @@ namespace GerenciamentoDeFuncionarios.views
             }
             else if (!string.IsNullOrEmpty(entrada) || filtroContrato != null)
             {
-                Pesquisa pesquisa = new Pesquisa(entrada: entrada, filtro:filtroContrato);
+                Pesquisa pesquisa = new Pesquisa(entrada: entrada, filtro: filtroContrato);
                 var funcionarios = await FuncionarioRepository.Pesquisar(pesquisa);
                 await AtualizarDataGrid(funcionarios);
             }
@@ -192,74 +194,14 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private async void TextBoxBuscarFuncionario_TextChanged(object sender, EventArgs e)
-        {
-            //await PesquisarFuncionario();
-        }
-
-        private async void TextBoxBuscarFuncionario_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            {
-                await PesquisarFuncionario();
-            }
-            else
-            {
-                e.Handled = true;
-            }
-        }
-
-        private async void BtnLimparPesquisa_Click(object sender, EventArgs e)
-        {
-            TextBoxBuscarFuncionario.Text = "";
-            TextBoxBuscarFuncionario.Select();
-            await AtualizarDataGrid();
-        }
-
-        private void ContratoComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filtroContrato = null;
-            switch(ContratoComboBox.SelectedIndex)
-            {
-                case (int)TiposDeContrato.CLT:
-                    filtroContrato = TiposDeContrato.CLT;
-                    break;
-                case (int)TiposDeContrato.PJ:
-                    filtroContrato = TiposDeContrato.PJ;
-                    break;
-                case (int)TiposDeContrato.Autonomo:
-                    filtroContrato = TiposDeContrato.Autonomo;
-                    break;
-                default:
-                    return;
-            }
-        }
-
-        private async void BtnRealizarPesquisa_Click(object sender, EventArgs e)
-        {
-            await PesquisarFuncionario();
-        }
-
-        private async void BtnAtualizarDgv_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TextBoxBuscarFuncionario.Text))
-            {
-                await PesquisarFuncionario();
-            }
-            else
-            {
-                await AtualizarDataGrid();
-            }
-        }
-
-        private void BtnNovoFuncionario_Click(object sender, EventArgs e)
+        private async Task CadastrarFuncionario()
         {
             FormCadastroFuncionario cadastrar = new FormCadastroFuncionario();
             cadastrar.FuncionarioCadastrado += SinalFuncionarioAtualizado;
             cadastrar.ShowDialog();
         }
 
-        private async void EditarFuncionario()
+        private async Task EditarFuncionario()
         {
             if (DgvFuncionarios.CurrentRow != null)
             {
@@ -291,29 +233,12 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.RowIndex != -1 && e.ColumnIndex != -1)
-            {
-                EditarFuncionario();
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        private void BtnEditarFuncionario_Click(object sender, EventArgs e)
-        {
-            EditarFuncionario();
-        }
-
         private async void SinalFuncionarioAtualizado(object? sender, EventArgs e)
         {
             await AtualizarDataGrid();
         }
 
-        private async void BtnRemoverFuncionario_Click(object sender, EventArgs e)
+        private async Task RemoverFuncionario()
         {
             int quantidadeSelecionado = DgvFuncionarios.SelectedRows.Count;
 
@@ -328,7 +253,7 @@ namespace GerenciamentoDeFuncionarios.views
                     if (quantidadeSelecionado == 1)
                     {
                         removerFuncionario = MessageBox.Show(
-                            $"Essa ação irá remover o funcionário \"{funcionarios.First().Nome}\" (Id: {funcionarios.First().Id})\nVocê tem certeza?",
+                            $"Essa ação irá remover o funcionário \"{funcionarios.First().Nome}\" (Matricula: {funcionarios.First().Id})\nVocê tem certeza?",
                             "Remover funcionário",
                             MessageBoxButtons.YesNo,
                             MessageBoxIcon.Warning,
@@ -381,10 +306,148 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
+        // Barra Superior
+
         private void TelaInicialButton_Click(object sender, EventArgs e)
         {
             _usuario = null;
             this.Close();
+        }
+
+        private async void TextBoxBuscarFuncionario_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await PesquisarFuncionario();
+            }
+            else
+            {
+                e.Handled = true;
+            }
+        }
+
+        private async void BtnLimparPesquisa_Click(object sender, EventArgs e)
+        {
+            TextBoxBuscarFuncionario.Text = "";
+            TextBoxBuscarFuncionario.Select();
+            await AtualizarDataGrid();
+        }
+
+        private void ContratoComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            filtroContrato = null;
+            switch (ContratoComboBox.SelectedIndex)
+            {
+                case (int)TiposDeContrato.CLT:
+                    filtroContrato = TiposDeContrato.CLT;
+                    break;
+                case (int)TiposDeContrato.PJ:
+                    filtroContrato = TiposDeContrato.PJ;
+                    break;
+                case (int)TiposDeContrato.Autonomo:
+                    filtroContrato = TiposDeContrato.Autonomo;
+                    break;
+                default:
+                    return;
+            }
+        }
+
+        private async void BtnRealizarPesquisa_Click(object sender, EventArgs e)
+        {
+            await PesquisarFuncionario();
+        }
+
+        private async void BtnAtualizarDgv_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TextBoxBuscarFuncionario.Text))
+            {
+                await PesquisarFuncionario();
+            }
+            else
+            {
+                await AtualizarDataGrid();
+            }
+        }
+
+        // Data Grid View
+
+        private void DgvFuncionarios_MouseDown(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hit = DgvFuncionarios.HitTest(e.X, e.Y);
+
+            if (hit.Type == DataGridViewHitTestType.None)
+            {
+                DgvFuncionarios.ClearSelection();
+            }
+        }
+
+        private async void ContextMenuItemNovoFunc_Click(object sender, EventArgs e)
+        {
+            await CadastrarFuncionario();
+        }
+
+        private async void ContextMenuItemAtualizar_Click(object sender, EventArgs e)
+        {
+            await AtualizarDataGrid();
+        }
+
+        // Célula Funcionario
+
+        private async void DgvFuncionarios_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex != -1 && e.ColumnIndex != -1)
+            {
+                await EditarFuncionario();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        private void DgvFuncionarios_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                ContextMenuItemEditarFunc.Enabled = false;
+
+                if (DgvFuncionarios.SelectedRows.Count <= 1 || celula.Selected == false)
+                {
+                    ContextMenuItemEditarFunc.Enabled = true;
+                    DgvFuncionarios.ClearSelection();
+                    celula.Selected = true;
+                }
+
+                e.ContextMenuStrip = funcContextMenu;
+            }
+        }
+
+        private async void ContextMenuItemEditarFunc_Click(object sender, EventArgs e)
+        {
+            await EditarFuncionario();
+        }
+
+        private async void ContextMenuItemExcluirFunc_Click(object sender, EventArgs e)
+        {
+            await RemoverFuncionario();
+        }
+
+        // Barra Inferior
+
+        private async void BtnNovoFuncionario_Click(object sender, EventArgs e)
+        {
+            await CadastrarFuncionario();
+        }
+
+        private async void BtnEditarFuncionario_Click(object sender, EventArgs e)
+        {
+            await EditarFuncionario();
+        }
+
+        private async void BtnRemoverFuncionario_Click(object sender, EventArgs e)
+        {
+            await RemoverFuncionario();
         }
     }
 }

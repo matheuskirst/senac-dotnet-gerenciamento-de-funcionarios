@@ -46,13 +46,22 @@
             BtnEditarFuncionario = new Button();
             BtnNovoFuncionario = new Button();
             DgvFuncionarios = new DataGridView();
+            dgvContextMenu = new ContextMenuStrip(components);
+            ContextMenuItemNovoFunc = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            ContextMenuItemAtualizar = new ToolStripMenuItem();
             LabelNenhumFuncErro = new Label();
-            PesquisaToolTip = new ToolTip(components);
+            ToolTipsFormPrincipal = new ToolTip(components);
+            funcContextMenu = new ContextMenuStrip(components);
+            ContextMenuItemEditarFunc = new ToolStripMenuItem();
+            ContextMenuItemExcluirFunc = new ToolStripMenuItem();
             mainTable.SuspendLayout();
             PanelBuscar.SuspendLayout();
             PanelBarraDeBuscar.SuspendLayout();
             PanelControles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)DgvFuncionarios).BeginInit();
+            dgvContextMenu.SuspendLayout();
+            funcContextMenu.SuspendLayout();
             SuspendLayout();
             // 
             // mainTable
@@ -114,6 +123,7 @@
             TelaInicialButton.Size = new Size(88, 26);
             TelaInicialButton.TabIndex = 0;
             TelaInicialButton.Text = "Tela Inicial";
+            ToolTipsFormPrincipal.SetToolTip(TelaInicialButton, "Voltar para a tela incial");
             TelaInicialButton.UseVisualStyleBackColor = true;
             TelaInicialButton.Click += TelaInicialButton_Click;
             // 
@@ -138,6 +148,7 @@
             BtnRealizarPesquisa.Size = new Size(61, 26);
             BtnRealizarPesquisa.TabIndex = 3;
             BtnRealizarPesquisa.Text = "Buscar";
+            ToolTipsFormPrincipal.SetToolTip(BtnRealizarPesquisa, "Realizar pesquisa");
             BtnRealizarPesquisa.UseVisualStyleBackColor = true;
             BtnRealizarPesquisa.Click += BtnRealizarPesquisa_Click;
             // 
@@ -169,6 +180,7 @@
             BtnLimparBusca.Size = new Size(20, 24);
             BtnLimparBusca.TabIndex = 2;
             BtnLimparBusca.Text = "X";
+            ToolTipsFormPrincipal.SetToolTip(BtnLimparBusca, "Limpar pesquisa");
             BtnLimparBusca.UseVisualStyleBackColor = true;
             BtnLimparBusca.Click += BtnLimparPesquisa_Click;
             // 
@@ -184,8 +196,7 @@
             TextBoxBuscarFuncionario.PlaceholderText = "Nome, CPF, Email...";
             TextBoxBuscarFuncionario.Size = new Size(331, 16);
             TextBoxBuscarFuncionario.TabIndex = 1;
-            PesquisaToolTip.SetToolTip(TextBoxBuscarFuncionario, "Para pesquisar pela 'Matricula' digite: id:\"número matricula\"");
-            TextBoxBuscarFuncionario.TextChanged += TextBoxBuscarFuncionario_TextChanged;
+            ToolTipsFormPrincipal.SetToolTip(TextBoxBuscarFuncionario, "Para pesquisar pela 'Matricula' digite: id:\"número matricula\"");
             TextBoxBuscarFuncionario.KeyUp += TextBoxBuscarFuncionario_KeyUp;
             // 
             // label1
@@ -249,6 +260,7 @@
             BtnRemoverFuncionario.Size = new Size(160, 41);
             BtnRemoverFuncionario.TabIndex = 2;
             BtnRemoverFuncionario.Text = "Excluir";
+            ToolTipsFormPrincipal.SetToolTip(BtnRemoverFuncionario, "Excluir funcionário selecionado");
             BtnRemoverFuncionario.UseVisualStyleBackColor = false;
             BtnRemoverFuncionario.Visible = false;
             BtnRemoverFuncionario.Click += BtnRemoverFuncionario_Click;
@@ -264,7 +276,8 @@
             BtnEditarFuncionario.Name = "BtnEditarFuncionario";
             BtnEditarFuncionario.Size = new Size(160, 41);
             BtnEditarFuncionario.TabIndex = 1;
-            BtnEditarFuncionario.Text = "Editar";
+            BtnEditarFuncionario.Text = "Ver/Editar";
+            ToolTipsFormPrincipal.SetToolTip(BtnEditarFuncionario, "Editar funcionário selecionado");
             BtnEditarFuncionario.UseVisualStyleBackColor = false;
             BtnEditarFuncionario.Click += BtnEditarFuncionario_Click;
             // 
@@ -280,6 +293,7 @@
             BtnNovoFuncionario.Size = new Size(160, 41);
             BtnNovoFuncionario.TabIndex = 0;
             BtnNovoFuncionario.Text = "Novo";
+            ToolTipsFormPrincipal.SetToolTip(BtnNovoFuncionario, "Cadastrar novo funcionário");
             BtnNovoFuncionario.UseVisualStyleBackColor = false;
             BtnNovoFuncionario.Visible = false;
             BtnNovoFuncionario.Click += BtnNovoFuncionario_Click;
@@ -288,6 +302,7 @@
             // 
             DgvFuncionarios.AllowUserToOrderColumns = true;
             DgvFuncionarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvFuncionarios.ContextMenuStrip = dgvContextMenu;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
@@ -305,8 +320,35 @@
             DgvFuncionarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             DgvFuncionarios.Size = new Size(908, 345);
             DgvFuncionarios.TabIndex = 0;
+            DgvFuncionarios.CellContextMenuStripNeeded += DgvFuncionarios_CellContextMenuStripNeeded;
             DgvFuncionarios.CellFormatting += DgvFuncionarios_CellFormatting;
             DgvFuncionarios.CellMouseDoubleClick += DgvFuncionarios_CellMouseDoubleClick;
+            DgvFuncionarios.MouseDown += DgvFuncionarios_MouseDown;
+            // 
+            // dgvContextMenu
+            // 
+            dgvContextMenu.Items.AddRange(new ToolStripItem[] { ContextMenuItemNovoFunc, toolStripSeparator1, ContextMenuItemAtualizar });
+            dgvContextMenu.Name = "dgvContextMenu";
+            dgvContextMenu.Size = new Size(121, 54);
+            // 
+            // ContextMenuItemNovoFunc
+            // 
+            ContextMenuItemNovoFunc.Name = "ContextMenuItemNovoFunc";
+            ContextMenuItemNovoFunc.Size = new Size(120, 22);
+            ContextMenuItemNovoFunc.Text = "Novo";
+            ContextMenuItemNovoFunc.Click += ContextMenuItemNovoFunc_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(117, 6);
+            // 
+            // ContextMenuItemAtualizar
+            // 
+            ContextMenuItemAtualizar.Name = "ContextMenuItemAtualizar";
+            ContextMenuItemAtualizar.Size = new Size(120, 22);
+            ContextMenuItemAtualizar.Text = "Atualizar";
+            ContextMenuItemAtualizar.Click += ContextMenuItemAtualizar_Click;
             // 
             // LabelNenhumFuncErro
             // 
@@ -319,6 +361,26 @@
             LabelNenhumFuncErro.Size = new Size(0, 15);
             LabelNenhumFuncErro.TabIndex = 5;
             LabelNenhumFuncErro.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // funcContextMenu
+            // 
+            funcContextMenu.Items.AddRange(new ToolStripItem[] { ContextMenuItemEditarFunc, ContextMenuItemExcluirFunc });
+            funcContextMenu.Name = "funcContextMenu";
+            funcContextMenu.Size = new Size(126, 48);
+            // 
+            // ContextMenuItemEditarFunc
+            // 
+            ContextMenuItemEditarFunc.Name = "ContextMenuItemEditarFunc";
+            ContextMenuItemEditarFunc.Size = new Size(125, 22);
+            ContextMenuItemEditarFunc.Text = "Ver/Editar";
+            ContextMenuItemEditarFunc.Click += ContextMenuItemEditarFunc_Click;
+            // 
+            // ContextMenuItemExcluirFunc
+            // 
+            ContextMenuItemExcluirFunc.Name = "ContextMenuItemExcluirFunc";
+            ContextMenuItemExcluirFunc.Size = new Size(125, 22);
+            ContextMenuItemExcluirFunc.Text = "Excluir";
+            ContextMenuItemExcluirFunc.Click += ContextMenuItemExcluirFunc_Click;
             // 
             // FormTelaPrincipal
             // 
@@ -341,6 +403,8 @@
             PanelBarraDeBuscar.PerformLayout();
             PanelControles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)DgvFuncionarios).EndInit();
+            dgvContextMenu.ResumeLayout(false);
+            funcContextMenu.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -363,6 +427,19 @@
         private Label label1;
         private ComboBox ContratoComboBox;
         private Label LabelContrato;
-        private ToolTip PesquisaToolTip;
+        private ToolTip ToolTipsFormPrincipal;
+        private ContextMenuStrip MenuDeContextoFunc;
+        private ToolStripMenuItem MenuContextoEditarFunc;
+        private ContextMenuStrip MenuDeContextoDgv;
+        private ToolStripMenuItem MenuContextoExcluirFunc;
+        private ToolStripMenuItem MenuContextoAdicionarFunc;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem MenuContextoAtualizarDgv;
+        private ContextMenuStrip dgvContextMenu;
+        private ToolStripMenuItem ContextMenuItemNovoFunc;
+        private ToolStripMenuItem ContextMenuItemAtualizar;
+        private ContextMenuStrip funcContextMenu;
+        private ToolStripMenuItem ContextMenuItemEditarFunc;
+        private ToolStripMenuItem ContextMenuItemExcluirFunc;
     }
 }
