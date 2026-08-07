@@ -16,7 +16,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             string senha,
             char sexo,
             decimal salario,
-            string tipoDeContrato,
+            TiposDeContrato tipoDeContrato,
             DateTime dataDeCadastro
             )
         {
@@ -26,7 +26,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             Senha = senha;
             Sexo = sexo;
             Salario = salario;
-            TipoDeContrato = tipoDeContrato;
+            TipoDeContratoId = (int)tipoDeContrato;
             DataDeCadastro = dataDeCadastro;
         }
 
@@ -38,7 +38,8 @@ namespace GerenciamentoDeFuncionarios.modelos
             string senha,
             char sexo,
             decimal salario,
-            string tipoDeContrato,
+            TiposDeContrato tipoDeContratoId,
+            string? tipoDeContrato,
             DateTime dataDeCadastro,
             DateTime? dataDeAtualizacao
             )
@@ -50,6 +51,7 @@ namespace GerenciamentoDeFuncionarios.modelos
             Senha = senha;
             Sexo = sexo;
             Salario = salario;
+            TipoDeContratoId = (int)tipoDeContratoId;
             TipoDeContrato = tipoDeContrato;
             DataDeCadastro = dataDeCadastro;
             DataDeAtualizacao = dataDeAtualizacao;
@@ -76,7 +78,8 @@ namespace GerenciamentoDeFuncionarios.modelos
         [Range(0.00, 99999999.99, ErrorMessage = "O valor de 'Salário' deve ser entre R$ 0,00 e R$ 99.999.999,99")]
         public decimal Salario { get; private set; }
 
-        public string TipoDeContrato { get; private set; }
+        public int TipoDeContratoId { get; private set; }
+        public string? TipoDeContrato { get; private set; }
 
         public DateTime DataDeCadastro { get; private set; }
 
@@ -112,9 +115,9 @@ namespace GerenciamentoDeFuncionarios.modelos
             Salario = salario;
         }
 
-        public void SetTipoDeContrato(string tipoDeContrato)
+        public void SetTipoDeContrato(TiposDeContrato tipoDeContrato)
         {
-            TipoDeContrato = tipoDeContrato;
+            TipoDeContratoId = (int)tipoDeContrato;
         }
     }
 }

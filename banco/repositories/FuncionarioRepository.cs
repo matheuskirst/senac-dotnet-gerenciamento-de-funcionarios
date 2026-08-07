@@ -13,7 +13,8 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
     public class FuncionarioRepository
     {
         private static ConexaoBanco ConexaoBanco = new ConexaoBanco();
-        public static async Task Adicionar(Funcionario funcionario)
+
+        public static async Task AdicionarFuncionario(Funcionario funcionario)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
@@ -24,10 +25,10 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         Senha,
                         Sexo,
                         Salario,
-                        TipoDeContrato,
+                        TipoDeContratoId,
                         DataDeCadastro,
                         DataDeAtualizacao
-                        )    
+                        )
                     VALUES (
                         @Nome,
                         @Cpf,
@@ -35,7 +36,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         @Senha,
                         @Sexo,
                         @Salario,
-                        @TipoDeContrato,
+                        @TipoDeContratoId,
                         @DataDeCadastro,
                         @DataDeAtualizacao
                         );
@@ -44,7 +45,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 );
         }
 
-        public static async Task Editar(Funcionario funcionario)
+        public static async Task EditarFuncionario(Funcionario funcionario)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
@@ -56,7 +57,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                         Senha = @Senha,
                         Sexo = @Sexo,
                         Salario = @Salario,
-                        TipoDeContrato = @TipoDeContrato,
+                        TipoDeContratoId = @TipoDeContratoId,
                         DataDeCadastro = @DataDeCadastro,
                         DataDeAtualizacao = @DataDeAtualizacao
                     WHERE Id = @Id
@@ -65,7 +66,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 );
         }
         
-        public static async Task Remover(List<int> listaIds)
+        public static async Task RemoverFuncionario(List<int> listaIds)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
@@ -80,8 +81,22 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 @"
-                    SELECT * FROM Funcionario
-                    ORDER BY Id
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    ORDER BY Funcionario.Id
                 "
                 );
             return funcionarios;
@@ -91,42 +106,115 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 @"
-                    SELECT * FROM Funcionario
-                    WHERE Id = ANY(@funcionariosId)
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    WHERE Funcionario.Id = ANY(@funcionariosId)
                 ",
                 new { FuncionariosId = funcionariosId }
                 );
             return funcionarios;
         }
 
-        public static async Task<IEnumerable<Funcionario>> PesquisaGeral(object entry)
+        public static async Task<IEnumerable<Funcionario>> Pesquisar(Pesquisa pesquisa)
         {
-            var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
+            var resultado = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 @"
-                    SELECT * FROM Funcionario
-                    WHERE Nome ILIKE @Entry
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    WHERE (@Entrada IS NULL OR Funcionario.Nome ILIKE @Entrada)
+                    AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
 
                     UNION
 
-                    SELECT * FROM Funcionario
-                    WHERE Cpf ILIKE @Entry
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    WHERE (@Entrada IS NULL OR Funcionario.Cpf ILIKE @Entrada)
+                    AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
 
                     UNION
 
-                    SELECT * FROM Funcionario
-                    WHERE Email ILIKE @Entry
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    WHERE (@Entrada IS NULL OR Funcionario.Email ILIKE @Entrada)
+                    AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
                 ",
-                new { Entry = $"{entry}%"}
+                pesquisa
                 );
-            return funcionarios;
+            return resultado;
         }
 
         public static async Task<IEnumerable<Funcionario>> PesquisarId(int id)
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 @"
-                    SELECT * FROM Funcionario
-                    WHERE Id = @Id
+                    SELECT 
+	                    Funcionario.Id,
+	                    Funcionario.Nome,
+                        Funcionario.Cpf,
+	                    Funcionario.Email,
+	                    Funcionario.Senha,
+	                    Funcionario.Sexo,
+	                    Funcionario.Salario,
+                        Funcionario.TipoDeContratoId,
+	                    TipoDeContrato.Nome as ""TipoDeContrato"",
+	                    Funcionario.DataDeCadastro,
+	                    Funcionario.DataDeAtualizacao
+                    FROM Funcionario
+                    INNER JOIN TipoDeContrato
+                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    WHERE Funcionario.Id = @Id
                 ",
                 new { Id = id }
                 );
@@ -135,38 +223,44 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
 
         public static async Task<bool> ExisteFuncionarioComId(int id)
         {
-            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+            return await ConexaoBanco.CriarConexao().ExecuteScalarAsync<bool>(
                 @"
-                    SELECT * FROM Funcionario
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM Funcionario
                     WHERE Id = @Id
+                )
                 ",
                 new { Id = id }
-                );
-            return resultado != null;
+            );
         }        
         
         public static async Task<bool> ExisteFuncionarioComCpf(string cpf)
         {
-            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+            return await ConexaoBanco.CriarConexao().ExecuteScalarAsync<bool>(
                 @"
-                    SELECT * FROM Funcionario
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM Funcionario
                     WHERE Cpf = @Cpf
+                )
                 ",
                 new { Cpf = cpf }
                 );
-            return resultado != null;
         }
 
         public static async Task<bool> ExisteFuncionarioComEmail(string email)
         {
-            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Funcionario>(
+            return await ConexaoBanco.CriarConexao().ExecuteScalarAsync<bool>(
                 @"
-                    SELECT * FROM Funcionario
+                SELECT EXISTS (
+                    SELECT 1
+                    FROM Funcionario
                     WHERE Email = @Email
+                )
                 ",
                 new { Email = email }
                 );
-            return resultado != null;
         }
     }
 }

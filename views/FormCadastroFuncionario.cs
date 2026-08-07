@@ -95,7 +95,11 @@ namespace GerenciamentoDeFuncionarios.views
             string? email = TxtBoxCadastroEmail.Text;
             string? senha = TxtBoxCadastroSenha.Text;
             char sexo = RadioBtnMasculino.Checked ? 'M' : 'F';
-            string? tipoContrato = RadioBtnContratoClt.Checked ? "CLT" : RadioBtnContratoPj.Checked ? "PJ" : "Autônomo";
+
+            TiposDeContrato tipoContrato = RadioBtnContratoClt.Checked ? TiposDeContrato.CLT :
+                RadioBtnContratoPj.Checked ? TiposDeContrato.PJ :
+                TiposDeContrato.Autonomo;
+
             var dataCadastro = DateTime.Now;
 
             if (!string.IsNullOrEmpty(cpf))
@@ -166,7 +170,7 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 try
                 {
-                    await FuncionarioRepository.Adicionar(funcionario);
+                    await FuncionarioRepository.AdicionarFuncionario(funcionario);
                     MessageBox.Show(
                         "Funcionário cadastrado com sucesso!",
                         "Operação concluida",
@@ -176,10 +180,10 @@ namespace GerenciamentoDeFuncionarios.views
                     FuncionarioCadastrado?.Invoke(this, EventArgs.Empty);
                     this.Close();
                 }
-                catch
+                catch (Exception ex)
                 {
                     MessageBox.Show(
-                        "Ocorreu um erro no cadastro do funcionário.",
+                        $"Ocorreu um erro no cadastro do funcionário\n{ex}.",
                         "Erro na conexão do banco de dados",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error

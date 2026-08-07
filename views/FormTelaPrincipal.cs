@@ -18,6 +18,8 @@ namespace GerenciamentoDeFuncionarios.views
     {
         private Usuario? _usuario;
 
+        private TiposDeContrato? filtroContrato = null;
+
         public SortableBindingList<Funcionario> tabelaFuncionarios = new();
         public FormTelaPrincipal(Usuario usuario)
         {
@@ -33,12 +35,20 @@ namespace GerenciamentoDeFuncionarios.views
 
         private async void FormTelaPrincipal_Load(object? sender, EventArgs e)
         {
+            await CarregarContratos();
+
+
             DgvFuncionarios.DataSource = tabelaFuncionarios;
             DgvFuncionarios.Columns["Senha"].Visible = false;
+            DgvFuncionarios.Columns["TipoDeContratoId"].Visible = false;
             ContratoComboBox.Items.Add("Todos");
-            ContratoComboBox.Items.Add("CLT");
-            ContratoComboBox.Items.Add("JP");
-            ContratoComboBox.Items.Add("Autônomo");
+
+            foreach (TiposDeContrato contrato in Enum.GetValues(typeof(TiposDeContrato)))
+            {
+                ContratoComboBox.Items.Add(contrato.ToString());
+            }
+
+            ContratoComboBox.SelectedIndex = 0;
 
             if (_usuario.IsAdmin)
             {
@@ -47,6 +57,20 @@ namespace GerenciamentoDeFuncionarios.views
             }
 
             await AtualizarDataGrid();
+        }
+
+        public async Task CarregarContratos()
+        {
+            bool contratos = await ContratosRepository.ExisteContratos();
+            if (contratos == false)
+            {
+                foreach (TiposDeContrato contrato in Enum.GetValues<TiposDeContrato>())
+                {
+                    string nome = contrato.ToString();
+                    var novoContrato = new Contrato(nome: nome);
+                    await ContratosRepository.AdicionarContratos(novoContrato);
+                }
+            }
         }
 
         public void NenhumFuncionarioEncontrado()
@@ -82,11 +106,11 @@ namespace GerenciamentoDeFuncionarios.views
                 }
 
             }
-            catch
+            catch (Exception ex)
             {
                 NenhumFuncionarioEncontrado();
                 MessageBox.Show(
-                    "Ocorreu um erro ao atualizar os funcionários",
+                    $"Ocorreu um erro ao atualizar os funcionários\n{ex}",
                     "Erro na conexão do banco de dados",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -133,16 +157,16 @@ namespace GerenciamentoDeFuncionarios.views
 
         private async Task PesquisarFuncionario()
         {
-            string? entry = TextBoxBuscarFuncionario.Text.ToLower();
+            string? entrada = TextBoxBuscarFuncionario.Text.ToLower();
 
-            if (!string.IsNullOrEmpty(entry) && entry.ToLower().Contains("id:"))
+            if (!string.IsNullOrEmpty(entrada) && entrada.ToLower().Contains("id:"))
             {
                 try
                 {
-                    string entryFormatada = entry.Replace("id:", "").Replace(" ", "").Trim();
-                    if (!string.IsNullOrEmpty(entryFormatada))
+                    string entradaFormatada = entrada.Replace("id:", "").Replace(" ", "").Trim();
+                    if (!string.IsNullOrEmpty(entradaFormatada))
                     {
-                        int id = int.Parse(entryFormatada);
+                        int id = int.Parse(entradaFormatada);
                         var funcionarios = await FuncionarioRepository.PesquisarId(id);
                         await AtualizarDataGrid(funcionarios);
                     }
@@ -156,9 +180,10 @@ namespace GerenciamentoDeFuncionarios.views
                     return;
                 }
             }
-            else if (!string.IsNullOrEmpty(entry))
+            else if (!string.IsNullOrEmpty(entrada) || filtroContrato != null)
             {
-                var funcionarios = await FuncionarioRepository.PesquisaGeral(entry);
+                Pesquisa pesquisa = new Pesquisa(entrada: entrada, filtro:filtroContrato);
+                var funcionarios = await FuncionarioRepository.Pesquisar(pesquisa);
                 await AtualizarDataGrid(funcionarios);
             }
             else
@@ -193,12 +218,20 @@ namespace GerenciamentoDeFuncionarios.views
 
         private void ContratoComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ContratoComboBox.SelectedIndex != -1)
+            filtroContrato = null;
+            switch(ContratoComboBox.SelectedIndex)
             {
-                if (ContratoComboBox.SelectedItem?.ToString() == "Todos")
-                {
-
-                }
+                case (int)TiposDeContrato.CLT:
+                    filtroContrato = TiposDeContrato.CLT;
+                    break;
+                case (int)TiposDeContrato.PJ:
+                    filtroContrato = TiposDeContrato.PJ;
+                    break;
+                case (int)TiposDeContrato.Autonomo:
+                    filtroContrato = TiposDeContrato.Autonomo;
+                    break;
+                default:
+                    return;
             }
         }
 
@@ -324,7 +357,7 @@ namespace GerenciamentoDeFuncionarios.views
                                 listIds.Add(func.Id);
                             }
 
-                            await FuncionarioRepository.Remover(listIds);
+                            await FuncionarioRepository.RemoverFuncionario(listIds);
 
                             MessageBox.Show(
                                 "Operação concluida com sucesso!",

@@ -43,15 +43,15 @@ namespace GerenciamentoDeFuncionarios.views
             if (Funcionario.Sexo == 'M') { RadioBtnEditarMasculino.Checked = true; }
             else { RadioBtnEditarFeminino.Checked = true; }
 
-            switch (Funcionario.TipoDeContrato)
+            switch (Funcionario.TipoDeContratoId)
             {
-                case "CLT":
+                case (int)TiposDeContrato.CLT:
                     RadioBtnEditarClt.Checked = true;
                     break;
-                case "PJ":
+                case (int)TiposDeContrato.PJ:
                     RadioBtnEditarPj.Checked = true;
                     break;
-                case "Autonomo":
+                case (int)TiposDeContrato.Autonomo:
                     RadioBtnEditarAutonomo.Checked = true;
                     break;
                 default:
@@ -110,7 +110,11 @@ namespace GerenciamentoDeFuncionarios.views
             string? cpf = MTextBoxEditarCpf.Text;
             string? email = TextBoxEditarEmail.Text;
             char sexo = RadioBtnEditarMasculino.Checked ? 'M' : 'F';
-            string? tipoContrato = RadioBtnEditarClt.Checked ? "CLT" : RadioBtnEditarPj.Checked ? "PJ" : "Autônomo";
+
+            TiposDeContrato tipoContrato = RadioBtnEditarClt.Checked ? TiposDeContrato.CLT :
+                RadioBtnEditarPj.Checked ? TiposDeContrato.PJ :
+                TiposDeContrato.Autonomo;
+
             var dataAtualizacao = DateTime.Now;
 
             if (!string.IsNullOrEmpty(cpf))
@@ -147,7 +151,7 @@ namespace GerenciamentoDeFuncionarios.views
                 email == Funcionario.Email &&
                 sexo == Funcionario.Sexo &&
                 salarioFormatado == Funcionario.Salario &&
-                tipoContrato == Funcionario.TipoDeContrato
+                tipoContrato == (TiposDeContrato)Funcionario.TipoDeContratoId
                 )
             {
                 this.Close();
@@ -177,7 +181,7 @@ namespace GerenciamentoDeFuncionarios.views
                 {
                     try
                     {
-                        await FuncionarioRepository.Editar(Funcionario);
+                        await FuncionarioRepository.EditarFuncionario(Funcionario);
                         MessageBox.Show(
                             "Funcionário atualizado com sucesso!",
                             "Operação concluida",
