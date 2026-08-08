@@ -16,3 +16,12 @@ create table funcionario (
 	DataDeAtualizacao timestamp,
 	foreign key (TipoDeContratoId) references TipoDeContrato(Id)
 );
+
+create table Dependente (
+	Id Serial primary key,
+	Nome VARCHAR(255) not null,
+	Parentesco VARCHAR(255) not null,
+	DataNascimento timestamp not null,
+	FuncionarioId int not null,
+	foreign key (FuncionarioId) references Funcionario(Id)
+);

@@ -7,12 +7,29 @@ using System.Threading.Tasks;
 using Dapper;
 using GerenciamentoDeFuncionarios.banco.configuracao;
 using GerenciamentoDeFuncionarios.modelos;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace GerenciamentoDeFuncionarios.banco.repositories
 {
     public class FuncionarioRepository
     {
         private static ConexaoBanco ConexaoBanco = new ConexaoBanco();
+
+        private static string selectQuery = @"SELECT
+                                Funcionario.Id,
+	                            Funcionario.Nome,
+                                Funcionario.Cpf,
+	                            Funcionario.Email,
+	                            Funcionario.Senha,
+	                            Funcionario.Sexo,
+	                            Funcionario.Salario,
+                                Funcionario.TipoDeContratoId,
+	                            TipoDeContrato.Nome as ""TipoDeContrato"",
+	                            Funcionario.DataDeCadastro,
+	                            Funcionario.DataDeAtualizacao
+                            FROM Funcionario
+                            INNER JOIN TipoDeContrato
+                            ON Funcionario.TipoDeContratoId = TipoDeContrato.Id";
 
         public static async Task AdicionarFuncionario(Funcionario funcionario)
         {
@@ -80,24 +97,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         public static async Task<IEnumerable<Funcionario>> ObterTodos()
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
-                @"
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
-                    ORDER BY Funcionario.Id
-                "
+                $"{selectQuery} ORDER BY Funcionario.Id"
                 );
             return funcionarios;
         }
@@ -105,25 +105,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         public static async Task<IEnumerable<Funcionario>> ObterPorId(List<int> funcionariosId)
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
-                @"
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
-                    WHERE Funcionario.Id = ANY(@funcionariosId)
-                ",
-                new { FuncionariosId = funcionariosId }
+                $"{selectQuery} WHERE Funcionario.Id = ANY(@funcionariosId)", new { FuncionariosId = funcionariosId }
                 );
             return funcionarios;
         }
@@ -131,62 +113,20 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         public static async Task<IEnumerable<Funcionario>> Pesquisar(Pesquisa pesquisa)
         {
             var resultado = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
-                @"
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                $@"
+                    {selectQuery}
                     WHERE (@Entrada IS NULL OR Funcionario.Nome ILIKE @Entrada)
                     AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
 
                     UNION
 
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    {selectQuery}
                     WHERE (@Entrada IS NULL OR Funcionario.Cpf ILIKE @Entrada)
                     AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
 
                     UNION
 
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
+                    {selectQuery}
                     WHERE (@Entrada IS NULL OR Funcionario.Email ILIKE @Entrada)
                     AND (@Filtro IS NULL OR Funcionario.TipoDeContratoId = @Filtro)
                 ",
@@ -198,25 +138,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         public static async Task<IEnumerable<Funcionario>> PesquisarId(int id)
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
-                @"
-                    SELECT 
-	                    Funcionario.Id,
-	                    Funcionario.Nome,
-                        Funcionario.Cpf,
-	                    Funcionario.Email,
-	                    Funcionario.Senha,
-	                    Funcionario.Sexo,
-	                    Funcionario.Salario,
-                        Funcionario.TipoDeContratoId,
-	                    TipoDeContrato.Nome as ""TipoDeContrato"",
-	                    Funcionario.DataDeCadastro,
-	                    Funcionario.DataDeAtualizacao
-                    FROM Funcionario
-                    INNER JOIN TipoDeContrato
-                    ON Funcionario.TipoDeContratoId = TipoDeContrato.Id
-                    WHERE Funcionario.Id = @Id
-                ",
-                new { Id = id }
+                $"{selectQuery} WHERE Funcionario.Id = @Id", new { Id = id }
                 );
             return funcionarios;
         }

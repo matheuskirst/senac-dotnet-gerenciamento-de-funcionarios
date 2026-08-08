@@ -60,7 +60,7 @@ namespace GerenciamentoDeFuncionarios.modelos
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo 'Nome' é obrigatório.")]
-        [StringLength(255, MinimumLength = 2, ErrorMessage = "O campo 'Nome' deve ter entre 3 e 255 caracteres.")]
+        [StringLength(255, MinimumLength = 3, ErrorMessage = "O campo 'Nome' deve ter entre 3 e 255 caracteres.")]
         public string Nome { get; private set; }
 
         [Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]

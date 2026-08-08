@@ -306,6 +306,37 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
+        private async Task CadastrarDependente()
+        {
+            if (DgvFuncionarios.CurrentRow != null)
+            {
+                Funcionario? funcionarioSelecionado = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
+
+                if (funcionarioSelecionado != null)
+                {
+                    int funcionarioId = funcionarioSelecionado.Id;
+                    var funcionario = await FuncionarioRepository.ObterPorId([funcionarioId]);
+
+                    if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
+                    {
+                        FormCadastroDependente dependente = new FormCadastroDependente(funcionario.First());
+                        dependente.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Você não tem permissão para editar esse funcionário",
+                            "Erro de permissão",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                        return;
+                    }
+
+                }
+            }
+        }
+
         // Barra Superior
 
         private void TelaInicialButton_Click(object sender, EventArgs e)
@@ -410,16 +441,18 @@ namespace GerenciamentoDeFuncionarios.views
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
                 var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                ContextMenuItemEditarFunc.Enabled = false;
+                verEditarToolStripMenuItem.Enabled = false;
+                novoDependenteToolStripMenuItem.Enabled = false;
 
                 if (DgvFuncionarios.SelectedRows.Count <= 1 || celula.Selected == false)
                 {
-                    ContextMenuItemEditarFunc.Enabled = true;
+                    verEditarToolStripMenuItem.Enabled = true;
+                    novoDependenteToolStripMenuItem.Enabled = true;
                     DgvFuncionarios.ClearSelection();
                     celula.Selected = true;
                 }
 
-                e.ContextMenuStrip = funcContextMenu;
+                e.ContextMenuStrip = funcContextMenuStrip;
             }
         }
 
@@ -431,6 +464,11 @@ namespace GerenciamentoDeFuncionarios.views
         private async void ContextMenuItemExcluirFunc_Click(object sender, EventArgs e)
         {
             await RemoverFuncionario();
+        }
+
+        private async void ContextMenuItemCriarDependente_Click(object sender, EventArgs e)
+        {
+            await CadastrarDependente();
         }
 
         // Barra Inferior

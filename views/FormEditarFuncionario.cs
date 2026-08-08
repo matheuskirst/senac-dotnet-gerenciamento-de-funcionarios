@@ -109,6 +109,7 @@ namespace GerenciamentoDeFuncionarios.views
             string? nome = TextBoxEditarNome.Text;
             string? cpf = MTextBoxEditarCpf.Text;
             string? email = TextBoxEditarEmail.Text;
+            string? novaSenha = TextBoxEditarSenha.Text;
             char sexo = RadioBtnEditarMasculino.Checked ? 'M' : 'F';
 
             TiposDeContrato tipoContrato = RadioBtnEditarClt.Checked ? TiposDeContrato.CLT :
@@ -145,6 +146,33 @@ namespace GerenciamentoDeFuncionarios.views
                     }
                 }
             }
+
+            if (!string.IsNullOrEmpty(novaSenha))
+            {
+                bool isTamanhoInvalido = false;
+                int tamanhoSenha = novaSenha.Length;
+
+                if (tamanhoSenha < 3 || tamanhoSenha > 30)
+                {
+                    isTamanhoInvalido = true;
+                }
+
+                if (isTamanhoInvalido)
+                {
+                    var senhaInvalida = new ValidationResult("A senha deve ter entre 3 e 30 caracteres!");
+                    listaDeErros.Add(senhaInvalida);
+                }
+
+                string senhaSalva = Funcionario.Senha;
+                bool isSenhaIgual = BCrypt.Net.BCrypt.EnhancedVerify(novaSenha, senhaSalva);
+                if (isSenhaIgual)
+                {
+                    var senhaNaoMudou = new ValidationResult("A nova senha não pode ser a mesma que a senha atual!");
+                    listaDeErros.Add(senhaNaoMudou);
+                }
+            }
+
+            string hashedNovaSenha = BCrypt.Net.BCrypt.EnhancedHashPassword(novaSenha);
 
             if (nome == Funcionario.Nome &&
                 cpf == Funcionario.Cpf &&

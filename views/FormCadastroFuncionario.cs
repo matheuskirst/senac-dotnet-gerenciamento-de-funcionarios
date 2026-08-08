@@ -188,7 +188,7 @@ namespace GerenciamentoDeFuncionarios.views
                 catch (Exception ex)
                 {
                     MessageBox.Show(
-                        $"Ocorreu um erro no cadastro do funcionário\n{ex}.",
+                        $"Ocorreu um erro no cadastro do funcionário.",
                         "Erro na conexão do banco de dados",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error
