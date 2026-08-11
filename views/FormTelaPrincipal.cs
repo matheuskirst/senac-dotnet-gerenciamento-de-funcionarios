@@ -16,11 +16,13 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormTelaPrincipal : Form
     {
-        private Usuario? _usuario;
+        private Usuario _usuario;
 
         private TiposDeContrato? filtroContrato = null;
 
         public SortableBindingList<Funcionario> tabelaFuncionarios = new();
+
+        private List<int> funcionariosSelecionados = [];
         public FormTelaPrincipal(Usuario usuario)
         {
             _usuario = usuario;
@@ -56,6 +58,27 @@ namespace GerenciamentoDeFuncionarios.views
             }
 
             await AtualizarDataGrid();
+        }
+
+        private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (DgvFuncionarios.Columns[e.ColumnIndex].Name == "Cpf" && e.Value != null)
+            {
+                string? cpf = e.Value?.ToString();
+
+                if (cpf != null && cpf.Length == 11)
+                {
+                    e.Value = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
+                    e.FormattingApplied = true;
+                }
+            }
+            foreach (DataGridViewColumn col in DgvFuncionarios.Columns)
+            {
+                if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(DateTime?))
+                {
+                    col.DefaultCellStyle.Format = "yyyy/MM/dd - HH:mm:ss";
+                }
+            }
         }
 
         // Métodos Gerais
@@ -120,78 +143,10 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private void DgvFuncionarios_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (DgvFuncionarios.Columns[e.ColumnIndex].Name == "Cpf" && e.Value != null)
-            {
-                string? cpf = e.Value?.ToString();
-
-                if (cpf != null && cpf.Length == 11)
-                {
-                    e.Value = Convert.ToUInt64(cpf).ToString(@"000\.000\.000\-00");
-                    e.FormattingApplied = true;
-                }
-            }
-            foreach (DataGridViewColumn col in DgvFuncionarios.Columns)
-            {
-                if (col.ValueType == typeof(DateTime) || col.ValueType == typeof(DateTime?))
-                {
-                    col.DefaultCellStyle.Format = "yyyy/MM/dd - HH:mm:ss";
-                }
-            }
-        }
-
         private Task<IEnumerable<Funcionario>> ExtrairFuncionarios()
         {
-            List<int>? funcionariosId = [];
-            Task<IEnumerable<Funcionario>> funcionarios;
-            foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
-            {
-                Funcionario? func = row.DataBoundItem as Funcionario;
-                if (func != null)
-                {
-                    funcionariosId.Add(func.Id);
-                }
-            }
-            funcionarios = FuncionarioRepository.ObterPorId(funcionariosId);
+            var funcionarios = FuncionarioRepository.ObterPorId(funcionariosSelecionados);
             return funcionarios;
-        }
-
-        private async Task PesquisarFuncionario()
-        {
-            string? entrada = TextBoxBuscarFuncionario.Text.ToLower();
-
-            if (!string.IsNullOrEmpty(entrada) && entrada.ToLower().Contains("id:"))
-            {
-                try
-                {
-                    string entradaFormatada = entrada.Replace("id:", "").Replace(" ", "").Trim();
-                    if (!string.IsNullOrEmpty(entradaFormatada))
-                    {
-                        int id = int.Parse(entradaFormatada);
-                        var funcionarios = await FuncionarioRepository.PesquisarId(id);
-                        await AtualizarDataGrid(funcionarios);
-                    }
-                    else
-                    {
-                        await AtualizarDataGrid();
-                    }
-                }
-                catch (FormatException)
-                {
-                    return;
-                }
-            }
-            else if (!string.IsNullOrEmpty(entrada) || filtroContrato != null)
-            {
-                Pesquisa pesquisa = new Pesquisa(entrada: entrada, filtro: filtroContrato);
-                var funcionarios = await FuncionarioRepository.Pesquisar(pesquisa);
-                await AtualizarDataGrid(funcionarios);
-            }
-            else
-            {
-                await AtualizarDataGrid();
-            }
         }
 
         private async Task CadastrarFuncionario()
@@ -201,22 +156,46 @@ namespace GerenciamentoDeFuncionarios.views
             cadastrar.ShowDialog();
         }
 
+        private async Task CadastrarDependente()
+        {
+            if (funcionariosSelecionados.Count == 1)
+            {
+                var funcionarios = await ExtrairFuncionarios();
+                if (funcionarios != null)
+                {
+                    Funcionario funcionario = funcionarios.First();
+                    if (_usuario.IsAdmin == true || _usuario.Id == funcionario.Id)
+                    {
+                        FormCadastroDependente dependente = new FormCadastroDependente(funcionario);
+                        dependente.ShowDialog();
+                    }
+                    else
+                    {
+                        MessageBox.Show(
+                            "Você não tem permissão para editar esse funcionário",
+                            "Erro de permissão",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error
+                            );
+                        return;
+                    }
+                }
+            }
+        }
+
         private async Task EditarFuncionario()
         {
-            if (DgvFuncionarios.CurrentRow != null)
+            if (funcionariosSelecionados.Count == 1)
             {
-                Funcionario? funcionarioSelecionado = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
-
-                if (funcionarioSelecionado != null)
+                var funcionarios = await ExtrairFuncionarios();
+                if (funcionarios != null)
                 {
-                    int funcionarioId = funcionarioSelecionado.Id;
-                    var funcionario = await FuncionarioRepository.PesquisarId(funcionarioId);
+                    Funcionario funcionario = funcionarios.First();
 
-                    if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
+                    if (_usuario.IsAdmin == true || _usuario.Id == funcionario.Id)
                     {
-                        FormEditarFuncionario editor = new FormEditarFuncionario(funcionario.First());
+                        FormEditarFuncionario editor = new FormEditarFuncionario(funcionario);
                         editor.FuncionarioAtualizado += SinalFuncionarioAtualizado;
-                        editor.AbrirCadastroDependente += SinalAbrirCadastroDependente;
                         editor.ShowDialog();
                     }
                     else
@@ -238,17 +217,10 @@ namespace GerenciamentoDeFuncionarios.views
         {
             await AtualizarDataGrid();
         }
-        
-        private async void SinalAbrirCadastroDependente(object? sender, EventArgs e)
-        {
-            await CadastrarDependente();
-        }
 
         private async Task RemoverFuncionario()
         {
-            int quantidadeSelecionado = DgvFuncionarios.SelectedRows.Count;
-
-            if (quantidadeSelecionado > 0)
+            if (funcionariosSelecionados.Count > 0)
             {
                 var funcionarios = await ExtrairFuncionarios();
 
@@ -256,7 +228,7 @@ namespace GerenciamentoDeFuncionarios.views
                 {
                     DialogResult? removerFuncionario;
 
-                    if (quantidadeSelecionado == 1)
+                    if (funcionarios.Count() == 1)
                     {
                         removerFuncionario = MessageBox.Show(
                             $"Essa ação irá remover o funcionário \"{funcionarios.First().Nome}\" (Matricula: {funcionarios.First().Id})\nVocê tem certeza?",
@@ -312,35 +284,40 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        private async Task CadastrarDependente()
+        private async Task PesquisarFuncionario()
         {
-            var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (DgvFuncionarios.CurrentRow != null)
+            string? entrada = TextBoxBuscarFuncionario.Text.ToLower();
+
+            if (!string.IsNullOrEmpty(entrada) && entrada.ToLower().Contains("id:"))
             {
-                Funcionario? funcionarioSelecionado = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;
-
-                if (funcionarioSelecionado != null)
+                try
                 {
-                    int funcionarioId = funcionarioSelecionado.Id;
-                    var funcionario = await FuncionarioRepository.ObterPorId([funcionarioId]);
-
-                    if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
+                    string entradaFormatada = entrada.Replace("id:", "").Replace(" ", "").Trim();
+                    if (!string.IsNullOrEmpty(entradaFormatada))
                     {
-                        FormCadastroDependente dependente = new FormCadastroDependente(funcionario.First());
-                        dependente.ShowDialog();
+                        int id = int.Parse(entradaFormatada);
+                        var funcionarios = await FuncionarioRepository.PesquisarId(id);
+                        await AtualizarDataGrid(funcionarios);
                     }
                     else
                     {
-                        MessageBox.Show(
-                            "Você não tem permissão para editar esse funcionário",
-                            "Erro de permissão",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error
-                            );
-                        return;
+                        await AtualizarDataGrid();
                     }
-
                 }
+                catch (FormatException)
+                {
+                    return;
+                }
+            }
+            else if (!string.IsNullOrEmpty(entrada) || filtroContrato != null)
+            {
+                Pesquisa pesquisa = new Pesquisa(entrada: entrada, filtro: filtroContrato);
+                var funcionarios = await FuncionarioRepository.Pesquisar(pesquisa);
+                await AtualizarDataGrid(funcionarios);
+            }
+            else
+            {
+                await AtualizarDataGrid();
             }
         }
 
@@ -409,6 +386,26 @@ namespace GerenciamentoDeFuncionarios.views
 
         // Data Grid View
 
+        private void DgvFuncionarios_SelectionChanged(object sender, EventArgs e)
+        {
+            funcionariosSelecionados.Clear();
+            if (DgvFuncionarios.SelectedRows.Count > 0)
+            {
+                if (DgvFuncionarios.SelectedRows.Count == 1)
+                {
+                    funcionariosSelecionados.Clear();
+                }
+                foreach (DataGridViewRow row in DgvFuncionarios.SelectedRows)
+                {
+                    var funcionario = row.DataBoundItem as Funcionario;
+                    if (funcionario != null)
+                    {
+                        funcionariosSelecionados.Add(funcionario.Id);
+                    }
+                }
+            }
+        }
+
         private void DgvFuncionarios_MouseDown(object sender, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hit = DgvFuncionarios.HitTest(e.X, e.Y);
@@ -447,16 +444,29 @@ namespace GerenciamentoDeFuncionarios.views
         {
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
-                var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
                 verEditarToolStripMenuItem.Enabled = false;
+                excluirToolStripMenuItem.Enabled = false;
                 novoDependenteToolStripMenuItem.Enabled = false;
 
-                if (DgvFuncionarios.SelectedRows.Count <= 1 || celula.Selected == false)
+                var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
+
+                if (funcionariosSelecionados.Count <= 1 || celula.Selected == false)
                 {
-                    verEditarToolStripMenuItem.Enabled = true;
-                    novoDependenteToolStripMenuItem.Enabled = true;
                     DgvFuncionarios.ClearSelection();
                     celula.Selected = true;
+                    if (_usuario.IsAdmin == true || _usuario.Id == funcionariosSelecionados.First())
+                    {
+                        verEditarToolStripMenuItem.Enabled = true;
+                        excluirToolStripMenuItem.Enabled = true;
+                        novoDependenteToolStripMenuItem.Enabled = true;
+                    }
+                }
+                else if (funcionariosSelecionados.Count > 1)
+                {
+                    if (_usuario.IsAdmin == true)
+                    {
+                        excluirToolStripMenuItem.Enabled = true;
+                    }
                 }
 
                 e.ContextMenuStrip = funcContextMenuStrip;

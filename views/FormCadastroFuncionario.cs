@@ -185,7 +185,7 @@ namespace GerenciamentoDeFuncionarios.views
                     FuncionarioCadastrado?.Invoke(this, EventArgs.Empty);
                     this.Close();
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show(
                         $"Ocorreu um erro no cadastro do funcionário.",

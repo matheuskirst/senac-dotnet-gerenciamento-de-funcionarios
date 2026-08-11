@@ -135,7 +135,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
             return resultado;
         }
 
-        public static async Task<IEnumerable<Funcionario>> PesquisarId(int id)
+        public static async Task<IEnumerable<Funcionario>> PesquisarId(int? id)
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
                 $"{selectQuery} WHERE Funcionario.Id = @Id", new { Id = id }

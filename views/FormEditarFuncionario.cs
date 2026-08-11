@@ -39,10 +39,9 @@ namespace GerenciamentoDeFuncionarios.views
                 System.Reflection.BindingFlags.NonPublic)
                 ?.SetValue(DgvDependentes, true);
         }
-            
+
         private async void FormEditarFuncionario_Load(object sender, EventArgs e)
         {
-            MessageBox
             TextBoxEditarNome.Text = Funcionario.Nome;
             MTextBoxEditarCpf.Text = Funcionario.Cpf;
             TextBoxEditarEmail.Text = Funcionario.Email;
@@ -115,6 +114,13 @@ namespace GerenciamentoDeFuncionarios.views
                     MessageBoxIcon.Error
                     );
             }
+        }
+
+        private async Task CadastrarDependente()
+        {
+            FormCadastroDependente dependente = new FormCadastroDependente(Funcionario);
+            dependente.ShowDialog();
+            await AtualizarTabelaDependentes();
         }
 
         private void AtualizarTextBoxSalario()
@@ -289,7 +295,7 @@ namespace GerenciamentoDeFuncionarios.views
             }
         }
 
-        // Data Grid View
+        // Dependentes
 
         private void DgvDependentes_MouseDown(object sender, MouseEventArgs e)
         {
@@ -299,11 +305,6 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 DgvDependentes.ClearSelection();
             }
-        }
-
-        private void NovoDependenteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AbrirCadastroDependente?.Invoke(this, EventArgs.Empty);
         }
 
         private void DgvDependentes_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
@@ -322,6 +323,11 @@ namespace GerenciamentoDeFuncionarios.views
 
                 e.ContextMenuStrip = DepenContextMenu;
             }
+        }
+
+        private async void NovoDependenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await CadastrarDependente();
         }
     }
 }

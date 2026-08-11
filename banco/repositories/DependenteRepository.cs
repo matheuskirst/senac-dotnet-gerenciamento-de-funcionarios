@@ -28,7 +28,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
             var dependentes = await ConexaoBanco.CriarConexao().QueryAsync<Dependente>(
                 @"  
                     SELECT * FROM Dependente
-                    WHERE FuncionarioId = Id
+                    WHERE FuncionarioId = @Id
                 ",
                 new { Id = funcionarioId }
                 );
