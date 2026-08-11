@@ -23,9 +23,9 @@ namespace GerenciamentoDeFuncionarios.views
         public SortableBindingList<Funcionario> tabelaFuncionarios = new();
         public FormTelaPrincipal(Usuario usuario)
         {
-            InitializeComponent();
-
             _usuario = usuario;
+
+            InitializeComponent();
             typeof(DataGridView).GetProperty(
                 "DoubleBuffered",
                 System.Reflection.BindingFlags.Instance |
@@ -108,11 +108,11 @@ namespace GerenciamentoDeFuncionarios.views
                 }
 
             }
-            catch (Exception ex)
+            catch
             {
                 NenhumFuncionarioEncontrado();
                 MessageBox.Show(
-                    $"Ocorreu um erro ao atualizar os funcionários\n{ex}",
+                    $"Ocorreu um erro ao atualizar os funcionários",
                     "Erro na conexão do banco de dados",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
@@ -210,12 +210,13 @@ namespace GerenciamentoDeFuncionarios.views
                 if (funcionarioSelecionado != null)
                 {
                     int funcionarioId = funcionarioSelecionado.Id;
-                    var funcionario = await FuncionarioRepository.ObterPorId([funcionarioId]);
+                    var funcionario = await FuncionarioRepository.PesquisarId(funcionarioId);
 
                     if (_usuario.IsAdmin == true || funcionarioId == _usuario.Id)
                     {
                         FormEditarFuncionario editor = new FormEditarFuncionario(funcionario.First());
                         editor.FuncionarioAtualizado += SinalFuncionarioAtualizado;
+                        editor.AbrirCadastroDependente += SinalAbrirCadastroDependente;
                         editor.ShowDialog();
                     }
                     else
@@ -236,6 +237,11 @@ namespace GerenciamentoDeFuncionarios.views
         private async void SinalFuncionarioAtualizado(object? sender, EventArgs e)
         {
             await AtualizarDataGrid();
+        }
+        
+        private async void SinalAbrirCadastroDependente(object? sender, EventArgs e)
+        {
+            await CadastrarDependente();
         }
 
         private async Task RemoverFuncionario()
@@ -308,6 +314,7 @@ namespace GerenciamentoDeFuncionarios.views
 
         private async Task CadastrarDependente()
         {
+            var celula = DgvFuncionarios.Rows[e.RowIndex].Cells[e.ColumnIndex];
             if (DgvFuncionarios.CurrentRow != null)
             {
                 Funcionario? funcionarioSelecionado = DgvFuncionarios.CurrentRow.DataBoundItem as Funcionario;

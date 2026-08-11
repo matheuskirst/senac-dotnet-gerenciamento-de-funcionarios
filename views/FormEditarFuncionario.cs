@@ -17,6 +17,7 @@ namespace GerenciamentoDeFuncionarios.views
 {
     public partial class FormEditarFuncionario : Form
     {
+        public event EventHandler? AbrirCadastroDependente;
         public event EventHandler? FuncionarioAtualizado;
 
         CultureInfo brazilCulture = new CultureInfo("pt-BR");
@@ -25,15 +26,23 @@ namespace GerenciamentoDeFuncionarios.views
 
         private Funcionario Funcionario;
 
+        public SortableBindingList<Dependente> tabelaDependentes = new();
+
         public FormEditarFuncionario(Funcionario funcionario)
         {
             Funcionario = funcionario;
 
             InitializeComponent();
+            typeof(DataGridView).GetProperty(
+                "DoubleBuffered",
+                System.Reflection.BindingFlags.Instance |
+                System.Reflection.BindingFlags.NonPublic)
+                ?.SetValue(DgvDependentes, true);
         }
-
-        private void FormEditarFuncionario_Load(object sender, EventArgs e)
+            
+        private async void FormEditarFuncionario_Load(object sender, EventArgs e)
         {
+            MessageBox
             TextBoxEditarNome.Text = Funcionario.Nome;
             MTextBoxEditarCpf.Text = Funcionario.Cpf;
             TextBoxEditarEmail.Text = Funcionario.Email;
@@ -57,6 +66,54 @@ namespace GerenciamentoDeFuncionarios.views
                 default:
                     RadioBtnEditarClt.Checked = true;
                     break;
+            }
+
+            DgvDependentes.DataSource = tabelaDependentes;
+            DgvDependentes.Columns["Id"].Visible = false;
+            DgvDependentes.Columns["FuncionarioId"].Visible = false;
+
+            await AtualizarTabelaDependentes();
+        }
+
+        public void NenhumDependentesCadastrado()
+        {
+
+        }
+
+        public async Task AtualizarTabelaDependentes(IEnumerable<Dependente>? dependentes = null)
+        {
+            try
+            {
+                if (dependentes == null)
+                {
+                    dependentes = await DependenteRepository.ObterDependentes(Funcionario.Id);
+                }
+                DgvDependentes.SuspendLayout();
+
+                tabelaDependentes.Clear();
+
+                foreach (var dependente in dependentes)
+                {
+                    tabelaDependentes.Add(dependente);
+                }
+
+                DgvDependentes.ClearSelection();
+                DgvDependentes.ResumeLayout();
+
+                if (tabelaDependentes.Count <= 0)
+                {
+                    NenhumDependentesCadastrado();
+                }
+            }
+            catch (Exception ex)
+            {
+                NenhumDependentesCadastrado();
+                MessageBox.Show(
+                    $"Ocorreu um erro ao carregar os dependentes\n{ex}",
+                    "Erro na conexão do banco de dados",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
             }
         }
 
@@ -229,6 +286,41 @@ namespace GerenciamentoDeFuncionarios.views
                             );
                     }
                 }
+            }
+        }
+
+        // Data Grid View
+
+        private void DgvDependentes_MouseDown(object sender, MouseEventArgs e)
+        {
+            DataGridView.HitTestInfo hit = DgvDependentes.HitTest(e.X, e.Y);
+
+            if (hit.Type == DataGridViewHitTestType.None)
+            {
+                DgvDependentes.ClearSelection();
+            }
+        }
+
+        private void NovoDependenteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AbrirCadastroDependente?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void DgvDependentes_CellContextMenuStripNeeded(object sender, DataGridViewCellContextMenuStripNeededEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                var celula = DgvDependentes.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                EditarDepenToolStripMenuItem.Enabled = false;
+
+                if (DgvDependentes.SelectedRows.Count <= 1 || celula.Selected == false)
+                {
+                    EditarDepenToolStripMenuItem.Enabled = true;
+                    DgvDependentes.ClearSelection();
+                    celula.Selected = true;
+                }
+
+                e.ContextMenuStrip = DepenContextMenu;
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using GerenciamentoDeFuncionarios.banco.configuracao;
+﻿using Dapper;
+using GerenciamentoDeFuncionarios.banco.configuracao;
 using GerenciamentoDeFuncionarios.modelos;
 using System;
 using System.Collections.Generic;
@@ -12,25 +13,26 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
     {
         private static ConexaoBanco ConexaoBanco = new ConexaoBanco();
 
-        public static async Task AdicionarDependente(Contrato contrato)
+        public static async Task AdicionarDependente(Dependente dependente)
         {
             await ConexaoBanco.CriarConexao().QueryAsync(
                 @"
                     INSERT INTO Dependente (Nome, Parentesco, DataNascimento, FuncionarioId)
                     VALUES (@Nome, @Parentesco, @DataNascimento, @FuncionarioId);
                 ",
-                contrato
+                dependente
                 );
         }
-        public static async Task<bool> ExisteContratos()
+        public static async Task<IEnumerable<Dependente>> ObterDependentes(int funcionarioId)
         {
-            var resultado = await ConexaoBanco.CriarConexao().QueryFirstOrDefaultAsync<Contrato>(
-                @"
-                    SELECT * FROM TipoDeContrato
-                "
+            var dependentes = await ConexaoBanco.CriarConexao().QueryAsync<Dependente>(
+                @"  
+                    SELECT * FROM Dependente
+                    WHERE FuncionarioId = Id
+                ",
+                new { Id = funcionarioId }
                 );
-            return resultado != null;
+            return dependentes;
         }
     }
-}
 }

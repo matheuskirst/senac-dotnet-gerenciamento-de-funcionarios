@@ -49,8 +49,8 @@
             BtnDependenteSelecionarData = new Button();
             tableLayoutPanel3 = new TableLayoutPanel();
             BtnCriarDependente = new Button();
-            MonthCalendarDependente = new MonthCalendar();
             LabelDependenteErro = new Label();
+            MonthCalendarDependente = new MonthCalendar();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             GroupBoxDependenteFuncionario.SuspendLayout();
@@ -76,7 +76,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(522, 553);
+            tableLayoutPanel1.Size = new Size(382, 553);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -95,7 +95,7 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 250F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel2.Size = new Size(476, 507);
+            tableLayoutPanel2.Size = new Size(336, 507);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // GroupBoxDependenteFuncionario
@@ -107,7 +107,7 @@
             GroupBoxDependenteFuncionario.Dock = DockStyle.Fill;
             GroupBoxDependenteFuncionario.Location = new Point(3, 3);
             GroupBoxDependenteFuncionario.Name = "GroupBoxDependenteFuncionario";
-            GroupBoxDependenteFuncionario.Size = new Size(470, 94);
+            GroupBoxDependenteFuncionario.Size = new Size(330, 94);
             GroupBoxDependenteFuncionario.TabIndex = 0;
             GroupBoxDependenteFuncionario.TabStop = false;
             GroupBoxDependenteFuncionario.Text = "Funcionário:";
@@ -152,7 +152,7 @@
             GroupBoxDepentendeDados.Dock = DockStyle.Fill;
             GroupBoxDepentendeDados.Location = new Point(3, 103);
             GroupBoxDepentendeDados.Name = "GroupBoxDepentendeDados";
-            GroupBoxDepentendeDados.Size = new Size(470, 244);
+            GroupBoxDepentendeDados.Size = new Size(330, 244);
             GroupBoxDepentendeDados.TabIndex = 1;
             GroupBoxDepentendeDados.TabStop = false;
             GroupBoxDepentendeDados.Text = "Novo Dependente:";
@@ -161,7 +161,6 @@
             // 
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tableLayoutPanel4.Controls.Add(tableLayoutPanel5, 0, 0);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel6, 0, 1);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel7, 0, 2);
@@ -170,10 +169,10 @@
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 4;
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 50F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel4.Size = new Size(464, 218);
+            tableLayoutPanel4.Size = new Size(324, 218);
             tableLayoutPanel4.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -188,7 +187,7 @@
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel5.Size = new Size(458, 44);
+            tableLayoutPanel5.Size = new Size(318, 44);
             tableLayoutPanel5.TabIndex = 1;
             // 
             // LabelDependenteNome
@@ -207,7 +206,7 @@
             TxtBoxDependenteNome.Anchor = AnchorStyles.Left;
             TxtBoxDependenteNome.Location = new Point(93, 8);
             TxtBoxDependenteNome.Name = "TxtBoxDependenteNome";
-            TxtBoxDependenteNome.Size = new Size(322, 27);
+            TxtBoxDependenteNome.Size = new Size(222, 27);
             TxtBoxDependenteNome.TabIndex = 1;
             // 
             // tableLayoutPanel6
@@ -222,14 +221,14 @@
             tableLayoutPanel6.Name = "tableLayoutPanel6";
             tableLayoutPanel6.RowCount = 1;
             tableLayoutPanel6.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel6.Size = new Size(458, 69);
+            tableLayoutPanel6.Size = new Size(318, 44);
             tableLayoutPanel6.TabIndex = 2;
             // 
             // LabelDependenteParentesco
             // 
             LabelDependenteParentesco.Anchor = AnchorStyles.Left;
             LabelDependenteParentesco.AutoSize = true;
-            LabelDependenteParentesco.Location = new Point(3, 24);
+            LabelDependenteParentesco.Location = new Point(3, 12);
             LabelDependenteParentesco.Name = "LabelDependenteParentesco";
             LabelDependenteParentesco.Size = new Size(83, 20);
             LabelDependenteParentesco.TabIndex = 0;
@@ -238,9 +237,9 @@
             // TxtBoxDependenteParentesco
             // 
             TxtBoxDependenteParentesco.Anchor = AnchorStyles.Left;
-            TxtBoxDependenteParentesco.Location = new Point(93, 21);
+            TxtBoxDependenteParentesco.Location = new Point(93, 8);
             TxtBoxDependenteParentesco.Name = "TxtBoxDependenteParentesco";
-            TxtBoxDependenteParentesco.Size = new Size(322, 27);
+            TxtBoxDependenteParentesco.Size = new Size(222, 27);
             TxtBoxDependenteParentesco.TabIndex = 1;
             // 
             // tableLayoutPanel7
@@ -253,19 +252,19 @@
             tableLayoutPanel7.Controls.Add(mTxtBoxDependenteData, 1, 0);
             tableLayoutPanel7.Controls.Add(BtnDependenteSelecionarData, 2, 0);
             tableLayoutPanel7.Dock = DockStyle.Fill;
-            tableLayoutPanel7.Location = new Point(0, 125);
+            tableLayoutPanel7.Location = new Point(0, 100);
             tableLayoutPanel7.Margin = new Padding(0);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new Size(464, 75);
+            tableLayoutPanel7.Size = new Size(324, 50);
             tableLayoutPanel7.TabIndex = 3;
             // 
             // LabelDependenteDataNascimento
             // 
             LabelDependenteDataNascimento.Anchor = AnchorStyles.Left;
             LabelDependenteDataNascimento.AutoSize = true;
-            LabelDependenteDataNascimento.Location = new Point(0, 27);
+            LabelDependenteDataNascimento.Location = new Point(0, 15);
             LabelDependenteDataNascimento.Margin = new Padding(0);
             LabelDependenteDataNascimento.Name = "LabelDependenteDataNascimento";
             LabelDependenteDataNascimento.Size = new Size(148, 20);
@@ -275,18 +274,19 @@
             // mTxtBoxDependenteData
             // 
             mTxtBoxDependenteData.Anchor = AnchorStyles.Left;
-            mTxtBoxDependenteData.Location = new Point(153, 24);
+            mTxtBoxDependenteData.Location = new Point(153, 11);
             mTxtBoxDependenteData.Mask = "00/00/0000";
             mTxtBoxDependenteData.Name = "mTxtBoxDependenteData";
-            mTxtBoxDependenteData.Size = new Size(74, 27);
+            mTxtBoxDependenteData.Size = new Size(69, 27);
             mTxtBoxDependenteData.TabIndex = 2;
+            mTxtBoxDependenteData.TextAlign = HorizontalAlignment.Center;
             // 
             // BtnDependenteSelecionarData
             // 
             BtnDependenteSelecionarData.Anchor = AnchorStyles.Left;
             BtnDependenteSelecionarData.BackgroundImage = Properties.Resources._1397;
             BtnDependenteSelecionarData.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnDependenteSelecionarData.Location = new Point(233, 23);
+            BtnDependenteSelecionarData.Location = new Point(228, 10);
             BtnDependenteSelecionarData.Name = "BtnDependenteSelecionarData";
             BtnDependenteSelecionarData.Size = new Size(29, 29);
             BtnDependenteSelecionarData.TabIndex = 3;
@@ -305,27 +305,19 @@
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 1;
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new Size(470, 44);
+            tableLayoutPanel3.Size = new Size(330, 44);
             tableLayoutPanel3.TabIndex = 2;
             // 
             // BtnCriarDependente
             // 
             BtnCriarDependente.Dock = DockStyle.Fill;
-            BtnCriarDependente.Location = new Point(84, 3);
+            BtnCriarDependente.Location = new Point(59, 3);
             BtnCriarDependente.Name = "BtnCriarDependente";
-            BtnCriarDependente.Size = new Size(301, 38);
+            BtnCriarDependente.Size = new Size(210, 38);
             BtnCriarDependente.TabIndex = 0;
             BtnCriarDependente.Text = "Cadastrar";
             BtnCriarDependente.UseVisualStyleBackColor = true;
             BtnCriarDependente.Click += BtnCriarDependente_Click;
-            // 
-            // MonthCalendarDependente
-            // 
-            MonthCalendarDependente.Location = new Point(511, 542);
-            MonthCalendarDependente.Name = "MonthCalendarDependente";
-            MonthCalendarDependente.TabIndex = 1;
-            MonthCalendarDependente.Visible = false;
-            MonthCalendarDependente.DateSelected += MonthCalendarDependente_DateSelected;
             // 
             // LabelDependenteErro
             // 
@@ -336,15 +328,24 @@
             LabelDependenteErro.Size = new Size(0, 20);
             LabelDependenteErro.TabIndex = 3;
             // 
+            // MonthCalendarDependente
+            // 
+            MonthCalendarDependente.Location = new Point(511, 542);
+            MonthCalendarDependente.Name = "MonthCalendarDependente";
+            MonthCalendarDependente.TabIndex = 1;
+            MonthCalendarDependente.Visible = false;
+            MonthCalendarDependente.DateSelected += MonthCalendarDependente_DateSelected;
+            // 
             // FormCadastroDependente
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(522, 553);
+            ClientSize = new Size(382, 553);
             Controls.Add(MonthCalendarDependente);
             Controls.Add(tableLayoutPanel1);
-            MinimumSize = new Size(540, 600);
+            MinimumSize = new Size(400, 600);
             Name = "FormCadastroDependente";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Novo Dependente";
             Load += FormCadastroDependente_Load;
             tableLayoutPanel1.ResumeLayout(false);

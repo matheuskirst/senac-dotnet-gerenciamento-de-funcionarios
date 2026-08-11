@@ -78,13 +78,12 @@
             tableLayoutMain.Controls.Add(tableLayoutRight, 2, 1);
             tableLayoutMain.Dock = DockStyle.Fill;
             tableLayoutMain.Location = new Point(0, 0);
-            tableLayoutMain.Margin = new Padding(3, 2, 3, 2);
             tableLayoutMain.Name = "tableLayoutMain";
             tableLayoutMain.RowCount = 3;
             tableLayoutMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
             tableLayoutMain.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
             tableLayoutMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutMain.Size = new Size(721, 533);
+            tableLayoutMain.Size = new Size(782, 703);
             tableLayoutMain.TabIndex = 0;
             // 
             // tableLayoutLeft
@@ -98,38 +97,35 @@
             tableLayoutLeft.Controls.Add(panelSenhaFunc, 0, 3);
             tableLayoutLeft.Controls.Add(labelErro, 0, 5);
             tableLayoutLeft.Dock = DockStyle.Fill;
-            tableLayoutLeft.Location = new Point(21, 28);
-            tableLayoutLeft.Margin = new Padding(3, 2, 3, 2);
+            tableLayoutLeft.Location = new Point(22, 38);
             tableLayoutLeft.Name = "tableLayoutLeft";
             tableLayoutLeft.RowCount = 6;
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 15F));
-            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 15F));
-            tableLayoutLeft.Size = new Size(444, 475);
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutLeft.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutLeft.Size = new Size(482, 626);
             tableLayoutLeft.TabIndex = 0;
             // 
             // panelSalarioFunc
             // 
             panelSalarioFunc.Controls.Add(TxtBoxCadastroSalario);
             panelSalarioFunc.Controls.Add(LabelCadastroSalario);
-            panelSalarioFunc.Location = new Point(3, 302);
-            panelSalarioFunc.Margin = new Padding(3, 2, 3, 2);
+            panelSalarioFunc.Location = new Point(3, 403);
             panelSalarioFunc.Name = "panelSalarioFunc";
-            panelSalarioFunc.Size = new Size(438, 70);
+            panelSalarioFunc.Size = new Size(476, 93);
             panelSalarioFunc.TabIndex = 5;
             // 
             // TxtBoxCadastroSalario
             // 
             TxtBoxCadastroSalario.BackColor = SystemColors.Window;
-            TxtBoxCadastroSalario.Location = new Point(10, 40);
-            TxtBoxCadastroSalario.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxCadastroSalario.Location = new Point(11, 53);
             TxtBoxCadastroSalario.Name = "TxtBoxCadastroSalario";
             TxtBoxCadastroSalario.ReadOnly = true;
-            TxtBoxCadastroSalario.Size = new Size(320, 23);
+            TxtBoxCadastroSalario.Size = new Size(365, 27);
             TxtBoxCadastroSalario.TabIndex = 1;
             TxtBoxCadastroSalario.Text = "R$ 0,00";
             TxtBoxCadastroSalario.KeyDown += TxtBoxCadastroSalario_KeyDown;
@@ -139,9 +135,9 @@
             // 
             LabelCadastroSalario.AutoSize = true;
             LabelCadastroSalario.Font = new Font("Segoe UI", 10.8F);
-            LabelCadastroSalario.Location = new Point(10, 13);
+            LabelCadastroSalario.Location = new Point(11, 17);
             LabelCadastroSalario.Name = "LabelCadastroSalario";
-            LabelCadastroSalario.Size = new Size(58, 20);
+            LabelCadastroSalario.Size = new Size(69, 25);
             LabelCadastroSalario.TabIndex = 0;
             LabelCadastroSalario.Text = "Salário:";
             // 
@@ -150,30 +146,28 @@
             panelNomeFunc.Controls.Add(LabelCadastroNome);
             panelNomeFunc.Controls.Add(TxtBoxCadastroNome);
             panelNomeFunc.Dock = DockStyle.Fill;
-            panelNomeFunc.Location = new Point(3, 2);
-            panelNomeFunc.Margin = new Padding(3, 2, 3, 2);
+            panelNomeFunc.Location = new Point(3, 3);
             panelNomeFunc.Name = "panelNomeFunc";
-            panelNomeFunc.Size = new Size(438, 71);
+            panelNomeFunc.Size = new Size(476, 94);
             panelNomeFunc.TabIndex = 0;
             // 
             // LabelCadastroNome
             // 
             LabelCadastroNome.AutoSize = true;
             LabelCadastroNome.Font = new Font("Segoe UI", 10.8F);
-            LabelCadastroNome.Location = new Point(10, 13);
+            LabelCadastroNome.Location = new Point(11, 17);
             LabelCadastroNome.Name = "LabelCadastroNome";
-            LabelCadastroNome.Size = new Size(53, 20);
+            LabelCadastroNome.Size = new Size(65, 25);
             LabelCadastroNome.TabIndex = 0;
             LabelCadastroNome.Text = "Nome:";
             // 
             // TxtBoxCadastroNome
             // 
             TxtBoxCadastroNome.Font = new Font("Segoe UI", 10.8F);
-            TxtBoxCadastroNome.Location = new Point(10, 40);
-            TxtBoxCadastroNome.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxCadastroNome.Location = new Point(11, 53);
             TxtBoxCadastroNome.Name = "TxtBoxCadastroNome";
             TxtBoxCadastroNome.PlaceholderText = "Ex: João da Silva";
-            TxtBoxCadastroNome.Size = new Size(320, 27);
+            TxtBoxCadastroNome.Size = new Size(365, 31);
             TxtBoxCadastroNome.TabIndex = 1;
             // 
             // panelCpfFunc
@@ -181,29 +175,27 @@
             panelCpfFunc.Controls.Add(LabelCadastroCpf);
             panelCpfFunc.Controls.Add(MTxtBoxCadastroCpf);
             panelCpfFunc.Dock = DockStyle.Fill;
-            panelCpfFunc.Location = new Point(3, 77);
-            panelCpfFunc.Margin = new Padding(3, 2, 3, 2);
+            panelCpfFunc.Location = new Point(3, 103);
             panelCpfFunc.Name = "panelCpfFunc";
-            panelCpfFunc.Size = new Size(438, 71);
+            panelCpfFunc.Size = new Size(476, 94);
             panelCpfFunc.TabIndex = 1;
             // 
             // LabelCadastroCpf
             // 
             LabelCadastroCpf.AutoSize = true;
             LabelCadastroCpf.Font = new Font("Segoe UI", 10.8F);
-            LabelCadastroCpf.Location = new Point(10, 13);
+            LabelCadastroCpf.Location = new Point(11, 17);
             LabelCadastroCpf.Name = "LabelCadastroCpf";
-            LabelCadastroCpf.Size = new Size(36, 20);
+            LabelCadastroCpf.Size = new Size(46, 25);
             LabelCadastroCpf.TabIndex = 0;
             LabelCadastroCpf.Text = "CPF:";
             // 
             // MTxtBoxCadastroCpf
             // 
-            MTxtBoxCadastroCpf.Location = new Point(10, 41);
-            MTxtBoxCadastroCpf.Margin = new Padding(3, 2, 3, 2);
+            MTxtBoxCadastroCpf.Location = new Point(11, 55);
             MTxtBoxCadastroCpf.Mask = "000\\.000\\.000\\-00";
             MTxtBoxCadastroCpf.Name = "MTxtBoxCadastroCpf";
-            MTxtBoxCadastroCpf.Size = new Size(320, 23);
+            MTxtBoxCadastroCpf.Size = new Size(365, 27);
             MTxtBoxCadastroCpf.TabIndex = 0;
             MTxtBoxCadastroCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MTxtBoxCadastroCpf.KeyPress += MTxtBoxCadastroCpf_KeyPress;
@@ -213,30 +205,28 @@
             panelEmailFunc.Controls.Add(LabelCadastroEmail);
             panelEmailFunc.Controls.Add(TxtBoxCadastroEmail);
             panelEmailFunc.Dock = DockStyle.Fill;
-            panelEmailFunc.Location = new Point(3, 152);
-            panelEmailFunc.Margin = new Padding(3, 2, 3, 2);
+            panelEmailFunc.Location = new Point(3, 203);
             panelEmailFunc.Name = "panelEmailFunc";
-            panelEmailFunc.Size = new Size(438, 71);
+            panelEmailFunc.Size = new Size(476, 94);
             panelEmailFunc.TabIndex = 2;
             // 
             // LabelCadastroEmail
             // 
             LabelCadastroEmail.AutoSize = true;
             LabelCadastroEmail.Font = new Font("Segoe UI", 10.8F);
-            LabelCadastroEmail.Location = new Point(10, 13);
+            LabelCadastroEmail.Location = new Point(11, 17);
             LabelCadastroEmail.Name = "LabelCadastroEmail";
-            LabelCadastroEmail.Size = new Size(55, 20);
+            LabelCadastroEmail.Size = new Size(65, 25);
             LabelCadastroEmail.TabIndex = 0;
             LabelCadastroEmail.Text = "E-mail:";
             // 
             // TxtBoxCadastroEmail
             // 
             TxtBoxCadastroEmail.Font = new Font("Segoe UI", 10.8F);
-            TxtBoxCadastroEmail.Location = new Point(10, 40);
-            TxtBoxCadastroEmail.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxCadastroEmail.Location = new Point(11, 53);
             TxtBoxCadastroEmail.Name = "TxtBoxCadastroEmail";
             TxtBoxCadastroEmail.PlaceholderText = "Ex: joao.silva@email.com";
-            TxtBoxCadastroEmail.Size = new Size(320, 27);
+            TxtBoxCadastroEmail.Size = new Size(365, 31);
             TxtBoxCadastroEmail.TabIndex = 0;
             // 
             // panelSenhaFunc
@@ -244,20 +234,18 @@
             panelSenhaFunc.Controls.Add(TxtBoxCadastroSenha);
             panelSenhaFunc.Controls.Add(LabelCadastroSenha);
             panelSenhaFunc.Dock = DockStyle.Fill;
-            panelSenhaFunc.Location = new Point(3, 227);
-            panelSenhaFunc.Margin = new Padding(3, 2, 3, 2);
+            panelSenhaFunc.Location = new Point(3, 303);
             panelSenhaFunc.Name = "panelSenhaFunc";
-            panelSenhaFunc.Size = new Size(438, 71);
+            panelSenhaFunc.Size = new Size(476, 94);
             panelSenhaFunc.TabIndex = 3;
             // 
             // TxtBoxCadastroSenha
             // 
             TxtBoxCadastroSenha.BackColor = SystemColors.Window;
-            TxtBoxCadastroSenha.Location = new Point(10, 40);
-            TxtBoxCadastroSenha.Margin = new Padding(3, 2, 3, 2);
+            TxtBoxCadastroSenha.Location = new Point(11, 53);
             TxtBoxCadastroSenha.Name = "TxtBoxCadastroSenha";
             TxtBoxCadastroSenha.PlaceholderText = "Ex: 1234";
-            TxtBoxCadastroSenha.Size = new Size(320, 23);
+            TxtBoxCadastroSenha.Size = new Size(365, 27);
             TxtBoxCadastroSenha.TabIndex = 1;
             TxtBoxCadastroSenha.UseSystemPasswordChar = true;
             // 
@@ -265,9 +253,9 @@
             // 
             LabelCadastroSenha.AutoSize = true;
             LabelCadastroSenha.Font = new Font("Segoe UI", 10.8F);
-            LabelCadastroSenha.Location = new Point(10, 13);
+            LabelCadastroSenha.Location = new Point(11, 17);
             LabelCadastroSenha.Name = "LabelCadastroSenha";
-            LabelCadastroSenha.Size = new Size(52, 20);
+            LabelCadastroSenha.Size = new Size(64, 25);
             LabelCadastroSenha.TabIndex = 0;
             LabelCadastroSenha.Text = "Senha:";
             // 
@@ -278,9 +266,9 @@
             labelErro.Dock = DockStyle.Left;
             labelErro.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             labelErro.ForeColor = Color.Red;
-            labelErro.Location = new Point(3, 375);
+            labelErro.Location = new Point(3, 500);
             labelErro.Name = "labelErro";
-            labelErro.Size = new Size(0, 100);
+            labelErro.Size = new Size(0, 126);
             labelErro.TabIndex = 4;
             labelErro.TextAlign = ContentAlignment.MiddleLeft;
             // 
@@ -292,16 +280,15 @@
             tableLayoutRight.Controls.Add(GroupBoxContrato, 0, 1);
             tableLayoutRight.Controls.Add(BtnCadastroSalvar, 0, 3);
             tableLayoutRight.Dock = DockStyle.Fill;
-            tableLayoutRight.Location = new Point(471, 28);
-            tableLayoutRight.Margin = new Padding(3, 2, 3, 2);
+            tableLayoutRight.Location = new Point(510, 38);
             tableLayoutRight.Name = "tableLayoutRight";
             tableLayoutRight.RowCount = 4;
-            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
-            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
+            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 100F));
             tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 41F));
-            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 15F));
-            tableLayoutRight.Size = new Size(228, 475);
+            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 55F));
+            tableLayoutRight.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutRight.Size = new Size(248, 626);
             tableLayoutRight.TabIndex = 1;
             // 
             // GroupBoxSexo
@@ -309,11 +296,9 @@
             GroupBoxSexo.Controls.Add(RadioBtnMasculino);
             GroupBoxSexo.Controls.Add(RadioBtnFeminino);
             GroupBoxSexo.Dock = DockStyle.Fill;
-            GroupBoxSexo.Location = new Point(3, 2);
-            GroupBoxSexo.Margin = new Padding(3, 2, 3, 2);
+            GroupBoxSexo.Location = new Point(3, 3);
             GroupBoxSexo.Name = "GroupBoxSexo";
-            GroupBoxSexo.Padding = new Padding(3, 2, 3, 2);
-            GroupBoxSexo.Size = new Size(222, 71);
+            GroupBoxSexo.Size = new Size(242, 94);
             GroupBoxSexo.TabIndex = 0;
             GroupBoxSexo.TabStop = false;
             GroupBoxSexo.Text = "Sexo:";
@@ -322,10 +307,9 @@
             // 
             RadioBtnMasculino.AutoSize = true;
             RadioBtnMasculino.Checked = true;
-            RadioBtnMasculino.Location = new Point(10, 30);
-            RadioBtnMasculino.Margin = new Padding(3, 2, 3, 2);
+            RadioBtnMasculino.Location = new Point(11, 40);
             RadioBtnMasculino.Name = "RadioBtnMasculino";
-            RadioBtnMasculino.Size = new Size(80, 19);
+            RadioBtnMasculino.Size = new Size(97, 24);
             RadioBtnMasculino.TabIndex = 0;
             RadioBtnMasculino.TabStop = true;
             RadioBtnMasculino.Text = "Masculino";
@@ -334,10 +318,9 @@
             // RadioBtnFeminino
             // 
             RadioBtnFeminino.AutoSize = true;
-            RadioBtnFeminino.Location = new Point(101, 30);
-            RadioBtnFeminino.Margin = new Padding(3, 2, 3, 2);
+            RadioBtnFeminino.Location = new Point(115, 40);
             RadioBtnFeminino.Name = "RadioBtnFeminino";
-            RadioBtnFeminino.Size = new Size(75, 19);
+            RadioBtnFeminino.Size = new Size(91, 24);
             RadioBtnFeminino.TabIndex = 1;
             RadioBtnFeminino.Text = "Feminino";
             RadioBtnFeminino.UseVisualStyleBackColor = true;
@@ -349,11 +332,9 @@
             GroupBoxContrato.Controls.Add(RadioBtnContratoAutonomo);
             GroupBoxContrato.Dock = DockStyle.Fill;
             GroupBoxContrato.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            GroupBoxContrato.Location = new Point(3, 77);
-            GroupBoxContrato.Margin = new Padding(3, 2, 3, 2);
+            GroupBoxContrato.Location = new Point(3, 103);
             GroupBoxContrato.Name = "GroupBoxContrato";
-            GroupBoxContrato.Padding = new Padding(3, 2, 3, 2);
-            GroupBoxContrato.Size = new Size(222, 71);
+            GroupBoxContrato.Size = new Size(242, 94);
             GroupBoxContrato.TabIndex = 1;
             GroupBoxContrato.TabStop = false;
             GroupBoxContrato.Text = "Tipo de Contrato";
@@ -362,10 +343,9 @@
             // 
             RadioBtnContratoClt.AutoSize = true;
             RadioBtnContratoClt.Checked = true;
-            RadioBtnContratoClt.Location = new Point(10, 32);
-            RadioBtnContratoClt.Margin = new Padding(3, 2, 3, 2);
+            RadioBtnContratoClt.Location = new Point(11, 43);
             RadioBtnContratoClt.Name = "RadioBtnContratoClt";
-            RadioBtnContratoClt.Size = new Size(45, 19);
+            RadioBtnContratoClt.Size = new Size(53, 24);
             RadioBtnContratoClt.TabIndex = 0;
             RadioBtnContratoClt.TabStop = true;
             RadioBtnContratoClt.Text = "CLT";
@@ -374,10 +354,9 @@
             // RadioBtnContratoPj
             // 
             RadioBtnContratoPj.AutoSize = true;
-            RadioBtnContratoPj.Location = new Point(62, 32);
-            RadioBtnContratoPj.Margin = new Padding(3, 2, 3, 2);
+            RadioBtnContratoPj.Location = new Point(71, 43);
             RadioBtnContratoPj.Name = "RadioBtnContratoPj";
-            RadioBtnContratoPj.Size = new Size(35, 19);
+            RadioBtnContratoPj.Size = new Size(42, 24);
             RadioBtnContratoPj.TabIndex = 1;
             RadioBtnContratoPj.Text = "PJ";
             RadioBtnContratoPj.UseVisualStyleBackColor = true;
@@ -385,10 +364,9 @@
             // RadioBtnContratoAutonomo
             // 
             RadioBtnContratoAutonomo.AutoSize = true;
-            RadioBtnContratoAutonomo.Location = new Point(111, 32);
-            RadioBtnContratoAutonomo.Margin = new Padding(3, 2, 3, 2);
+            RadioBtnContratoAutonomo.Location = new Point(127, 43);
             RadioBtnContratoAutonomo.Name = "RadioBtnContratoAutonomo";
-            RadioBtnContratoAutonomo.Size = new Size(83, 19);
+            RadioBtnContratoAutonomo.Size = new Size(101, 24);
             RadioBtnContratoAutonomo.TabIndex = 2;
             RadioBtnContratoAutonomo.Text = "Autônomo";
             RadioBtnContratoAutonomo.UseVisualStyleBackColor = true;
@@ -396,10 +374,9 @@
             // BtnCadastroSalvar
             // 
             BtnCadastroSalvar.Anchor = AnchorStyles.None;
-            BtnCadastroSalvar.Location = new Point(57, 436);
-            BtnCadastroSalvar.Margin = new Padding(3, 2, 3, 2);
+            BtnCadastroSalvar.Location = new Point(59, 574);
             BtnCadastroSalvar.Name = "BtnCadastroSalvar";
-            BtnCadastroSalvar.Size = new Size(113, 37);
+            BtnCadastroSalvar.Size = new Size(129, 49);
             BtnCadastroSalvar.TabIndex = 3;
             BtnCadastroSalvar.Text = "Salvar";
             BtnCadastroSalvar.UseVisualStyleBackColor = true;
@@ -407,14 +384,13 @@
             // 
             // FormCadastroFuncionario
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(721, 533);
+            ClientSize = new Size(782, 703);
             Controls.Add(tableLayoutMain);
-            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
-            MaximumSize = new Size(737, 572);
-            MinimumSize = new Size(737, 572);
+            MaximumSize = new Size(800, 750);
+            MinimumSize = new Size(800, 750);
             Name = "FormCadastroFuncionario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Cadastrar Funcionario";

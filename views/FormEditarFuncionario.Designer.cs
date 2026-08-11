@@ -28,194 +28,245 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanelMain = new TableLayoutPanel();
+            components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
-            GroupBoxEditarNome = new GroupBox();
+            tabControl1 = new TabControl();
+            tabPageFuncionario = new TabPage();
+            tableLayoutPanel2 = new TableLayoutPanel();
+            groupBox1 = new GroupBox();
             TextBoxEditarNome = new TextBox();
-            GroupBoxEditarCpf = new GroupBox();
+            groupBox2 = new GroupBox();
             MTextBoxEditarCpf = new MaskedTextBox();
-            GroupBoxEditarTipoContrato = new GroupBox();
+            groupBox3 = new GroupBox();
+            TextBoxEditarEmail = new TextBox();
+            groupBox4 = new GroupBox();
+            TextBoxEditarSenha = new TextBox();
+            groupBox5 = new GroupBox();
+            TextBoxEditarSalario = new TextBox();
+            groupBox8 = new GroupBox();
+            RadioBtnEditarFeminino = new RadioButton();
+            RadioBtnEditarMasculino = new RadioButton();
+            groupBox9 = new GroupBox();
             RadioBtnEditarAutonomo = new RadioButton();
             RadioBtnEditarPj = new RadioButton();
             RadioBtnEditarClt = new RadioButton();
-            GroupBoxEditarSexo = new GroupBox();
-            RadioBtnEditarFeminino = new RadioButton();
-            RadioBtnEditarMasculino = new RadioButton();
-            GroupBoxEditarSalario = new GroupBox();
-            TextBoxEditarSalario = new TextBox();
-            GroupBoxEditarEmail = new GroupBox();
-            TextBoxEditarEmail = new TextBox();
-            tableLayoutPanel2 = new TableLayoutPanel();
-            BtnEditarSalvar = new Button();
+            tableLayoutPanel4 = new TableLayoutPanel();
+            button1 = new Button();
             LabelEditarErro = new Label();
-            GroupBoxEditarSenha = new GroupBox();
-            TextBoxEditarSenha = new TextBox();
-            tableLayoutPanelMain.SuspendLayout();
+            tabPageDependentes = new TabPage();
+            DgvDependentes = new DataGridView();
+            groupBox6 = new GroupBox();
+            groupBox7 = new GroupBox();
+            tableLayoutPanel3 = new TableLayoutPanel();
+            DepenContextMenu = new ContextMenuStrip(components);
+            EditarDepenToolStripMenuItem = new ToolStripMenuItem();
+            ExcluirDepenToolStripMenuItem = new ToolStripMenuItem();
+            DepenDgvContextMenuStrip = new ContextMenuStrip(components);
+            NovoDependenteToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            AtualizarDgvToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel1.SuspendLayout();
-            GroupBoxEditarNome.SuspendLayout();
-            GroupBoxEditarCpf.SuspendLayout();
-            GroupBoxEditarTipoContrato.SuspendLayout();
-            GroupBoxEditarSexo.SuspendLayout();
-            GroupBoxEditarSalario.SuspendLayout();
-            GroupBoxEditarEmail.SuspendLayout();
+            tabControl1.SuspendLayout();
+            tabPageFuncionario.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            GroupBoxEditarSenha.SuspendLayout();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
+            groupBox3.SuspendLayout();
+            groupBox4.SuspendLayout();
+            groupBox5.SuspendLayout();
+            groupBox8.SuspendLayout();
+            groupBox9.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            tabPageDependentes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DgvDependentes).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
+            DepenContextMenu.SuspendLayout();
+            DepenDgvContextMenuStrip.SuspendLayout();
             SuspendLayout();
-            // 
-            // tableLayoutPanelMain
-            // 
-            tableLayoutPanelMain.ColumnCount = 3;
-            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
-            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
-            tableLayoutPanelMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
-            tableLayoutPanelMain.Controls.Add(tableLayoutPanel1, 1, 1);
-            tableLayoutPanelMain.Dock = DockStyle.Fill;
-            tableLayoutPanelMain.Location = new Point(0, 0);
-            tableLayoutPanelMain.Name = "tableLayoutPanelMain";
-            tableLayoutPanelMain.RowCount = 3;
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 90F));
-            tableLayoutPanelMain.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
-            tableLayoutPanelMain.Size = new Size(432, 653);
-            tableLayoutPanelMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 1;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarNome, 0, 0);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarCpf, 0, 1);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarTipoContrato, 0, 6);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarSexo, 0, 5);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarSalario, 0, 4);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarEmail, 0, 2);
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 7);
-            tableLayoutPanel1.Controls.Add(LabelEditarErro, 0, 7);
-            tableLayoutPanel1.Controls.Add(GroupBoxEditarSenha, 0, 3);
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
+            tableLayoutPanel1.Controls.Add(tabControl1, 1, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(24, 35);
+            tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 9;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tableLayoutPanel1.Size = new Size(382, 581);
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 95F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
+            tableLayoutPanel1.Size = new Size(482, 653);
             tableLayoutPanel1.TabIndex = 0;
             // 
-            // GroupBoxEditarNome
+            // tabControl1
             // 
-            GroupBoxEditarNome.Controls.Add(TextBoxEditarNome);
-            GroupBoxEditarNome.Dock = DockStyle.Fill;
-            GroupBoxEditarNome.Location = new Point(3, 3);
-            GroupBoxEditarNome.Name = "GroupBoxEditarNome";
-            GroupBoxEditarNome.Size = new Size(376, 58);
-            GroupBoxEditarNome.TabIndex = 6;
-            GroupBoxEditarNome.TabStop = false;
-            GroupBoxEditarNome.Text = "Nome";
+            tabControl1.Controls.Add(tabPageFuncionario);
+            tabControl1.Controls.Add(tabPageDependentes);
+            tabControl1.Dock = DockStyle.Fill;
+            tabControl1.Location = new Point(27, 3);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(427, 614);
+            tabControl1.TabIndex = 0;
+            // 
+            // tabPageFuncionario
+            // 
+            tabPageFuncionario.Controls.Add(tableLayoutPanel2);
+            tabPageFuncionario.Location = new Point(4, 29);
+            tabPageFuncionario.Name = "tabPageFuncionario";
+            tabPageFuncionario.Padding = new Padding(3);
+            tabPageFuncionario.Size = new Size(419, 581);
+            tabPageFuncionario.TabIndex = 0;
+            tabPageFuncionario.Text = "Funcionário";
+            tabPageFuncionario.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(groupBox1, 0, 0);
+            tableLayoutPanel2.Controls.Add(groupBox2, 0, 1);
+            tableLayoutPanel2.Controls.Add(groupBox3, 0, 2);
+            tableLayoutPanel2.Controls.Add(groupBox4, 0, 3);
+            tableLayoutPanel2.Controls.Add(groupBox5, 0, 4);
+            tableLayoutPanel2.Controls.Add(groupBox8, 0, 5);
+            tableLayoutPanel2.Controls.Add(groupBox9, 0, 6);
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel4, 0, 8);
+            tableLayoutPanel2.Controls.Add(LabelEditarErro, 0, 7);
+            tableLayoutPanel2.Dock = DockStyle.Fill;
+            tableLayoutPanel2.Location = new Point(3, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 9;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
+            tableLayoutPanel2.Size = new Size(413, 575);
+            tableLayoutPanel2.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(TextBoxEditarNome);
+            groupBox1.Dock = DockStyle.Fill;
+            groupBox1.Location = new Point(3, 3);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(407, 54);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Nome";
             // 
             // TextBoxEditarNome
             // 
-            TextBoxEditarNome.BackColor = SystemColors.Window;
-            TextBoxEditarNome.Location = new Point(6, 27);
+            TextBoxEditarNome.Location = new Point(6, 21);
             TextBoxEditarNome.Name = "TextBoxEditarNome";
             TextBoxEditarNome.ReadOnly = true;
-            TextBoxEditarNome.Size = new Size(364, 27);
+            TextBoxEditarNome.Size = new Size(305, 27);
             TextBoxEditarNome.TabIndex = 0;
             // 
-            // GroupBoxEditarCpf
+            // groupBox2
             // 
-            GroupBoxEditarCpf.Controls.Add(MTextBoxEditarCpf);
-            GroupBoxEditarCpf.Dock = DockStyle.Fill;
-            GroupBoxEditarCpf.Location = new Point(3, 67);
-            GroupBoxEditarCpf.Name = "GroupBoxEditarCpf";
-            GroupBoxEditarCpf.Size = new Size(376, 58);
-            GroupBoxEditarCpf.TabIndex = 7;
-            GroupBoxEditarCpf.TabStop = false;
-            GroupBoxEditarCpf.Text = "Cpf";
+            groupBox2.Controls.Add(MTextBoxEditarCpf);
+            groupBox2.Dock = DockStyle.Fill;
+            groupBox2.Location = new Point(3, 63);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(407, 54);
+            groupBox2.TabIndex = 1;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "CPF";
             // 
             // MTextBoxEditarCpf
             // 
-            MTextBoxEditarCpf.Location = new Point(6, 27);
+            MTextBoxEditarCpf.Location = new Point(6, 21);
             MTextBoxEditarCpf.Mask = "000\\.000\\.000\\-00";
             MTextBoxEditarCpf.Name = "MTextBoxEditarCpf";
-            MTextBoxEditarCpf.Size = new Size(364, 27);
+            MTextBoxEditarCpf.Size = new Size(305, 27);
             MTextBoxEditarCpf.TabIndex = 0;
             MTextBoxEditarCpf.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             // 
-            // GroupBoxEditarTipoContrato
+            // groupBox3
             // 
-            GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarAutonomo);
-            GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarPj);
-            GroupBoxEditarTipoContrato.Controls.Add(RadioBtnEditarClt);
-            GroupBoxEditarTipoContrato.Dock = DockStyle.Fill;
-            GroupBoxEditarTipoContrato.Location = new Point(3, 387);
-            GroupBoxEditarTipoContrato.Name = "GroupBoxEditarTipoContrato";
-            GroupBoxEditarTipoContrato.Size = new Size(376, 58);
-            GroupBoxEditarTipoContrato.TabIndex = 5;
-            GroupBoxEditarTipoContrato.TabStop = false;
-            GroupBoxEditarTipoContrato.Text = "Tipo de Contrato";
+            groupBox3.Controls.Add(TextBoxEditarEmail);
+            groupBox3.Dock = DockStyle.Fill;
+            groupBox3.Location = new Point(3, 123);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(407, 54);
+            groupBox3.TabIndex = 2;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "Email";
             // 
-            // RadioBtnEditarAutonomo
+            // TextBoxEditarEmail
             // 
-            RadioBtnEditarAutonomo.AutoSize = true;
-            RadioBtnEditarAutonomo.Dock = DockStyle.Left;
-            RadioBtnEditarAutonomo.Location = new Point(98, 23);
-            RadioBtnEditarAutonomo.Name = "RadioBtnEditarAutonomo";
-            RadioBtnEditarAutonomo.Size = new Size(101, 32);
-            RadioBtnEditarAutonomo.TabIndex = 4;
-            RadioBtnEditarAutonomo.TabStop = true;
-            RadioBtnEditarAutonomo.Text = "Autônomo";
-            RadioBtnEditarAutonomo.UseVisualStyleBackColor = true;
+            TextBoxEditarEmail.Location = new Point(6, 21);
+            TextBoxEditarEmail.Name = "TextBoxEditarEmail";
+            TextBoxEditarEmail.Size = new Size(305, 27);
+            TextBoxEditarEmail.TabIndex = 0;
             // 
-            // RadioBtnEditarPj
+            // groupBox4
             // 
-            RadioBtnEditarPj.AutoSize = true;
-            RadioBtnEditarPj.Dock = DockStyle.Left;
-            RadioBtnEditarPj.Location = new Point(56, 23);
-            RadioBtnEditarPj.Name = "RadioBtnEditarPj";
-            RadioBtnEditarPj.Size = new Size(42, 32);
-            RadioBtnEditarPj.TabIndex = 3;
-            RadioBtnEditarPj.TabStop = true;
-            RadioBtnEditarPj.Text = "PJ";
-            RadioBtnEditarPj.UseVisualStyleBackColor = true;
+            groupBox4.Controls.Add(TextBoxEditarSenha);
+            groupBox4.Dock = DockStyle.Fill;
+            groupBox4.Location = new Point(3, 183);
+            groupBox4.Name = "groupBox4";
+            groupBox4.Size = new Size(407, 54);
+            groupBox4.TabIndex = 3;
+            groupBox4.TabStop = false;
+            groupBox4.Text = "Alterar Senha";
             // 
-            // RadioBtnEditarClt
+            // TextBoxEditarSenha
             // 
-            RadioBtnEditarClt.AutoSize = true;
-            RadioBtnEditarClt.Dock = DockStyle.Left;
-            RadioBtnEditarClt.Location = new Point(3, 23);
-            RadioBtnEditarClt.Name = "RadioBtnEditarClt";
-            RadioBtnEditarClt.Size = new Size(53, 32);
-            RadioBtnEditarClt.TabIndex = 2;
-            RadioBtnEditarClt.TabStop = true;
-            RadioBtnEditarClt.Text = "CLT";
-            RadioBtnEditarClt.UseVisualStyleBackColor = true;
+            TextBoxEditarSenha.Location = new Point(6, 21);
+            TextBoxEditarSenha.Name = "TextBoxEditarSenha";
+            TextBoxEditarSenha.Size = new Size(305, 27);
+            TextBoxEditarSenha.TabIndex = 0;
             // 
-            // GroupBoxEditarSexo
+            // groupBox5
             // 
-            GroupBoxEditarSexo.Controls.Add(RadioBtnEditarFeminino);
-            GroupBoxEditarSexo.Controls.Add(RadioBtnEditarMasculino);
-            GroupBoxEditarSexo.Dock = DockStyle.Fill;
-            GroupBoxEditarSexo.Location = new Point(3, 323);
-            GroupBoxEditarSexo.Name = "GroupBoxEditarSexo";
-            GroupBoxEditarSexo.Size = new Size(376, 58);
-            GroupBoxEditarSexo.TabIndex = 3;
-            GroupBoxEditarSexo.TabStop = false;
-            GroupBoxEditarSexo.Text = "Sexo";
+            groupBox5.Controls.Add(TextBoxEditarSalario);
+            groupBox5.Dock = DockStyle.Fill;
+            groupBox5.Location = new Point(3, 243);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(407, 54);
+            groupBox5.TabIndex = 4;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Salário";
+            // 
+            // TextBoxEditarSalario
+            // 
+            TextBoxEditarSalario.BackColor = SystemColors.Window;
+            TextBoxEditarSalario.Location = new Point(6, 21);
+            TextBoxEditarSalario.Name = "TextBoxEditarSalario";
+            TextBoxEditarSalario.ReadOnly = true;
+            TextBoxEditarSalario.Size = new Size(305, 27);
+            TextBoxEditarSalario.TabIndex = 0;
+            TextBoxEditarSalario.Text = " ";
+            TextBoxEditarSalario.KeyDown += TextBoxEditarSalario_KeyDown;
+            TextBoxEditarSalario.KeyPress += TextBoxEditarSalario_KeyPress;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(RadioBtnEditarFeminino);
+            groupBox8.Controls.Add(RadioBtnEditarMasculino);
+            groupBox8.Dock = DockStyle.Fill;
+            groupBox8.Location = new Point(3, 303);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(407, 54);
+            groupBox8.TabIndex = 5;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Sexo";
             // 
             // RadioBtnEditarFeminino
             // 
             RadioBtnEditarFeminino.AutoSize = true;
-            RadioBtnEditarFeminino.Dock = DockStyle.Left;
-            RadioBtnEditarFeminino.Location = new Point(100, 23);
+            RadioBtnEditarFeminino.Location = new Point(109, 24);
             RadioBtnEditarFeminino.Name = "RadioBtnEditarFeminino";
-            RadioBtnEditarFeminino.Size = new Size(91, 32);
+            RadioBtnEditarFeminino.Size = new Size(91, 24);
             RadioBtnEditarFeminino.TabIndex = 1;
             RadioBtnEditarFeminino.TabStop = true;
             RadioBtnEditarFeminino.Text = "Feminino";
@@ -224,171 +275,275 @@
             // RadioBtnEditarMasculino
             // 
             RadioBtnEditarMasculino.AutoSize = true;
-            RadioBtnEditarMasculino.Dock = DockStyle.Left;
-            RadioBtnEditarMasculino.Location = new Point(3, 23);
+            RadioBtnEditarMasculino.Location = new Point(6, 24);
             RadioBtnEditarMasculino.Name = "RadioBtnEditarMasculino";
-            RadioBtnEditarMasculino.Size = new Size(97, 32);
+            RadioBtnEditarMasculino.Size = new Size(97, 24);
             RadioBtnEditarMasculino.TabIndex = 0;
             RadioBtnEditarMasculino.TabStop = true;
             RadioBtnEditarMasculino.Text = "Masculino";
             RadioBtnEditarMasculino.UseVisualStyleBackColor = true;
             // 
-            // GroupBoxEditarSalario
+            // groupBox9
             // 
-            GroupBoxEditarSalario.Controls.Add(TextBoxEditarSalario);
-            GroupBoxEditarSalario.Dock = DockStyle.Fill;
-            GroupBoxEditarSalario.Location = new Point(3, 259);
-            GroupBoxEditarSalario.Name = "GroupBoxEditarSalario";
-            GroupBoxEditarSalario.Size = new Size(376, 58);
-            GroupBoxEditarSalario.TabIndex = 9;
-            GroupBoxEditarSalario.TabStop = false;
-            GroupBoxEditarSalario.Text = "Salário";
+            groupBox9.Controls.Add(RadioBtnEditarAutonomo);
+            groupBox9.Controls.Add(RadioBtnEditarPj);
+            groupBox9.Controls.Add(RadioBtnEditarClt);
+            groupBox9.Dock = DockStyle.Fill;
+            groupBox9.Location = new Point(3, 363);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(407, 54);
+            groupBox9.TabIndex = 6;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Tipo de Contrato";
             // 
-            // TextBoxEditarSalario
+            // RadioBtnEditarAutonomo
             // 
-            TextBoxEditarSalario.BackColor = SystemColors.Window;
-            TextBoxEditarSalario.Location = new Point(6, 27);
-            TextBoxEditarSalario.Name = "TextBoxEditarSalario";
-            TextBoxEditarSalario.ReadOnly = true;
-            TextBoxEditarSalario.Size = new Size(364, 27);
-            TextBoxEditarSalario.TabIndex = 2;
-            TextBoxEditarSalario.Text = "R$ 0,00";
-            TextBoxEditarSalario.KeyDown += TextBoxEditarSalario_KeyDown;
-            TextBoxEditarSalario.KeyPress += TextBoxEditarSalario_KeyPress;
+            RadioBtnEditarAutonomo.AutoSize = true;
+            RadioBtnEditarAutonomo.Location = new Point(113, 24);
+            RadioBtnEditarAutonomo.Name = "RadioBtnEditarAutonomo";
+            RadioBtnEditarAutonomo.Size = new Size(101, 24);
+            RadioBtnEditarAutonomo.TabIndex = 2;
+            RadioBtnEditarAutonomo.TabStop = true;
+            RadioBtnEditarAutonomo.Text = "Autônomo";
+            RadioBtnEditarAutonomo.UseVisualStyleBackColor = true;
             // 
-            // GroupBoxEditarEmail
+            // RadioBtnEditarPj
             // 
-            GroupBoxEditarEmail.Controls.Add(TextBoxEditarEmail);
-            GroupBoxEditarEmail.Dock = DockStyle.Fill;
-            GroupBoxEditarEmail.Location = new Point(3, 131);
-            GroupBoxEditarEmail.Name = "GroupBoxEditarEmail";
-            GroupBoxEditarEmail.Size = new Size(376, 58);
-            GroupBoxEditarEmail.TabIndex = 8;
-            GroupBoxEditarEmail.TabStop = false;
-            GroupBoxEditarEmail.Text = "Email";
+            RadioBtnEditarPj.AutoSize = true;
+            RadioBtnEditarPj.Location = new Point(65, 24);
+            RadioBtnEditarPj.Name = "RadioBtnEditarPj";
+            RadioBtnEditarPj.Size = new Size(42, 24);
+            RadioBtnEditarPj.TabIndex = 1;
+            RadioBtnEditarPj.TabStop = true;
+            RadioBtnEditarPj.Text = "PJ";
+            RadioBtnEditarPj.UseVisualStyleBackColor = true;
             // 
-            // TextBoxEditarEmail
+            // RadioBtnEditarClt
             // 
-            TextBoxEditarEmail.Location = new Point(6, 27);
-            TextBoxEditarEmail.Name = "TextBoxEditarEmail";
-            TextBoxEditarEmail.Size = new Size(364, 27);
-            TextBoxEditarEmail.TabIndex = 1;
+            RadioBtnEditarClt.AutoSize = true;
+            RadioBtnEditarClt.Location = new Point(6, 24);
+            RadioBtnEditarClt.Name = "RadioBtnEditarClt";
+            RadioBtnEditarClt.Size = new Size(53, 24);
+            RadioBtnEditarClt.TabIndex = 0;
+            RadioBtnEditarClt.TabStop = true;
+            RadioBtnEditarClt.Text = "CLT";
+            RadioBtnEditarClt.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel2
+            // tableLayoutPanel4
             // 
-            tableLayoutPanel2.ColumnCount = 3;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
-            tableLayoutPanel2.Controls.Add(BtnEditarSalvar, 1, 1);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(3, 451);
-            tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 3;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 80F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            tableLayoutPanel2.Size = new Size(376, 58);
-            tableLayoutPanel2.TabIndex = 10;
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+            tableLayoutPanel4.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            tableLayoutPanel4.Controls.Add(button1, 1, 1);
+            tableLayoutPanel4.Dock = DockStyle.Fill;
+            tableLayoutPanel4.Location = new Point(3, 518);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 3;
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 70F));
+            tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Percent, 15F));
+            tableLayoutPanel4.Size = new Size(407, 54);
+            tableLayoutPanel4.TabIndex = 7;
             // 
-            // BtnEditarSalvar
+            // button1
             // 
-            BtnEditarSalvar.Dock = DockStyle.Fill;
-            BtnEditarSalvar.Location = new Point(78, 8);
-            BtnEditarSalvar.Name = "BtnEditarSalvar";
-            BtnEditarSalvar.Size = new Size(219, 40);
-            BtnEditarSalvar.TabIndex = 0;
-            BtnEditarSalvar.Text = "Salvar";
-            BtnEditarSalvar.UseVisualStyleBackColor = true;
-            BtnEditarSalvar.Click += BtnEditarSalvar_Click;
+            button1.Dock = DockStyle.Fill;
+            button1.Location = new Point(43, 11);
+            button1.Name = "button1";
+            button1.Size = new Size(319, 31);
+            button1.TabIndex = 0;
+            button1.Text = "Salvar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += BtnEditarSalvar_Click;
             // 
             // LabelEditarErro
             // 
             LabelEditarErro.AutoSize = true;
-            LabelEditarErro.BackColor = SystemColors.Control;
-            LabelEditarErro.Dock = DockStyle.Left;
             LabelEditarErro.ForeColor = Color.Red;
-            LabelEditarErro.Location = new Point(3, 512);
+            LabelEditarErro.Location = new Point(3, 420);
             LabelEditarErro.Name = "LabelEditarErro";
-            LabelEditarErro.Size = new Size(0, 69);
-            LabelEditarErro.TabIndex = 11;
+            LabelEditarErro.Size = new Size(0, 20);
+            LabelEditarErro.TabIndex = 8;
             // 
-            // GroupBoxEditarSenha
+            // tabPageDependentes
             // 
-            GroupBoxEditarSenha.Controls.Add(TextBoxEditarSenha);
-            GroupBoxEditarSenha.Dock = DockStyle.Fill;
-            GroupBoxEditarSenha.Location = new Point(3, 195);
-            GroupBoxEditarSenha.Name = "GroupBoxEditarSenha";
-            GroupBoxEditarSenha.Size = new Size(376, 58);
-            GroupBoxEditarSenha.TabIndex = 12;
-            GroupBoxEditarSenha.TabStop = false;
-            GroupBoxEditarSenha.Text = "Alterar Senha";
+            tabPageDependentes.Controls.Add(DgvDependentes);
+            tabPageDependentes.Location = new Point(4, 29);
+            tabPageDependentes.Name = "tabPageDependentes";
+            tabPageDependentes.Padding = new Padding(3);
+            tabPageDependentes.Size = new Size(419, 581);
+            tabPageDependentes.TabIndex = 1;
+            tabPageDependentes.Text = "Dependentes";
+            tabPageDependentes.UseVisualStyleBackColor = true;
             // 
-            // TextBoxEditarSenha
+            // DgvDependentes
             // 
-            TextBoxEditarSenha.Location = new Point(6, 25);
-            TextBoxEditarSenha.Name = "TextBoxEditarSenha";
-            TextBoxEditarSenha.Size = new Size(364, 27);
-            TextBoxEditarSenha.TabIndex = 0;
-            TextBoxEditarSenha.UseSystemPasswordChar = true;
+            DgvDependentes.BackgroundColor = SystemColors.ControlLight;
+            DgvDependentes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DgvDependentes.ContextMenuStrip = DepenDgvContextMenuStrip;
+            DgvDependentes.Dock = DockStyle.Fill;
+            DgvDependentes.Location = new Point(3, 3);
+            DgvDependentes.Name = "DgvDependentes";
+            DgvDependentes.RowHeadersWidth = 51;
+            DgvDependentes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DgvDependentes.Size = new Size(413, 575);
+            DgvDependentes.TabIndex = 0;
+            DgvDependentes.CellContextMenuStripNeeded += DgvDependentes_CellContextMenuStripNeeded;
+            DgvDependentes.MouseDown += DgvDependentes_MouseDown;
+            // 
+            // groupBox6
+            // 
+            groupBox6.Dock = DockStyle.Fill;
+            groupBox6.Location = new Point(3, 3);
+            groupBox6.Name = "groupBox6";
+            groupBox6.Size = new Size(194, 54);
+            groupBox6.TabIndex = 0;
+            groupBox6.TabStop = false;
+            groupBox6.Text = "Nome";
+            // 
+            // groupBox7
+            // 
+            groupBox7.Dock = DockStyle.Fill;
+            groupBox7.Location = new Point(3, 63);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(194, 54);
+            groupBox7.TabIndex = 1;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "CPF";
+            // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 1;
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel3.Controls.Add(groupBox6, 0, 0);
+            tableLayoutPanel3.Location = new Point(0, 0);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.Size = new Size(200, 100);
+            tableLayoutPanel3.TabIndex = 0;
+            // 
+            // DepenContextMenu
+            // 
+            DepenContextMenu.ImageScalingSize = new Size(20, 20);
+            DepenContextMenu.Items.AddRange(new ToolStripItem[] { EditarDepenToolStripMenuItem, ExcluirDepenToolStripMenuItem });
+            DepenContextMenu.Name = "DepenContextMenu";
+            DepenContextMenu.Size = new Size(122, 52);
+            // 
+            // EditarDepenToolStripMenuItem
+            // 
+            EditarDepenToolStripMenuItem.Name = "EditarDepenToolStripMenuItem";
+            EditarDepenToolStripMenuItem.Size = new Size(121, 24);
+            EditarDepenToolStripMenuItem.Text = "Editar";
+            // 
+            // ExcluirDepenToolStripMenuItem
+            // 
+            ExcluirDepenToolStripMenuItem.Name = "ExcluirDepenToolStripMenuItem";
+            ExcluirDepenToolStripMenuItem.Size = new Size(121, 24);
+            ExcluirDepenToolStripMenuItem.Text = "Excluir";
+            // 
+            // DepenDgvContextMenuStrip
+            // 
+            DepenDgvContextMenuStrip.ImageScalingSize = new Size(20, 20);
+            DepenDgvContextMenuStrip.Items.AddRange(new ToolStripItem[] { NovoDependenteToolStripMenuItem, toolStripSeparator1, AtualizarDgvToolStripMenuItem });
+            DepenDgvContextMenuStrip.Name = "DepenDgvContextMenuStrip";
+            DepenDgvContextMenuStrip.Size = new Size(138, 58);
+            // 
+            // NovoDependenteToolStripMenuItem
+            // 
+            NovoDependenteToolStripMenuItem.Name = "NovoDependenteToolStripMenuItem";
+            NovoDependenteToolStripMenuItem.Size = new Size(137, 24);
+            NovoDependenteToolStripMenuItem.Text = "Novo";
+            NovoDependenteToolStripMenuItem.Click += NovoDependenteToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(134, 6);
+            // 
+            // AtualizarDgvToolStripMenuItem
+            // 
+            AtualizarDgvToolStripMenuItem.Name = "AtualizarDgvToolStripMenuItem";
+            AtualizarDgvToolStripMenuItem.Size = new Size(137, 24);
+            AtualizarDgvToolStripMenuItem.Text = "Atualizar";
             // 
             // FormEditarFuncionario
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(432, 653);
-            Controls.Add(tableLayoutPanelMain);
-            MaximizeBox = false;
-            MaximumSize = new Size(450, 700);
-            MinimumSize = new Size(450, 700);
+            ClientSize = new Size(482, 653);
+            Controls.Add(tableLayoutPanel1);
+            MinimumSize = new Size(500, 700);
             Name = "FormEditarFuncionario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Editar Funcionario";
             Load += FormEditarFuncionario_Load;
-            tableLayoutPanelMain.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
-            GroupBoxEditarNome.ResumeLayout(false);
-            GroupBoxEditarNome.PerformLayout();
-            GroupBoxEditarCpf.ResumeLayout(false);
-            GroupBoxEditarCpf.PerformLayout();
-            GroupBoxEditarTipoContrato.ResumeLayout(false);
-            GroupBoxEditarTipoContrato.PerformLayout();
-            GroupBoxEditarSexo.ResumeLayout(false);
-            GroupBoxEditarSexo.PerformLayout();
-            GroupBoxEditarSalario.ResumeLayout(false);
-            GroupBoxEditarSalario.PerformLayout();
-            GroupBoxEditarEmail.ResumeLayout(false);
-            GroupBoxEditarEmail.PerformLayout();
+            tabControl1.ResumeLayout(false);
+            tabPageFuncionario.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
-            GroupBoxEditarSenha.ResumeLayout(false);
-            GroupBoxEditarSenha.PerformLayout();
+            tableLayoutPanel2.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            groupBox4.ResumeLayout(false);
+            groupBox4.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            groupBox9.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            tabPageDependentes.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)DgvDependentes).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
+            DepenContextMenu.ResumeLayout(false);
+            DepenDgvContextMenuStrip.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanelMain;
         private TableLayoutPanel tableLayoutPanel1;
-        private GroupBox GroupBoxEditarSexo;
-        private GroupBox GroupBoxEditarTipoContrato;
-        private GroupBox GroupBoxEditarNome;
+        private TabControl tabControl1;
+        private TabPage tabPageFuncionario;
+        private TableLayoutPanel tableLayoutPanel2;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private GroupBox groupBox4;
+        private GroupBox groupBox5;
+        private TabPage tabPageDependentes;
+        private GroupBox groupBox6;
+        private GroupBox groupBox7;
+        private TableLayoutPanel tableLayoutPanel3;
+        private TextBox TextBoxEditarNome;
+        private TextBox TextBoxEditarEmail;
+        private TextBox TextBoxEditarSenha;
+        private TextBox TextBoxEditarSalario;
+        private GroupBox groupBox8;
+        private GroupBox groupBox9;
         private RadioButton RadioBtnEditarFeminino;
         private RadioButton RadioBtnEditarMasculino;
-        private RadioButton RadioBtnEditarClt;
-        private TextBox TextBoxEditarNome;
-        private GroupBox GroupBoxEditarCpf;
-        private GroupBox GroupBoxEditarEmail;
-        private TextBox TextBoxEditarEmail;
-        private GroupBox GroupBoxEditarSalario;
-        private TextBox TextBoxEditarSalario;
         private RadioButton RadioBtnEditarAutonomo;
         private RadioButton RadioBtnEditarPj;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Button BtnEditarSalvar;
+        private RadioButton RadioBtnEditarClt;
+        private TableLayoutPanel tableLayoutPanel4;
+        private Button button1;
         private MaskedTextBox MTextBoxEditarCpf;
         private Label LabelEditarErro;
-        private GroupBox GroupBoxEditarSenha;
-        private TextBox TextBoxEditarSenha;
+        private DataGridView DgvDependentes;
+        private ContextMenuStrip DepenContextMenu;
+        private ContextMenuStrip DepenDgvContextMenuStrip;
+        private ToolStripMenuItem adicionarDependenteToolStripMenuItem;
+        private ToolStripMenuItem AtualizarDgvToolStripMenuItem;
+        private ToolStripMenuItem NovoDependenteToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem EditarDepenToolStripMenuItem;
+        private ToolStripMenuItem ExcluirDepenToolStripMenuItem;
     }
 }

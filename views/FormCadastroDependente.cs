@@ -56,21 +56,22 @@ namespace GerenciamentoDeFuncionarios.views
             InserirDataNascimento();
         }
 
-        private void BtnCriarDependente_Click(object sender, EventArgs e)
+        private async void BtnCriarDependente_Click(object sender, EventArgs e)
         {
             LabelDependenteErro.Text = "";
 
             var stringBuilder = new StringBuilder();
             var listaDeErros = new List<ValidationResult>();
 
-            string? nome = LabelDependenteNome.Text;
+            string? nome = TxtBoxDependenteNome.Text;
             string? parentesco = TxtBoxDependenteParentesco.Text;
             DateTime? dataDeNascimento = dataNascimento;
 
             var dependente = new Dependente(
                 nome: nome,
                 parentesco: parentesco,
-                dataNascimento: dataDeNascimento
+                dataNascimento: dataDeNascimento,
+                funcionarioId: Funcionario.Id
                 );
 
             var contexto = new ValidationContext(dependente);
@@ -89,17 +90,16 @@ namespace GerenciamentoDeFuncionarios.views
             {
                 try
                 {
-                    await FuncionarioRepository.AdicionarFuncionario(funcionario);
+                    await DependenteRepository.AdicionarDependente(dependente);
                     MessageBox.Show(
                         "Dependente cadastrado com sucesso!",
                         "Operação concluida",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
                         );
-                    FuncionarioCadastrado?.Invoke(this, EventArgs.Empty);
                     this.Close();
                 }
-                catch (Exception ex)
+                catch
                 {
                     MessageBox.Show(
                         $"Ocorreu um erro no cadastro do Dependente.",
