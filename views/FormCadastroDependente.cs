@@ -110,5 +110,17 @@ namespace GerenciamentoDeFuncionarios.views
                 }
             }
         }
+
+        private void MonthCalendarDependente_LocationChanged(object sender, EventArgs e)
+        {
+            MonthCalendarDependente.LocationChanged -= MonthCalendarDependente_LocationChanged;
+
+            int novoX = Math.Max(0, Math.Min(MonthCalendarDependente.Location.X, ClientRectangle.Width - MonthCalendarDependente.Width));
+            int novoY = Math.Max(0, Math.Min(MonthCalendarDependente.Location.Y, ClientRectangle.Height - MonthCalendarDependente.Height));
+
+            MonthCalendarDependente.Location = new Point(novoX, novoY);
+
+            MonthCalendarDependente.LocationChanged += MonthCalendarDependente_LocationChanged;
+        }
     }
 }

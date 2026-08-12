@@ -105,7 +105,7 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
         public static async Task<IEnumerable<Funcionario>> ObterPorId(List<int> funcionariosId)
         {
             var funcionarios = await ConexaoBanco.CriarConexao().QueryAsync<Funcionario>(
-                $"{selectQuery} WHERE Funcionario.Id = ANY(@funcionariosId)", new { FuncionariosId = funcionariosId }
+                $"{selectQuery} WHERE Funcionario.Id = ANY(@FuncionariosId)", new { FuncionariosId = funcionariosId }
                 );
             return funcionarios;
         }

@@ -34,5 +34,24 @@ namespace GerenciamentoDeFuncionarios.banco.repositories
                 );
             return dependentes;
         }
+
+        public static async Task<IEnumerable<Dependente>> ObterPorId(List<int> dependentesId)
+        {
+            var dependentes = await ConexaoBanco.CriarConexao().QueryAsync<Dependente>(
+                $"SELECT * FROM Dependente WHERE Dependente.Id = ANY(@DependentesId)", new { DependentesId = dependentesId }
+                );
+            return dependentes;
+        }
+
+        public static async Task RemoverDependente(List<int> listaIds)
+        {
+            await ConexaoBanco.CriarConexao().QueryAsync(
+                @"
+                    DELETE FROM Dependente
+                    WHERE Id = ANY(@ListaIds)
+                ",
+                new { ListaIds = listaIds }
+                );
+        }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tableLayoutPanel1 = new TableLayoutPanel();
+            DependenteMainLayoutPanel = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             GroupBoxDependenteFuncionario = new GroupBox();
             LabelFuncNomePlaceholder = new Label();
@@ -51,7 +51,7 @@
             BtnCriarDependente = new Button();
             LabelDependenteErro = new Label();
             MonthCalendarDependente = new MonthCalendar();
-            tableLayoutPanel1.SuspendLayout();
+            DependenteMainLayoutPanel.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             GroupBoxDependenteFuncionario.SuspendLayout();
             GroupBoxDepentendeDados.SuspendLayout();
@@ -62,22 +62,22 @@
             tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // DependenteMainLayoutPanel
             // 
-            tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 1, 1);
-            tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new Point(0, 0);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(382, 553);
-            tableLayoutPanel1.TabIndex = 0;
+            DependenteMainLayoutPanel.ColumnCount = 3;
+            DependenteMainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            DependenteMainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            DependenteMainLayoutPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            DependenteMainLayoutPanel.Controls.Add(tableLayoutPanel2, 1, 1);
+            DependenteMainLayoutPanel.Dock = DockStyle.Fill;
+            DependenteMainLayoutPanel.Location = new Point(0, 0);
+            DependenteMainLayoutPanel.Name = "DependenteMainLayoutPanel";
+            DependenteMainLayoutPanel.RowCount = 3;
+            DependenteMainLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            DependenteMainLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            DependenteMainLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            DependenteMainLayoutPanel.Size = new Size(382, 553);
+            DependenteMainLayoutPanel.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
@@ -277,7 +277,7 @@
             mTxtBoxDependenteData.Location = new Point(153, 11);
             mTxtBoxDependenteData.Mask = "00/00/0000";
             mTxtBoxDependenteData.Name = "mTxtBoxDependenteData";
-            mTxtBoxDependenteData.Size = new Size(69, 27);
+            mTxtBoxDependenteData.Size = new Size(80, 27);
             mTxtBoxDependenteData.TabIndex = 2;
             mTxtBoxDependenteData.TextAlign = HorizontalAlignment.Center;
             // 
@@ -286,7 +286,7 @@
             BtnDependenteSelecionarData.Anchor = AnchorStyles.Left;
             BtnDependenteSelecionarData.BackgroundImage = Properties.Resources._1397;
             BtnDependenteSelecionarData.BackgroundImageLayout = ImageLayout.Zoom;
-            BtnDependenteSelecionarData.Location = new Point(228, 10);
+            BtnDependenteSelecionarData.Location = new Point(239, 10);
             BtnDependenteSelecionarData.Name = "BtnDependenteSelecionarData";
             BtnDependenteSelecionarData.Size = new Size(29, 29);
             BtnDependenteSelecionarData.TabIndex = 3;
@@ -322,7 +322,8 @@
             // LabelDependenteErro
             // 
             LabelDependenteErro.AutoSize = true;
-            LabelDependenteErro.BackColor = Color.Red;
+            LabelDependenteErro.BackColor = Color.Transparent;
+            LabelDependenteErro.ForeColor = Color.Red;
             LabelDependenteErro.Location = new Point(3, 350);
             LabelDependenteErro.Name = "LabelDependenteErro";
             LabelDependenteErro.Size = new Size(0, 20);
@@ -330,11 +331,12 @@
             // 
             // MonthCalendarDependente
             // 
-            MonthCalendarDependente.Location = new Point(511, 542);
+            MonthCalendarDependente.Location = new Point(404, 542);
             MonthCalendarDependente.Name = "MonthCalendarDependente";
             MonthCalendarDependente.TabIndex = 1;
             MonthCalendarDependente.Visible = false;
             MonthCalendarDependente.DateSelected += MonthCalendarDependente_DateSelected;
+            MonthCalendarDependente.LocationChanged += MonthCalendarDependente_LocationChanged;
             // 
             // FormCadastroDependente
             // 
@@ -342,13 +344,14 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(382, 553);
             Controls.Add(MonthCalendarDependente);
-            Controls.Add(tableLayoutPanel1);
+            Controls.Add(DependenteMainLayoutPanel);
+            MaximumSize = new Size(400, 600);
             MinimumSize = new Size(400, 600);
             Name = "FormCadastroDependente";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Novo Dependente";
             Load += FormCadastroDependente_Load;
-            tableLayoutPanel1.ResumeLayout(false);
+            DependenteMainLayoutPanel.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             GroupBoxDependenteFuncionario.ResumeLayout(false);
@@ -367,7 +370,7 @@
 
         #endregion
 
-        private TableLayoutPanel tableLayoutPanel1;
+        private TableLayoutPanel DependenteMainLayoutPanel;
         private TableLayoutPanel tableLayoutPanel2;
         private GroupBox GroupBoxDependenteFuncionario;
         private GroupBox GroupBoxDepentendeDados;

@@ -26,6 +26,8 @@ namespace GerenciamentoDeFuncionarios.views
 
         private Funcionario Funcionario;
 
+        private List<int> dependentesSelecionados = [];
+
         public SortableBindingList<Dependente> tabelaDependentes = new();
 
         public FormEditarFuncionario(Funcionario funcionario)
@@ -76,11 +78,12 @@ namespace GerenciamentoDeFuncionarios.views
 
         public void NenhumDependentesCadastrado()
         {
-
+            LabelDependenteErro.Text = "NÃO HÁ DEPENDENTES CADASTRADOS!";
         }
 
         public async Task AtualizarTabelaDependentes(IEnumerable<Dependente>? dependentes = null)
         {
+            LabelDependenteErro.Text = "";
             try
             {
                 if (dependentes == null)
@@ -114,13 +117,6 @@ namespace GerenciamentoDeFuncionarios.views
                     MessageBoxIcon.Error
                     );
             }
-        }
-
-        private async Task CadastrarDependente()
-        {
-            FormCadastroDependente dependente = new FormCadastroDependente(Funcionario);
-            dependente.ShowDialog();
-            await AtualizarTabelaDependentes();
         }
 
         private void AtualizarTextBoxSalario()
@@ -297,6 +293,97 @@ namespace GerenciamentoDeFuncionarios.views
 
         // Dependentes
 
+        private Task<IEnumerable<Dependente>> ExtrairDependentes()
+        {
+            var dependentes = DependenteRepository.ObterPorId(dependentesSelecionados);
+            return dependentes;
+        }
+
+        private async Task CadastrarDependente()
+        {
+            FormCadastroDependente dependente = new FormCadastroDependente(Funcionario);
+            dependente.ShowDialog();
+            await AtualizarTabelaDependentes();
+        }
+        private async Task RemoverDependente()
+        {
+            if (dependentesSelecionados.Count > 0)
+            {
+                var dependentes = await ExtrairDependentes();
+
+                if (dependentes.Count() > 0)
+                {
+                    DialogResult? removerDependente;
+
+                    if (dependentes.Count() == 1)
+                    {
+                        removerDependente = MessageBox.Show(
+                            $"Essa ação irá remover o dependente \"{dependentes.First().Nome}\" (Id: {dependentes.First().Id})\nVocê tem certeza?",
+                            "Remover funcionário",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button2
+                            );
+                    }
+                    else
+                    {
+                        removerDependente = MessageBox.Show(
+                            $"Essa ação irá remover múltiplos dependentes\nVocê tem certeza?",
+                            "Remover funcionários",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning,
+                            MessageBoxDefaultButton.Button2
+                            );
+                    }
+
+                    if (removerDependente == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            await DependenteRepository.RemoverDependente(dependentesSelecionados);
+
+                            MessageBox.Show(
+                                "Operação concluida com sucesso!",
+                                "Sucesso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                                );
+                            await AtualizarTabelaDependentes();
+                        }
+                        catch
+                        {
+                            MessageBox.Show(
+                                "Ocorreu um erro ao remover o(s) dependente(s)",
+                                "Erro na conexão do banco de dados",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                                );
+                        }
+                    }
+                }
+            }
+        }
+
+        private void DgvDependentes_SelectionChanged(object sender, EventArgs e)
+        {
+            dependentesSelecionados.Clear();
+            if (DgvDependentes.SelectedRows.Count > 0)
+            {
+                if (DgvDependentes.SelectedRows.Count == 1)
+                {
+                    dependentesSelecionados.Clear();
+                }
+                foreach (DataGridViewRow row in DgvDependentes.SelectedRows)
+                {
+                    var dependente = row.DataBoundItem as Dependente;
+                    if (dependente != null)
+                    {
+                        dependentesSelecionados.Add(dependente.Id);
+                    }
+                }
+            }
+        }
+
         private void DgvDependentes_MouseDown(object sender, MouseEventArgs e)
         {
             DataGridView.HitTestInfo hit = DgvDependentes.HitTest(e.X, e.Y);
@@ -328,6 +415,21 @@ namespace GerenciamentoDeFuncionarios.views
         private async void NovoDependenteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             await CadastrarDependente();
+        }
+
+        private async void ExcluirDepenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            await RemoverDependente();
+        }
+
+        private async void BtnNovoFuncionario_Click(object sender, EventArgs e)
+        {
+            await CadastrarDependente();
+        }
+
+        private async void BtnExcluirFuncionario_Click(object sender, EventArgs e)
+        {
+            await RemoverDependente();
         }
     }
 }

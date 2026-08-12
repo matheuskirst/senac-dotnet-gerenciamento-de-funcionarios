@@ -80,11 +80,23 @@ namespace GerenciamentoDeFuncionarios.views
 
             if (char.IsDigit(e.KeyChar))
             {
-                salarioDigitado += e.KeyChar.ToString();
+                if (salarioFormatado <= 1000000)
+                {
+                    salarioDigitado += e.KeyChar.ToString();
 
-                salarioFormatado = decimal.Parse(salarioDigitado) / 100;
+                    salarioFormatado = decimal.Parse(salarioDigitado) / 100;
 
-                AtualizarTextBoxSalario();
+                    AtualizarTextBoxSalario();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        $"O salário não pode ser maior que R$ 1.000.0000",
+                        "Erro limite de salário",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error
+                        );
+                }
             }
         }
 
